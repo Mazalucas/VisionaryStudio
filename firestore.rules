@@ -1,0 +1,121 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // ===============================================================
+    // Assumed Data Model
+    // ===============================================================
+    //
+    // Collection: projects
+    // Document ID: projectId
+    // Fields:
+    //   - name: string (required)
+    //   - createdAt: timestamp (required)
+    //   - updatedAt: timestamp
+    //   - scriptRaw: string
+    //   - globalStylePrompt: string
+    //   - styleReferenceId: string
+    //
+    // Collection: projects/{projectId}/frames
+    // Document ID: frameId
+    // Fields:
+    //   - projectId: string (required)
+    //   - frameNumber: string (required)
+    //   - originalDescription: string
+    //   - narratedText: string
+    //   - visualIntent: string
+    //   - category: string (enum)
+    //   - status: string (enum: pending, selected, generated, skipped)
+    //   - generatedImageUrl: string
+    //   - generationPrompt: string
+    //   - preferred: bool
+    //
+    // Collection: styleReferences
+    // Document ID: refId
+    // Fields:
+    //   - name: string (required)
+    //   - stylePrompt: string
+    //   - category: string
+    //   - description: string
+    //   - projectId: string (optional)
+    //
+    // Collection: styleReferences/{refId}/images
+    // Document ID: imageId
+    // Fields:
+    //   - url: string (required, base64)
+    //   - createdAt: timestamp
+    //
+    // ===============================================================
+
+    // ===============================================================
+    // Helper Functions
+    // ===============================================================
+    
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+
+    function isOwner(userId) {
+      return isAuthenticated() && request.auth.uid == userId;
+    }
+
+    function isAdmin() {
+      return isAuthenticated() &&
+        (get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'admin' ||
+          (request.auth.token.email == "lmazalan@mazalancomunicaciones.com" && request.auth.token.email_verified == true));
+    }
+    
+    function isValidProject(data) {
+      return data.name is string && data.name.size() > 0 && data.name.size() < 200 &&
+             (!('styleReferenceId' in data) || data.styleReferenceId is string);
+    }
+
+    function isValidFrame(data) {
+      return data.projectId is string && 
+             data.frameNumber is string &&
+             data.status in ['pending', 'selected', 'generated', 'skipped'];
+    }
+
+    function isValidStyleRef(data) {
+      return data.name is string && data.name.size() > 0 && data.name.size() < 200 &&
+             (!('stylePrompt' in data) || (data.stylePrompt is string && data.stylePrompt.size() < 5000));
+    }
+
+    function isValidStyleImage(data) {
+      return data.url is string && data.url.size() < 1048576; // Max Firestore doc size
+    }
+
+    // ===============================================================
+    // Rules
+    // ===============================================================
+
+    match /users/{userId} {
+      allow read: if isOwner(userId) || isAdmin();
+      allow write: if isOwner(userId) || isAdmin();
+    }
+
+    match /styleReferences/{refId} {
+      allow read, write: if isAuthenticated();
+
+      match /images/{imageId} {
+        allow read, write: if isAuthenticated();
+      }
+    }
+
+    match /projects/{projectId} {
+      allow read, write: if isAuthenticated();
+      
+      match /frames/{frameId} {
+        allow read, write: if isAuthenticated();
+        
+        match /chunks/{chunkId} {
+          allow read, write: if isAuthenticated();
+        }
+      }
+    }
+
+    match /{path=**} {
+      allow read, write: if false;
+    }
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "firestore": {
+    "rules": "firestore.rules"
+  },
+  "storage": {
+    "rules": "storage.rules"
+  },
+  "auth": {
+    "providers": {
+      "googleSignIn": {
+        "oAuthBrandDisplayName": "Visionary Studio",
+        "supportEmail": "lmazalan@mazalancomunicaciones.com"
+      }
+    }
+  }
+}
