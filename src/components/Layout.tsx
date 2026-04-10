@@ -24,7 +24,7 @@ export function Layout({ children, user, currentView, setView }: LayoutProps) {
               <div className="w-10 h-10 bg-black rounded-xl flex items-center justify-center text-white">
                 <LayoutDashboard size={20} />
               </div>
-              <h1 className="font-bold text-xl tracking-tight">Visionary</h1>
+              <h1 className="font-bold text-xl tracking-tight text-neutral-950">Visionary</h1>
             </div>
             
             <nav className="space-y-1">
@@ -61,13 +61,13 @@ export function Layout({ children, user, currentView, setView }: LayoutProps) {
                 referrerPolicy="no-referrer"
               />
               <div className="flex-1 min-w-0">
-                <p className="text-sm font-semibold truncate">{user.displayName}</p>
-                <p className="text-xs text-gray-500 truncate">{user.email}</p>
+                <p className="text-sm font-semibold truncate text-neutral-950">{user.displayName}</p>
+                <p className="text-xs text-neutral-950 truncate">{user.email}</p>
               </div>
             </div>
             <Button 
               variant="ghost" 
-              className="w-full justify-start h-11 text-gray-500 hover:text-red-600 hover:bg-red-50"
+              className="w-full justify-start h-11 text-neutral-950 hover:text-red-700 hover:bg-red-50"
               onClick={() => auth.signOut()}
             >
               <LogOut className="mr-3 h-5 w-5" /> Sign Out
@@ -76,7 +76,7 @@ export function Layout({ children, user, currentView, setView }: LayoutProps) {
         </aside>
 
         {/* Main Content */}
-        <main className="flex-1 ml-64 p-8 w-[calc(100%-16rem)]">
+        <main className="ml-64 flex w-[calc(100%-16rem)] flex-1 bg-white p-8 dark:from-background dark:via-background dark:to-violet-950/30">
           <div className="w-full">
             {children}
           </div>

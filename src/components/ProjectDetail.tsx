@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { db, handleFirestoreError, OperationType } from '../firebase';
-import { doc, onSnapshot, updateDoc, collection, addDoc, serverTimestamp, query, orderBy, writeBatch } from 'firebase/firestore';
+import { doc, onSnapshot, updateDoc, collection, serverTimestamp, query, writeBatch } from 'firebase/firestore';
 import { geminiService } from '../geminiService';
 import { openaiService } from '../openaiService';
 import { getTextProvider } from '@/lib/apiKeysStorage';
@@ -33,6 +33,120 @@ interface ProjectDetailProps {
   onBack: () => void;
 }
 
+const GLASS_SHELL =
+  'rounded-2xl border border-white/50 bg-white/45 shadow-[0_8px_32px_rgba(31,38,135,0.08),inset_0_1px_0_0_rgba(255,255,255,0.55)] backdrop-blur-2xl backdrop-saturate-150 dark:border-white/10 dark:bg-white/5 dark:shadow-[0_8px_32px_rgba(0,0,0,0.35),inset_0_1px_0_0_rgba(255,255,255,0.06)]';
+
+const GLASS_CARD =
+  'rounded-2xl border border-white/45 bg-white/35 shadow-[0_8px_32px_rgba(31,38,135,0.06),inset_0_1px_0_0_rgba(255,255,255,0.5)] backdrop-blur-xl backdrop-saturate-150 dark:border-white/10 dark:bg-white/[0.06] dark:shadow-[0_8px_32px_rgba(0,0,0,0.25)]';
+
+const GLASS_INPUT =
+  'border-white/40 bg-white/50 shadow-inner backdrop-blur-sm dark:border-white/10 dark:bg-white/5';
+
+const tabTriggerClass =
+  'relative flex min-h-11 items-center justify-center gap-2 rounded-xl border border-transparent px-4 py-3 text-sm font-medium text-neutral-950/70 shadow-none transition-all after:hidden hover:bg-white/30 hover:text-neutral-950 dark:hover:bg-white/10 data-active:border-white/40 data-active:bg-white/65 data-active:text-neutral-950 data-active:shadow-[0_4px_16px_rgba(0,0,0,0.08)] dark:data-active:border-white/15 dark:data-active:bg-white/15 [&_svg]:opacity-70 data-active:[&_svg]:opacity-100';
+
+const SCRIPT_TOOLBAR =
+  'rounded-2xl border border-neutral-200 bg-white/90 shadow-[0_8px_32px_rgba(31,38,135,0.07),inset_0_1px_0_0_rgba(255,255,255,0.5)] backdrop-blur-2xl backdrop-saturate-150 dark:border-white/10 dark:bg-white/[0.06]';
+
+interface StudioHeaderProps {
+  projectName: string;
+  onBack: () => void;
+}
+
+function StudioHeader({ projectName, onBack }: StudioHeaderProps) {
+  return (
+    <header className={cn('overflow-hidden', GLASS_SHELL)}>
+      <div className="flex flex-col gap-4 px-4 py-4 sm:flex-row sm:items-center sm:justify-between">
+        <div className="flex min-w-0 items-start gap-3">
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={onBack}
+            className="mt-0.5 shrink-0 rounded-full text-neutral-950 hover:bg-white/20 hover:text-neutral-950 dark:hover:bg-white/10"
+          >
+            <ArrowLeft size={20} />
+          </Button>
+          <div className="min-w-0 space-y-1">
+            <h1 className="truncate text-2xl font-semibold tracking-tight text-neutral-950 sm:text-3xl">{projectName}</h1>
+            <p className="text-xs font-medium uppercase tracking-[0.22em] text-neutral-950">Production Studio</p>
+          </div>
+        </div>
+      </div>
+    </header>
+  );
+}
+
+interface ScriptStyleToolbarProps {
+  onSave: () => void;
+  onParseScript: () => void;
+  isParsing: boolean;
+  isSaving: boolean;
+}
+
+function ScriptStyleToolbar({ onSave, onParseScript, isParsing, isSaving }: ScriptStyleToolbarProps) {
+  return (
+    <div
+      className={cn(
+        'flex flex-col gap-3 p-4 sm:flex-row sm:flex-wrap sm:items-center sm:justify-end',
+        SCRIPT_TOOLBAR,
+      )}
+    >
+      <Button
+        variant="outline"
+        onClick={onSave}
+        disabled={isSaving || isParsing}
+        aria-busy={isSaving}
+        className="h-11 min-w-[10.5rem] rounded-xl border-neutral-300 bg-white px-5 text-neutral-950 shadow-sm hover:bg-neutral-50"
+      >
+        {isSaving ? (
+          <>
+            <Loader2 className="mr-2 h-4 w-4 animate-spin opacity-90" aria-hidden />
+            Saving…
+          </>
+        ) : (
+          <>
+            <Save className="mr-2 h-4 w-4 opacity-90" aria-hidden /> Save Settings
+          </>
+        )}
+      </Button>
+      <Button
+        onClick={onParseScript}
+        disabled={isParsing || isSaving}
+        aria-busy={isParsing}
+        className="h-11 min-w-[10.5rem] rounded-xl border border-neutral-300 bg-neutral-100 px-6 text-neutral-950 shadow-[0_4px_20px_rgba(0,0,0,0.08)] hover:bg-neutral-200"
+      >
+        {isParsing ? (
+          <>
+            <Loader2 className="mr-2 h-4 w-4 animate-spin" aria-hidden />
+            Parsing script…
+          </>
+        ) : (
+          <>
+            <Sparkles className="mr-2 h-4 w-4" aria-hidden /> Parse Script
+          </>
+        )}
+      </Button>
+    </div>
+  );
+}
+
+function WorkspaceTabBar() {
+  return (
+    <nav aria-label="Workspace sections" className={cn('overflow-hidden p-2', GLASS_SHELL)}>
+      <TabsList className="grid h-auto w-full max-w-lg grid-cols-2 gap-1 rounded-xl bg-transparent p-0">
+        <TabsTrigger value="frames" className={tabTriggerClass}>
+          <LayoutGrid className="h-4 w-4 shrink-0" />
+          Frames
+        </TabsTrigger>
+        <TabsTrigger value="script" className={tabTriggerClass}>
+          <FileText className="h-4 w-4 shrink-0" />
+          Script & Style
+        </TabsTrigger>
+      </TabsList>
+    </nav>
+  );
+}
+
 export function ProjectDetail({ projectId, onBack }: ProjectDetailProps) {
   const [project, setProject] = useState<Project | null>(null);
   const [scriptInput, setScriptInput] = useState('');
@@ -40,6 +154,7 @@ export function ProjectDetail({ projectId, onBack }: ProjectDetailProps) {
   const [styleRefId, setStyleRefId] = useState<string>('none');
   const [availableStyles, setAvailableStyles] = useState<StyleRef[]>([]);
   const [isParsing, setIsParsing] = useState(false);
+  const [isSaving, setIsSaving] = useState(false);
   const [activeTab, setActiveTab] = useState('frames');
 
   useEffect(() => {
@@ -67,6 +182,7 @@ export function ProjectDetail({ projectId, onBack }: ProjectDetailProps) {
   }, []);
 
   const handleSaveSettings = async () => {
+    setIsSaving(true);
     try {
       await updateDoc(doc(db, 'projects', projectId), {
         scriptRaw: scriptInput,
@@ -77,6 +193,8 @@ export function ProjectDetail({ projectId, onBack }: ProjectDetailProps) {
       toast.success('Settings saved');
     } catch (error) {
       toast.error('Failed to save settings');
+    } finally {
+      setIsSaving(false);
     }
   };
 
@@ -118,92 +236,26 @@ export function ProjectDetail({ projectId, onBack }: ProjectDetailProps) {
 
   if (!project) return null;
 
-  const glassShell =
-    'rounded-2xl border border-white/50 bg-white/45 shadow-[0_8px_32px_rgba(31,38,135,0.08),inset_0_1px_0_0_rgba(255,255,255,0.55)] backdrop-blur-2xl backdrop-saturate-150 dark:border-white/10 dark:bg-white/5 dark:shadow-[0_8px_32px_rgba(0,0,0,0.35),inset_0_1px_0_0_rgba(255,255,255,0.06)]';
-  const glassCard =
-    'rounded-2xl border border-white/45 bg-white/35 shadow-[0_8px_32px_rgba(31,38,135,0.06),inset_0_1px_0_0_rgba(255,255,255,0.5)] backdrop-blur-xl backdrop-saturate-150 dark:border-white/10 dark:bg-white/[0.06] dark:shadow-[0_8px_32px_rgba(0,0,0,0.25)]';
-  const glassInput =
-    'border-white/40 bg-white/50 shadow-inner backdrop-blur-sm dark:border-white/10 dark:bg-white/5';
-
   return (
     <div className="relative flex min-h-full flex-col">
       <div className="pointer-events-none absolute -left-24 top-0 h-72 w-72 rounded-full bg-violet-400/25 blur-3xl dark:bg-violet-600/15" aria-hidden />
       <div className="pointer-events-none absolute -right-16 top-32 h-64 w-64 rounded-full bg-sky-300/30 blur-3xl dark:bg-sky-500/10" aria-hidden />
 
-      <Tabs value={activeTab} onValueChange={setActiveTab} className="flex w-full flex-col gap-8">
-        <div className="sticky top-0 z-30 mb-2">
-          <div className={cn('overflow-hidden', glassShell)}>
-            <nav aria-label="Project workspace" className="border-b border-white/35 p-2 dark:border-white/10">
-              <TabsList className="grid h-auto w-full grid-cols-2 gap-1 rounded-xl bg-transparent p-0 sm:max-w-md">
-                <TabsTrigger
-                  value="frames"
-                  className={cn(
-                    'relative flex min-h-11 items-center justify-center gap-2 rounded-xl border border-transparent px-4 py-3 text-sm font-medium text-muted-foreground shadow-none transition-all after:hidden',
-                    'hover:bg-white/30 hover:text-foreground dark:hover:bg-white/10',
-                    'data-active:border-white/40 data-active:bg-white/65 data-active:text-foreground data-active:shadow-[0_4px_16px_rgba(0,0,0,0.08)] dark:data-active:border-white/15 dark:data-active:bg-white/15',
-                    '[&_svg]:opacity-70 data-active:[&_svg]:opacity-100',
-                  )}
-                >
-                  <LayoutGrid className="h-4 w-4 shrink-0" />
-                  Frames
-                </TabsTrigger>
-                <TabsTrigger
-                  value="script"
-                  className={cn(
-                    'relative flex min-h-11 items-center justify-center gap-2 rounded-xl border border-transparent px-4 py-3 text-sm font-medium text-muted-foreground shadow-none transition-all after:hidden',
-                    'hover:bg-white/30 hover:text-foreground dark:hover:bg-white/10',
-                    'data-active:border-white/40 data-active:bg-white/65 data-active:text-foreground data-active:shadow-[0_4px_16px_rgba(0,0,0,0.08)] dark:data-active:border-white/15 dark:data-active:bg-white/15',
-                    '[&_svg]:opacity-70 data-active:[&_svg]:opacity-100',
-                  )}
-                >
-                  <FileText className="h-4 w-4 shrink-0" />
-                  Script &amp; Style
-                </TabsTrigger>
-              </TabsList>
-            </nav>
-
-            <div className="flex flex-col gap-4 px-4 py-4 sm:flex-row sm:items-center sm:justify-between">
-              <div className="flex min-w-0 items-start gap-3">
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  onClick={onBack}
-                  className="mt-0.5 shrink-0 rounded-full text-muted-foreground hover:bg-white/20 hover:text-foreground dark:hover:bg-white/10"
-                >
-                  <ArrowLeft size={20} />
-                </Button>
-                <div className="min-w-0 space-y-1">
-                  <h2 className="truncate text-2xl font-semibold tracking-tight text-foreground sm:text-3xl">{project.name}</h2>
-                  <p className="text-xs font-medium uppercase tracking-[0.22em] text-muted-foreground">Production Studio</p>
-                </div>
-              </div>
-
-              <div className="flex flex-wrap items-center gap-2 sm:justify-end">
-                <Button
-                  variant="outline"
-                  onClick={handleSaveSettings}
-                  className="h-11 rounded-xl border-white/50 bg-white/40 px-5 shadow-sm backdrop-blur-md hover:bg-white/60 dark:border-white/10 dark:bg-white/5 dark:hover:bg-white/10"
-                >
-                  <Save className="mr-2 h-4 w-4 opacity-80" /> Save Settings
-                </Button>
-                <Button
-                  onClick={handleParseScript}
-                  disabled={isParsing}
-                  className="h-11 rounded-xl border border-white/20 bg-white/90 px-6 text-foreground shadow-[0_4px_20px_rgba(0,0,0,0.12)] backdrop-blur-sm hover:bg-white dark:border-white/10 dark:bg-white/15 dark:text-foreground"
-                >
-                  {isParsing ? (
-                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                  ) : (
-                    <>
-                      <Sparkles className="mr-2 h-4 w-4" /> Parse Script
-                    </>
-                  )}
-                </Button>
-              </div>
-            </div>
-          </div>
+      <Tabs value={activeTab} onValueChange={setActiveTab} className="flex w-full flex-col gap-6">
+        <div className="sticky top-0 z-30 flex flex-col gap-4">
+          <StudioHeader projectName={project.name} onBack={onBack} />
+          <WorkspaceTabBar />
+          {activeTab === 'script' && (
+            <ScriptStyleToolbar
+              onSave={handleSaveSettings}
+              onParseScript={handleParseScript}
+              isParsing={isParsing}
+              isSaving={isSaving}
+            />
+          )}
         </div>
 
+        <section aria-label="Workspace content" className="flex min-h-0 flex-1 flex-col">
         <TabsContent value="frames" className="mt-0 outline-none focus-visible:ring-0">
           <FrameGrid
             projectId={projectId}
@@ -215,7 +267,7 @@ export function ProjectDetail({ projectId, onBack }: ProjectDetailProps) {
 
         <TabsContent value="script" className="mt-0 outline-none focus-visible:ring-0">
           <div className="grid grid-cols-1 gap-8 lg:grid-cols-3 lg:gap-10">
-            <Card className={cn('group/card relative overflow-hidden lg:col-span-2', glassCard)}>
+            <Card className={cn('group/card relative overflow-hidden lg:col-span-2', GLASS_CARD)}>
               <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-violet-400/25 to-transparent" aria-hidden />
               <CardHeader className="space-y-1 border-b border-white/25 pb-5 pt-6 dark:border-white/10">
                 <div className="flex items-start gap-4">
@@ -223,10 +275,10 @@ export function ProjectDetail({ projectId, onBack }: ProjectDetailProps) {
                     <FileText size={20} className="text-violet-600 dark:text-violet-400" />
                   </div>
                   <div className="min-w-0 space-y-1">
-                    <CardTitle className="text-lg font-semibold tracking-tight">Raw script input</CardTitle>
-                    <CardDescription className="text-sm leading-relaxed">
+                    <CardTitle className="text-lg font-semibold tracking-tight text-neutral-950">Raw script input</CardTitle>
+                    <CardDescription className="text-sm leading-relaxed text-neutral-950">
                       Paste your script table (Fr, On Screen Visual, Script…), then run{' '}
-                      <span className="font-medium text-foreground/80">Parse Script</span> to create frames.
+                      <span className="font-medium">Parse Script</span> to create frames.
                     </CardDescription>
                   </div>
                 </div>
@@ -236,8 +288,8 @@ export function ProjectDetail({ projectId, onBack }: ProjectDetailProps) {
                   placeholder="Paste your script table here…"
                   className={cn(
                     'min-h-[min(520px,70vh)] resize-y rounded-xl p-5 font-mono text-sm leading-relaxed text-foreground transition-[box-shadow,border-color]',
-                    'placeholder:text-muted-foreground/60 focus-visible:border-violet-400/50 focus-visible:ring-2 focus-visible:ring-violet-400/25',
-                    glassInput,
+                    'placeholder:text-neutral-950/45 focus-visible:border-violet-400/50 focus-visible:ring-2 focus-visible:ring-violet-400/25',
+                    GLASS_INPUT,
                   )}
                   value={scriptInput}
                   onChange={(e) => setScriptInput(e.target.value)}
@@ -246,15 +298,15 @@ export function ProjectDetail({ projectId, onBack }: ProjectDetailProps) {
             </Card>
 
             <div className="flex flex-col gap-6 lg:col-span-1">
-              <Card className={cn('overflow-hidden', glassCard)}>
+              <Card className={cn('overflow-hidden', GLASS_CARD)}>
                 <CardHeader className="space-y-1 border-b border-white/25 pb-5 pt-6 dark:border-white/10">
                   <div className="flex items-start gap-4">
                     <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-white/40 bg-white/50 shadow-sm backdrop-blur-md dark:border-white/10 dark:bg-white/10">
                       <Settings2 size={20} className="text-violet-600 dark:text-violet-400" />
                     </div>
                     <div className="min-w-0 space-y-1">
-                      <CardTitle className="text-lg font-semibold tracking-tight">Global style</CardTitle>
-                      <CardDescription className="text-sm leading-relaxed">
+                      <CardTitle className="text-lg font-semibold tracking-tight text-neutral-950">Global style</CardTitle>
+                      <CardDescription className="text-sm leading-relaxed text-neutral-950">
                         Keep a consistent look across every frame in this project.
                       </CardDescription>
                     </div>
@@ -262,9 +314,9 @@ export function ProjectDetail({ projectId, onBack }: ProjectDetailProps) {
                 </CardHeader>
                 <CardContent className="space-y-6 p-5 sm:p-6">
                   <div className="space-y-2">
-                    <Label className="text-xs font-medium text-muted-foreground">Style reference library</Label>
+                    <Label className="text-xs font-medium text-neutral-950">Style reference library</Label>
                     <Select value={styleRefId} onValueChange={setStyleRefId}>
-                      <SelectTrigger className={cn('h-11 rounded-xl', glassInput)}>
+                      <SelectTrigger className={cn('h-11 rounded-xl', GLASS_INPUT)}>
                         <SelectValue placeholder="Select a style…" />
                       </SelectTrigger>
                       <SelectContent className="rounded-xl">
@@ -279,13 +331,13 @@ export function ProjectDetail({ projectId, onBack }: ProjectDetailProps) {
                   </div>
 
                   <div className="space-y-2">
-                    <Label className="text-xs font-medium text-muted-foreground">Manual style prompt</Label>
+                    <Label className="text-xs font-medium text-neutral-950">Manual style prompt</Label>
                     <Textarea
                       placeholder="e.g. cinematic 3D illustration, vibrant colors, detailed textures, soft lighting…"
                       className={cn(
                         'min-h-[200px] resize-y rounded-xl p-4 text-sm leading-relaxed transition-[box-shadow,border-color]',
                         'focus-visible:border-violet-400/50 focus-visible:ring-2 focus-visible:ring-violet-400/25',
-                        glassInput,
+                        GLASS_INPUT,
                       )}
                       value={stylePrompt}
                       onChange={(e) => setStylePrompt(e.target.value)}
@@ -294,22 +346,23 @@ export function ProjectDetail({ projectId, onBack }: ProjectDetailProps) {
                 </CardContent>
               </Card>
 
-              <div className="relative overflow-hidden rounded-2xl border border-white/50 bg-white/25 p-6 text-foreground shadow-[0_8px_32px_rgba(31,38,135,0.07)] backdrop-blur-xl dark:border-white/10 dark:bg-violet-950/40 dark:text-white">
+              <div className="relative overflow-hidden rounded-2xl border border-neutral-200 bg-white p-6 text-neutral-950 shadow-[0_8px_32px_rgba(31,38,135,0.07)] backdrop-blur-xl dark:border-white/10 dark:bg-violet-950/40 dark:text-white">
                 <div className="pointer-events-none absolute -right-8 -top-8 h-32 w-32 rounded-full bg-violet-400/30 blur-3xl dark:bg-violet-500/20" aria-hidden />
                 <div className="pointer-events-none absolute -bottom-6 -left-6 h-24 w-24 rounded-full bg-amber-300/20 blur-2xl dark:bg-amber-400/10" aria-hidden />
-                <p className="mb-3 flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.18em] text-violet-700/90 dark:text-violet-200/90">
-                  <Sparkles size={14} className="text-amber-500 dark:text-amber-300" />
+                <p className="mb-3 flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.18em] text-neutral-950 dark:text-violet-200/90">
+                  <Sparkles size={14} className="text-neutral-950 dark:text-amber-300" />
                   Pro tip
                 </p>
-                <p className="text-sm leading-relaxed text-muted-foreground dark:text-slate-300">
-                  Try phrases like <span className="font-medium text-foreground dark:text-white">&quot;vibrant colors&quot;</span>,{' '}
-                  <span className="font-medium text-foreground dark:text-white">&quot;cinematic lighting&quot;</span>, or{' '}
-                  <span className="font-medium text-foreground dark:text-white">&quot;watercolor&quot;</span> to keep frames visually aligned.
+                <p className="text-sm leading-relaxed text-neutral-950 dark:text-slate-300">
+                  Try phrases like <span className="font-medium">&quot;vibrant colors&quot;</span>,{' '}
+                  <span className="font-medium">&quot;cinematic lighting&quot;</span>, or{' '}
+                  <span className="font-medium">&quot;watercolor&quot;</span> to keep frames visually aligned.
                 </p>
               </div>
             </div>
           </div>
         </TabsContent>
+        </section>
       </Tabs>
     </div>
   );

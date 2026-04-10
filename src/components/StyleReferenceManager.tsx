@@ -27,6 +27,7 @@ export function StyleReferenceManager() {
   const [newCategory, setNewCategory] = useState('');
   const [newStylePrompt, setNewStylePrompt] = useState('');
   const [isUploading, setIsUploading] = useState(false);
+  const [deletingRefId, setDeletingRefId] = useState<string | null>(null);
 
   useEffect(() => {
     const q = query(collection(db, 'styleReferences'));
@@ -156,6 +157,7 @@ export function StyleReferenceManager() {
 
   const handleDeleteRef = async (id: string) => {
     if (!confirm('Delete this reference?')) return;
+    setDeletingRefId(id);
     try {
       // 1. Get all images in subcollection
       const imagesSnap = await getDocs(collection(db, 'styleReferences', id, 'images'));
@@ -171,6 +173,8 @@ export function StyleReferenceManager() {
       toast.success('Reference deleted');
     } catch (error) {
       toast.error('Failed to delete reference');
+    } finally {
+      setDeletingRefId(null);
     }
   };
 
@@ -178,8 +182,8 @@ export function StyleReferenceManager() {
     <div className="space-y-8">
       <div className="flex items-center justify-between">
         <div>
-          <h2 className="text-3xl font-bold tracking-tight text-gray-900">Style Library</h2>
-          <p className="text-gray-500 mt-1">Maintain visual consistency by referencing your existing aesthetic.</p>
+          <h2 className="text-3xl font-bold tracking-tight text-neutral-950">Style Library</h2>
+          <p className="text-neutral-950 mt-1">Maintain visual consistency by referencing your existing aesthetic.</p>
         </div>
         
         <Dialog open={isNewRefOpen} onOpenChange={setIsNewRefOpen}>
@@ -209,15 +213,15 @@ export function StyleReferenceManager() {
                       <img src={url} className="w-full h-full object-cover" alt="preview" />
                       <button 
                         onClick={() => removeImageUrl(i)}
-                        className="absolute top-1 right-1 bg-red-500 text-white p-1 rounded-full opacity-0 group-hover:opacity-100 transition-opacity"
+                        className="absolute top-1 right-1 bg-red-100 text-neutral-950 border border-red-300 p-1 rounded-full opacity-0 group-hover:opacity-100 transition-opacity"
                       >
                         <Trash2 size={12} />
                       </button>
                     </div>
                   ))}
                   <label className="aspect-square flex flex-col items-center justify-center border-2 border-dashed border-gray-200 rounded-md cursor-pointer hover:bg-gray-50 transition-colors">
-                    <Plus size={24} className="text-gray-400" />
-                    <span className="text-[10px] text-gray-400 mt-1">Upload</span>
+                    <Plus size={24} className="text-neutral-950" />
+                    <span className="text-[10px] text-neutral-950 mt-1">Upload</span>
                     <input type="file" multiple accept="image/*" className="hidden" onChange={handleFileChange} disabled={isUploading} />
                   </label>
                 </div>
@@ -269,7 +273,7 @@ export function StyleReferenceManager() {
                 referrerPolicy="no-referrer"
               />
               {ref.imageUrls && ref.imageUrls.length > 1 && (
-                <div className="absolute bottom-2 right-2 bg-black/60 text-white text-[10px] px-1.5 py-0.5 rounded-full font-bold">
+                <div className="absolute bottom-2 right-2 bg-white/95 text-neutral-950 border border-neutral-200 text-[10px] px-1.5 py-0.5 rounded-full font-bold">
                   +{ref.imageUrls.length - 1} images
                 </div>
               )}
@@ -280,8 +284,15 @@ export function StyleReferenceManager() {
                 <Button size="icon" variant="secondary" className="rounded-full" onClick={() => window.open(ref.imageUrls?.[0], '_blank')}>
                   <ExternalLink size={16} />
                 </Button>
-                <Button size="icon" variant="destructive" className="rounded-full" onClick={() => handleDeleteRef(ref.id)}>
-                  <Trash2 size={16} />
+                <Button
+                  size="icon"
+                  variant="destructive"
+                  className="rounded-full"
+                  disabled={deletingRefId === ref.id}
+                  aria-busy={deletingRefId === ref.id}
+                  onClick={() => handleDeleteRef(ref.id)}
+                >
+                  {deletingRefId === ref.id ? <Loader2 size={16} className="animate-spin" /> : <Trash2 size={16} />}
                 </Button>
               </div>
             </div>
@@ -295,7 +306,7 @@ export function StyleReferenceManager() {
                 </Badge>
               )}
               {ref.stylePrompt && (
-                <p className="text-[11px] text-gray-500 line-clamp-2 mt-2 italic">
+                <p className="text-[11px] text-neutral-950 line-clamp-2 mt-2 italic">
                   "{ref.stylePrompt}"
                 </p>
               )}
@@ -305,11 +316,11 @@ export function StyleReferenceManager() {
 
         {refs.length === 0 && (
           <div className="col-span-full py-20 text-center border-2 border-dashed border-gray-200 rounded-2xl">
-            <div className="mx-auto w-12 h-12 text-gray-300 mb-4">
+            <div className="mx-auto w-12 h-12 text-neutral-400 mb-4">
               <ImageIcon size={48} />
             </div>
-            <h3 className="text-lg font-medium text-gray-900">No references yet</h3>
-            <p className="text-gray-500">Add images to help the AI understand your aesthetic.</p>
+            <h3 className="text-lg font-medium text-neutral-950">No references yet</h3>
+            <p className="text-neutral-950">Add images to help the AI understand your aesthetic.</p>
           </div>
         )}
       </div>

@@ -15,7 +15,13 @@ export const db =
     ? getFirestore(app, firestoreDatabaseId)
     : getFirestore(app);
 export const auth = getAuth(app);
-export const storage = getStorage(app);
+
+const storageBucket = (firebaseConfig as { storageBucket?: string }).storageBucket;
+if (!storageBucket) {
+  throw new Error('firebase-applet-config.json must include storageBucket for Cloud Storage.');
+}
+/** Explicit gs:// bucket avoids ambiguous default bucket resolution with the new *.firebasestorage.app buckets. */
+export const storage = getStorage(app, `gs://${storageBucket}`);
 
 export enum OperationType {
   CREATE = 'create',

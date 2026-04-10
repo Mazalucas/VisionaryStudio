@@ -10,11 +10,12 @@ import { ProjectList } from './components/ProjectList';
 import { ProjectDetail } from './components/ProjectDetail';
 import { StyleReferenceManager } from './components/StyleReferenceManager';
 import { ApiKeysSettings } from './components/ApiKeysSettings';
-import { LogIn, LayoutDashboard } from 'lucide-react';
+import { LogIn, LayoutDashboard, Loader2 } from 'lucide-react';
 
 export default function App() {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
+  const [isLoggingIn, setIsLoggingIn] = useState(false);
   const [view, setView] = useState<'projects' | 'project-detail' | 'styles' | 'api-keys'>('projects');
   const [selectedProjectId, setSelectedProjectId] = useState<string | null>(null);
 
@@ -27,6 +28,7 @@ export default function App() {
   }, []);
 
   const handleLogin = async () => {
+    setIsLoggingIn(true);
     try {
       const provider = new GoogleAuthProvider();
       await signInWithPopup(auth, provider);
@@ -51,13 +53,15 @@ export default function App() {
         console.error(error);
         toast.error('Failed to login: ' + (err.message || 'Unknown error'));
       }
+    } finally {
+      setIsLoggingIn(false);
     }
   };
 
   if (loading) {
     return (
       <div className="flex items-center justify-center h-screen bg-[#f5f5f5]">
-        <div className="animate-pulse text-xl font-medium text-gray-500">Loading Visionary Studio...</div>
+        <div className="animate-pulse text-xl font-medium text-neutral-950">Loading Visionary Studio...</div>
       </div>
     );
   }
@@ -72,16 +76,30 @@ export default function App() {
             </div>
             <div>
               <CardTitle className="text-3xl font-bold tracking-tight">Visionary Studio</CardTitle>
-              <CardDescription className="text-gray-500 mt-2">
+              <CardDescription className="text-neutral-950 mt-2">
                 AI-Assisted Background Production for Educational Videos
               </CardDescription>
             </div>
           </CardHeader>
           <CardContent className="flex flex-col gap-4 pt-4">
-            <Button onClick={handleLogin} className="w-full h-12 text-lg font-medium transition-all">
-              <LogIn className="mr-2 h-5 w-5" /> Sign in with Google
+            <Button
+              onClick={handleLogin}
+              disabled={isLoggingIn}
+              aria-busy={isLoggingIn}
+              className="w-full h-12 text-lg font-medium transition-all"
+            >
+              {isLoggingIn ? (
+                <>
+                  <Loader2 className="mr-2 h-5 w-5 animate-spin" aria-hidden />
+                  Signing in…
+                </>
+              ) : (
+                <>
+                  <LogIn className="mr-2 h-5 w-5" aria-hidden /> Sign in with Google
+                </>
+              )}
             </Button>
-            <p className="text-xs text-center text-gray-400">
+            <p className="text-xs text-center text-neutral-950">
               Secure access to your production projects and assets.
             </p>
             {import.meta.env.DEV && (
@@ -119,7 +137,7 @@ export default function App() {
       {view === 'api-keys' && (
         <ApiKeysSettings />
       )}
-      <Toaster position="bottom-right" />
+      <Toaster />
     </Layout>
   );
 }

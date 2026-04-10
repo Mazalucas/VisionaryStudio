@@ -6,7 +6,7 @@ import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { Plus, Trash2, ArrowRight, Calendar, Globe } from 'lucide-react';
+import { Plus, Trash2, ArrowRight, Calendar, Globe, Loader2 } from 'lucide-react';
 import { toast } from 'sonner';
 
 interface Project {
@@ -24,6 +24,8 @@ export function ProjectList({ onSelectProject }: ProjectListProps) {
   const [projects, setProjects] = useState<Project[]>([]);
   const [isNewProjectOpen, setIsNewProjectOpen] = useState(false);
   const [newProjectName, setNewProjectName] = useState('');
+  const [isCreatingProject, setIsCreatingProject] = useState(false);
+  const [deletingProjectId, setDeletingProjectId] = useState<string | null>(null);
 
   useEffect(() => {
     const q = query(collection(db, 'projects'), orderBy('createdAt', 'desc'));
@@ -38,6 +40,7 @@ export function ProjectList({ onSelectProject }: ProjectListProps) {
 
   const handleCreateProject = async () => {
     if (!newProjectName.trim()) return;
+    setIsCreatingProject(true);
     try {
       await addDoc(collection(db, 'projects'), {
         name: newProjectName,
@@ -50,17 +53,22 @@ export function ProjectList({ onSelectProject }: ProjectListProps) {
       toast.success('Project created');
     } catch (error) {
       toast.error('Failed to create project');
+    } finally {
+      setIsCreatingProject(false);
     }
   };
 
   const handleDeleteProject = async (e: React.MouseEvent, id: string) => {
     e.stopPropagation();
     if (!confirm('Are you sure you want to delete this project?')) return;
+    setDeletingProjectId(id);
     try {
       await deleteDoc(doc(db, 'projects', id));
       toast.success('Project deleted');
     } catch (error) {
       toast.error('Failed to delete project');
+    } finally {
+      setDeletingProjectId(null);
     }
   };
 
@@ -68,8 +76,8 @@ export function ProjectList({ onSelectProject }: ProjectListProps) {
     <div className="space-y-8">
       <div className="flex items-center justify-between">
         <div>
-          <h2 className="text-3xl font-bold tracking-tight text-gray-900">Production Projects</h2>
-          <p className="text-gray-500 mt-1">Manage your video episodes and background generations.</p>
+          <h2 className="text-3xl font-bold tracking-tight text-neutral-950">Production Projects</h2>
+          <p className="text-neutral-950 mt-1">Manage your video episodes and background generations.</p>
         </div>
         
         <Dialog open={isNewProjectOpen} onOpenChange={setIsNewProjectOpen}>
@@ -97,8 +105,24 @@ export function ProjectList({ onSelectProject }: ProjectListProps) {
               </div>
             </div>
             <DialogFooter>
-              <Button variant="outline" onClick={() => setIsNewProjectOpen(false)}>Cancel</Button>
-              <Button onClick={handleCreateProject} className="bg-black hover:bg-gray-800">Create Project</Button>
+              <Button variant="outline" onClick={() => setIsNewProjectOpen(false)} disabled={isCreatingProject}>
+                Cancel
+              </Button>
+              <Button
+                onClick={handleCreateProject}
+                disabled={isCreatingProject}
+                aria-busy={isCreatingProject}
+                className="min-w-[8.5rem] border border-neutral-400 bg-neutral-200 text-neutral-950 hover:bg-neutral-300"
+              >
+                {isCreatingProject ? (
+                  <>
+                    <Loader2 className="mr-2 h-4 w-4 animate-spin" aria-hidden />
+                    Creating…
+                  </>
+                ) : (
+                  'Create Project'
+                )}
+              </Button>
             </DialogFooter>
           </DialogContent>
         </Dialog>
@@ -113,16 +137,18 @@ export function ProjectList({ onSelectProject }: ProjectListProps) {
           >
             <CardHeader className="pb-4">
               <div className="flex justify-between items-start">
-                <div className="p-2 bg-gray-100 rounded-lg group-hover:bg-black group-hover:text-white transition-colors">
+                <div className="p-2 bg-neutral-100 rounded-lg group-hover:bg-neutral-200 transition-colors text-neutral-950">
                   <Globe size={20} />
                 </div>
                 <Button 
                   variant="ghost" 
                   size="icon" 
-                  className="text-gray-400 hover:text-red-600 h-8 w-8"
+                  className="text-neutral-950 hover:text-red-600 h-8 w-8"
+                  disabled={deletingProjectId === project.id}
+                  aria-busy={deletingProjectId === project.id}
                   onClick={(e) => handleDeleteProject(e, project.id)}
                 >
-                  <Trash2 size={16} />
+                  {deletingProjectId === project.id ? <Loader2 size={16} className="animate-spin" /> : <Trash2 size={16} />}
                 </Button>
               </div>
               <CardTitle className="mt-4 text-xl font-bold">{project.name}</CardTitle>
@@ -132,24 +158,24 @@ export function ProjectList({ onSelectProject }: ProjectListProps) {
               </CardDescription>
             </CardHeader>
             <CardContent>
-              <p className="text-sm text-gray-500 line-clamp-2 italic">
+              <p className="text-sm text-neutral-950 line-clamp-2 italic">
                 {project.globalStylePrompt || 'No style prompt set.'}
               </p>
             </CardContent>
-            <CardFooter className="bg-gray-50 py-3 flex justify-between items-center group-hover:bg-gray-100 transition-colors">
-              <span className="text-xs font-semibold text-gray-400 uppercase tracking-wider">Open Studio</span>
-              <ArrowRight size={16} className="text-gray-400 group-hover:translate-x-1 transition-transform" />
+            <CardFooter className="bg-neutral-50 py-3 flex justify-between items-center group-hover:bg-neutral-100 transition-colors">
+              <span className="text-xs font-semibold text-neutral-950 uppercase tracking-wider">Open Studio</span>
+              <ArrowRight size={16} className="text-neutral-950 group-hover:translate-x-1 transition-transform" />
             </CardFooter>
           </Card>
         ))}
 
         {projects.length === 0 && (
           <div className="col-span-full py-20 text-center border-2 border-dashed border-gray-200 rounded-2xl">
-            <div className="mx-auto w-12 h-12 text-gray-300 mb-4">
+            <div className="mx-auto w-12 h-12 text-neutral-400 mb-4">
               <Globe size={48} />
             </div>
-            <h3 className="text-lg font-medium text-gray-900">No projects yet</h3>
-            <p className="text-gray-500">Create your first project to start generating backgrounds.</p>
+            <h3 className="text-lg font-medium text-neutral-950">No projects yet</h3>
+            <p className="text-neutral-950">Create your first project to start generating backgrounds.</p>
           </div>
         )}
       </div>

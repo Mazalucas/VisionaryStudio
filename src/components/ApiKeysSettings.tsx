@@ -152,9 +152,9 @@ export function ApiKeysSettings() {
   return (
     <div className="max-w-3xl space-y-8">
       <div>
-        <h2 className="text-3xl font-bold tracking-tight text-gray-900">API Keys</h2>
-        <p className="text-sm text-gray-500 mt-2 leading-relaxed">
-          Las claves se guardan en <span className="font-medium text-gray-700">localStorage</span> de este
+        <h2 className="text-3xl font-bold tracking-tight text-neutral-950">API Keys</h2>
+        <p className="text-sm text-neutral-950 mt-2 leading-relaxed">
+          Las claves se guardan en <span className="font-medium">localStorage</span> de este
           navegador. No se envían a Firebase. Para producción, usa variables de entorno en el build
           (Gemini) o un backend seguro.
         </p>
@@ -164,7 +164,7 @@ export function ApiKeysSettings() {
         <CardHeader className="border-b border-gray-50 bg-gray-50/30">
           <div className="flex items-center gap-3">
             <div className="p-2 bg-white rounded-lg shadow-sm border border-gray-100">
-              <Sparkles className="h-5 w-5 text-gray-700" />
+              <Sparkles className="h-5 w-5 text-neutral-950" />
             </div>
             <div>
               <CardTitle className="text-lg">Proveedores por defecto</CardTitle>
@@ -218,7 +218,7 @@ export function ApiKeysSettings() {
         <CardHeader className="border-b border-gray-50 bg-gray-50/30">
           <div className="flex items-center gap-3">
             <div className="p-2 bg-white rounded-lg shadow-sm border border-gray-100">
-              <Sparkles className="h-5 w-5 text-gray-700" />
+              <Sparkles className="h-5 w-5 text-neutral-950" />
             </div>
             <div>
               <CardTitle className="text-lg">Modelos</CardTitle>
@@ -231,7 +231,7 @@ export function ApiKeysSettings() {
         </CardHeader>
         <CardContent className="pt-6 space-y-8">
           <div className="space-y-4">
-            <p className="text-xs font-semibold uppercase tracking-wide text-gray-500">Google Gemini</p>
+            <p className="text-xs font-semibold uppercase tracking-wide text-neutral-950">Google Gemini</p>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               <div className="space-y-2">
                 <Label>Texto (parseo y refinado)</Label>
@@ -282,7 +282,7 @@ export function ApiKeysSettings() {
           </div>
 
           <div className="space-y-4 border-t border-gray-100 pt-8">
-            <p className="text-xs font-semibold uppercase tracking-wide text-gray-500">OpenAI</p>
+            <p className="text-xs font-semibold uppercase tracking-wide text-neutral-950">OpenAI</p>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="space-y-2">
                 <Label>Texto (parseo y refinado)</Label>
@@ -324,7 +324,7 @@ export function ApiKeysSettings() {
           <div className="flex items-center justify-between gap-4 flex-wrap">
             <div className="flex items-center gap-3">
               <div className="p-2 bg-white rounded-lg shadow-sm border border-gray-100">
-                <KeyRound className="h-5 w-5 text-gray-700" />
+                <KeyRound className="h-5 w-5 text-neutral-950" />
               </div>
               <div>
                 <CardTitle className="text-lg">Google Gemini</CardTitle>
@@ -338,7 +338,7 @@ export function ApiKeysSettings() {
               href="https://aistudio.google.com/apikey"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1 text-sm font-medium text-gray-600 hover:text-black"
+              className="inline-flex items-center gap-1 text-sm font-medium text-neutral-950 hover:underline"
             >
               Obtener clave <ExternalLink className="h-4 w-4" />
             </a>
@@ -347,7 +347,7 @@ export function ApiKeysSettings() {
         <CardContent className="pt-6 space-y-4">
           <div className="flex items-center gap-2">
             <span
-              className={`text-xs font-semibold uppercase tracking-wide ${meta.geminiConfigured ? 'text-green-600' : 'text-gray-400'}`}
+              className={`text-xs font-semibold uppercase tracking-wide ${meta.geminiConfigured ? 'text-green-700' : 'text-neutral-950'}`}
             >
               {meta.geminiConfigured ? 'Clave configurada' : 'Sin clave en el navegador'}
             </span>
@@ -380,7 +380,7 @@ export function ApiKeysSettings() {
           <div className="flex items-center justify-between gap-4 flex-wrap">
             <div className="flex items-center gap-3">
               <div className="p-2 bg-white rounded-lg shadow-sm border border-gray-100">
-                <KeyRound className="h-5 w-5 text-gray-700" />
+                <KeyRound className="h-5 w-5 text-neutral-950" />
               </div>
               <div>
                 <CardTitle className="text-lg">OpenAI (ChatGPT / DALL·E)</CardTitle>
@@ -393,7 +393,7 @@ export function ApiKeysSettings() {
               href="https://platform.openai.com/api-keys"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1 text-sm font-medium text-gray-600 hover:text-black"
+              className="inline-flex items-center gap-1 text-sm font-medium text-neutral-950 hover:underline"
             >
               Obtener clave <ExternalLink className="h-4 w-4" />
             </a>
@@ -402,7 +402,7 @@ export function ApiKeysSettings() {
         <CardContent className="pt-6 space-y-4">
           <div className="flex items-center gap-2">
             <span
-              className={`text-xs font-semibold uppercase tracking-wide ${meta.openaiConfigured ? 'text-green-600' : 'text-gray-400'}`}
+              className={`text-xs font-semibold uppercase tracking-wide ${meta.openaiConfigured ? 'text-green-700' : 'text-neutral-950'}`}
             >
               {meta.openaiConfigured ? 'Clave configurada' : 'Sin clave en el navegador'}
             </span>
