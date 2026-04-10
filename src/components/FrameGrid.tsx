@@ -10,7 +10,7 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { Sparkles, Trash2, Eye, Download, CheckCircle2, Circle, RefreshCw, Image as ImageIcon, Edit3, Upload as UploadIcon, RotateCcw } from 'lucide-react';
+import { Sparkles, Trash2, Eye, Download, CheckCircle2, Circle, RefreshCw, Image as ImageIcon, Edit3, Upload as UploadIcon, RotateCcw, Clapperboard } from 'lucide-react';
 import { toast } from 'sonner';
 
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter, DialogDescription } from '@/components/ui/dialog';
@@ -360,54 +360,78 @@ export function FrameGrid({ projectId, globalStyle, styleReferenceId, availableS
   };
 
   return (
-    <div className="space-y-6">
-      <div className="flex items-center justify-between bg-white p-4 rounded-xl border border-gray-200 shadow-sm sticky top-0 z-10">
-        <div className="flex items-center gap-4">
-          <div className="text-sm font-medium text-gray-500">
-            {selectedFrameIds.size} frames selected
+    <div className="space-y-8">
+      <div className="sticky top-0 z-10 flex flex-col gap-4 rounded-2xl border border-border/60 bg-gradient-to-b from-background/95 to-muted/20 p-4 shadow-sm backdrop-blur-md supports-[backdrop-filter]:bg-background/80 sm:flex-row sm:items-center sm:justify-between">
+        <div className="flex flex-wrap items-center gap-3">
+          <div className="inline-flex items-center gap-2 rounded-full border border-border/50 bg-muted/40 px-3 py-1.5 text-sm font-medium text-muted-foreground">
+            <span className="tabular-nums text-foreground">{selectedFrameIds.size}</span>
+            <span>selected</span>
           </div>
-          <Button 
-            variant="outline" 
-            size="sm" 
-            onClick={() => setSelectedFrameIds(new Set(frames.map(f => f.id)))}
-          >
-            Select All
-          </Button>
-          <Button 
-            variant="outline" 
-            size="sm" 
-            onClick={() => setSelectedFrameIds(new Set())}
-          >
-            Deselect All
-          </Button>
+          <div className="flex flex-wrap gap-2">
+            <Button
+              variant="outline"
+              size="sm"
+              className="rounded-lg border-border/70"
+              onClick={() => setSelectedFrameIds(new Set(frames.map(f => f.id)))}
+            >
+              Select all
+            </Button>
+            <Button
+              variant="outline"
+              size="sm"
+              className="rounded-lg border-border/70"
+              onClick={() => setSelectedFrameIds(new Set())}
+            >
+              Deselect all
+            </Button>
+          </div>
         </div>
 
-        <div className="flex items-center gap-3">
+        <div className="flex flex-wrap items-center gap-2 sm:gap-3">
           <Select value={quality} onValueChange={(v: any) => setQuality(v)}>
-            <SelectTrigger className="w-32 h-9">
+            <SelectTrigger className="h-9 w-[9.5rem] rounded-lg border-border/70">
               <SelectValue placeholder="Quality" />
             </SelectTrigger>
             <SelectContent>
               <SelectItem value="standard">Standard</SelectItem>
-              <SelectItem value="high">High Fidelity</SelectItem>
+              <SelectItem value="high">High fidelity</SelectItem>
             </SelectContent>
           </Select>
-          
-          <Button 
-            onClick={handleGenerateSelected} 
+
+          <Button
+            onClick={handleGenerateSelected}
             disabled={isGenerating || selectedFrameIds.size === 0}
-            className="h-9"
+            className="h-9 rounded-lg bg-gradient-to-br from-foreground to-foreground/90 shadow-sm"
           >
             {isGenerating ? <RefreshCw className="mr-2 h-4 w-4 animate-spin" /> : <Sparkles className="mr-2 h-4 w-4" />}
-            Generate Selected
+            Generate selected
           </Button>
         </div>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+      {frames.length === 0 && (
+        <div className="flex flex-col items-center justify-center rounded-2xl border border-dashed border-border/80 bg-muted/20 px-8 py-16 text-center">
+          <div className="mb-4 flex h-14 w-14 items-center justify-center rounded-2xl bg-background shadow-sm ring-1 ring-border/60">
+            <Clapperboard className="h-7 w-7 text-violet-600 dark:text-violet-400" />
+          </div>
+          <h3 className="text-lg font-semibold tracking-tight text-foreground">No frames yet</h3>
+          <p className="mt-2 max-w-md text-sm leading-relaxed text-muted-foreground">
+            Go to <span className="font-medium text-foreground/90">Script & Style</span>, paste your script table, then run <span className="font-medium text-foreground/90">Parse Script</span> to generate frames here.
+          </p>
+        </div>
+      )}
+
+      <div className="grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3">
         {frames.map((frame) => (
-          <Card key={frame.id} className={`overflow-hidden transition-all border-2 ${selectedFrameIds.has(frame.id) ? 'border-black' : 'border-transparent'}`}>
-            <div className="relative aspect-video bg-gray-100 group">
+          <Card
+            key={frame.id}
+            className={`overflow-hidden rounded-2xl border bg-card shadow-sm ring-1 ring-black/[0.04] transition-all duration-200 ${
+              selectedFrameIds.has(frame.id)
+                ? 'border-violet-500/50 shadow-md ring-2 ring-violet-500/25'
+                : 'border-border/60 hover:border-border hover:shadow-md'
+            }`}
+          >
+            <div className="relative aspect-video bg-muted/50 group">
               {frame.generatedImageUrl || frame.isChunked ? (
                 <ChunkedImage 
                   frame={frame} 
@@ -415,9 +439,11 @@ export function FrameGrid({ projectId, globalStyle, styleReferenceId, availableS
                   className="w-full h-full object-cover" 
                 />
               ) : (
-                <div className="w-full h-full flex flex-col items-center justify-center text-gray-300">
-                  <ImageIcon size={48} />
-                  <p className="text-xs mt-2 font-medium uppercase tracking-wider">Pending Generation</p>
+                <div className="flex h-full w-full flex-col items-center justify-center gap-2 text-muted-foreground/70">
+                  <div className="rounded-xl bg-background/80 p-3 shadow-sm ring-1 ring-border/50">
+                    <ImageIcon className="h-10 w-10 opacity-50" />
+                  </div>
+                  <p className="text-[11px] font-semibold uppercase tracking-[0.14em]">Pending generation</p>
                 </div>
               )}
               
