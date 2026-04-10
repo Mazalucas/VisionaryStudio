@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef, useLayoutEffect, useCallback } from 'react';
 import { db, handleFirestoreError, OperationType } from '../firebase';
 import { doc, onSnapshot, updateDoc, collection, serverTimestamp, query, writeBatch } from 'firebase/firestore';
 import { geminiService } from '../geminiService';
@@ -11,8 +11,9 @@ import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
 import { cn } from '@/lib/utils';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { FrameGrid } from './FrameGrid';
-import { ArrowLeft, Sparkles, Settings2, Save, FileText, LayoutGrid, Loader2 } from 'lucide-react';
+import { FrameGrid, type FrameGridColumnCount } from './FrameGrid';
+import { ArrowLeft, Sparkles, Settings2, Save, FileText, LayoutGrid, Loader2, Settings } from 'lucide-react';
+import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import { toast } from 'sonner';
 
 interface Project {
@@ -26,6 +27,17 @@ interface Project {
 interface StyleRef {
   id: string;
   name: string;
+}
+
+/** Label for global style select when the menu is closed (items not mounted). */
+function globalStyleSelectLabel(
+  value: string | null | undefined,
+  styles: StyleRef[],
+): string {
+  const v = value ?? 'none';
+  if (v === 'none') return 'None (manual prompt only)';
+  const found = styles.find((s) => s.id === v);
+  return found?.name ?? 'Style (unavailable)';
 }
 
 interface ProjectDetailProps {
@@ -51,9 +63,10 @@ const SCRIPT_TOOLBAR =
 interface StudioHeaderProps {
   projectName: string;
   onBack: () => void;
+  headerActions?: React.ReactNode;
 }
 
-function StudioHeader({ projectName, onBack }: StudioHeaderProps) {
+function StudioHeader({ projectName, onBack, headerActions }: StudioHeaderProps) {
   return (
     <header className={cn('overflow-hidden', GLASS_SHELL)}>
       <div className="flex flex-col gap-4 px-4 py-4 sm:flex-row sm:items-center sm:justify-between">
@@ -71,8 +84,72 @@ function StudioHeader({ projectName, onBack }: StudioHeaderProps) {
             <p className="text-xs font-medium uppercase tracking-[0.22em] text-neutral-950">Production Studio</p>
           </div>
         </div>
+        {headerActions != null ? (
+          <div className="flex shrink-0 items-center justify-end self-end sm:self-center">{headerActions}</div>
+        ) : null}
       </div>
     </header>
+  );
+}
+
+const FRAME_GRID_COLS_STORAGE_PREFIX = 'visionary-frame-grid-cols:';
+
+function frameGridColsStorageKey(projectId: string) {
+  return `${FRAME_GRID_COLS_STORAGE_PREFIX}${projectId}`;
+}
+
+function parseStoredFrameGridColumns(raw: string | null): FrameGridColumnCount {
+  if (raw == null) return 2;
+  const n = Number.parseInt(raw, 10);
+  if (n === 1 || n === 2 || n === 3 || n === 4) return n;
+  return 2;
+}
+
+function FrameGridColumnsPopover({
+  value,
+  onChange,
+}: {
+  value: FrameGridColumnCount;
+  onChange: (v: FrameGridColumnCount) => void;
+}) {
+  const [open, setOpen] = useState(false);
+  const options: FrameGridColumnCount[] = [1, 2, 3, 4];
+  return (
+    <Popover open={open} onOpenChange={setOpen}>
+      <PopoverTrigger asChild>
+        <Button
+          type="button"
+          variant="ghost"
+          size="icon"
+          className="shrink-0 rounded-full text-neutral-950 hover:bg-white/20 hover:text-neutral-950 dark:hover:bg-white/10"
+          aria-label="Grid columns"
+        >
+          <Settings size={20} aria-hidden />
+        </Button>
+      </PopoverTrigger>
+      <PopoverContent className="w-auto min-w-[12rem] p-3" align="end" sideOffset={8}>
+        <p className="mb-2 text-[11px] font-semibold uppercase tracking-[0.14em] text-neutral-950/70 dark:text-neutral-100/70">
+          Frame grid columns
+        </p>
+        <div className="flex flex-wrap gap-1.5">
+          {options.map((n) => (
+            <Button
+              key={n}
+              type="button"
+              variant={value === n ? 'default' : 'outline'}
+              size="sm"
+              className="min-w-9 rounded-lg"
+              onClick={() => {
+                onChange(n);
+                setOpen(false);
+              }}
+            >
+              {n}
+            </Button>
+          ))}
+        </div>
+      </PopoverContent>
+    </Popover>
   );
 }
 
@@ -156,6 +233,25 @@ export function ProjectDetail({ projectId, onBack }: ProjectDetailProps) {
   const [isParsing, setIsParsing] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
   const [activeTab, setActiveTab] = useState('frames');
+  const [frameGridColumns, setFrameGridColumns] = useState<FrameGridColumnCount>(2);
+
+  useEffect(() => {
+    try {
+      const raw = localStorage.getItem(frameGridColsStorageKey(projectId));
+      setFrameGridColumns(parseStoredFrameGridColumns(raw));
+    } catch {
+      setFrameGridColumns(2);
+    }
+  }, [projectId]);
+
+  const persistFrameGridColumns = useCallback((v: FrameGridColumnCount) => {
+    setFrameGridColumns(v);
+    try {
+      localStorage.setItem(frameGridColsStorageKey(projectId), String(v));
+    } catch {
+      // ignore quota / private mode
+    }
+  }, [projectId]);
 
   useEffect(() => {
     const unsubscribe = onSnapshot(doc(db, 'projects', projectId), (snapshot) => {
@@ -197,6 +293,19 @@ export function ProjectDetail({ projectId, onBack }: ProjectDetailProps) {
       setIsSaving(false);
     }
   };
+
+  const studioChromeRef = useRef<HTMLDivElement>(null);
+  const [studioChromePx, setStudioChromePx] = useState(0);
+
+  useLayoutEffect(() => {
+    const el = studioChromeRef.current;
+    if (!el) return;
+    const update = () => setStudioChromePx(el.getBoundingClientRect().height);
+    update();
+    const ro = new ResizeObserver(update);
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, [activeTab, project?.name]);
 
   const handleParseScript = async () => {
     if (!scriptInput.trim()) {
@@ -242,8 +351,16 @@ export function ProjectDetail({ projectId, onBack }: ProjectDetailProps) {
       <div className="pointer-events-none absolute -right-16 top-32 h-64 w-64 rounded-full bg-sky-300/30 blur-3xl dark:bg-sky-500/10" aria-hidden />
 
       <Tabs value={activeTab} onValueChange={setActiveTab} className="flex w-full flex-col gap-6">
-        <div className="sticky top-0 z-30 flex flex-col gap-4">
-          <StudioHeader projectName={project.name} onBack={onBack} />
+        <div ref={studioChromeRef} className="sticky top-0 z-30 flex flex-col gap-4">
+          <StudioHeader
+            projectName={project.name}
+            onBack={onBack}
+            headerActions={
+              activeTab === 'frames' ? (
+                <FrameGridColumnsPopover value={frameGridColumns} onChange={persistFrameGridColumns} />
+              ) : undefined
+            }
+          />
           <WorkspaceTabBar />
           {activeTab === 'script' && (
             <ScriptStyleToolbar
@@ -262,6 +379,8 @@ export function ProjectDetail({ projectId, onBack }: ProjectDetailProps) {
             globalStyle={stylePrompt}
             styleReferenceId={styleRefId}
             availableStyles={availableStyles}
+            stickyTopOffsetPx={studioChromePx}
+            gridColumns={frameGridColumns}
           />
         </TabsContent>
 
@@ -317,7 +436,13 @@ export function ProjectDetail({ projectId, onBack }: ProjectDetailProps) {
                     <Label className="text-xs font-medium text-neutral-950">Style reference library</Label>
                     <Select value={styleRefId} onValueChange={setStyleRefId}>
                       <SelectTrigger className={cn('h-11 rounded-xl', GLASS_INPUT)}>
-                        <SelectValue placeholder="Select a style…" />
+                        <SelectValue placeholder="Select a style…">
+                          {(value) =>
+                            globalStyleSelectLabel(
+                              value as string | null | undefined,
+                              availableStyles,
+                            )}
+                        </SelectValue>
                       </SelectTrigger>
                       <SelectContent className="rounded-xl">
                         <SelectItem value="none">None (manual prompt only)</SelectItem>

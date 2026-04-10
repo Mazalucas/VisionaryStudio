@@ -29,6 +29,16 @@ service cloud.firestore {
     //   - generatedImageUrl: string
     //   - generationPrompt: string
     //   - preferred: bool
+    //   - activeGenerationId: string (optional)
+    //
+    // Collection: projects/{projectId}/frames/{frameId}/generations
+    // Document ID: generationId
+    // Fields:
+    //   - storagePath: string
+    //   - downloadUrl: string
+    //   - createdAt: timestamp
+    //   - generationPrompt: string (optional)
+    //   - quality: string (optional)
     //
     // Collection: styleReferences
     // Document ID: refId
@@ -109,6 +119,10 @@ service cloud.firestore {
         allow read, write: if isAuthenticated();
         
         match /chunks/{chunkId} {
+          allow read, write: if isAuthenticated();
+        }
+
+        match /generations/{generationId} {
           allow read, write: if isAuthenticated();
         }
       }

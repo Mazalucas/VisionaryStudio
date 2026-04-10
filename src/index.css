@@ -91,3 +91,24 @@
 [data-sonner-toaster] {
   --width: min(100vw - 2rem, 22.5rem);
 }
+
+@keyframes frame-gen-indeterminate {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(350%);
+  }
+}
+
+@layer utilities {
+  .frame-gen-indeterminate-bar {
+    animation: frame-gen-indeterminate 1.2s ease-in-out infinite;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .frame-gen-indeterminate-bar {
+      animation: none;
+    }
+  }
+}

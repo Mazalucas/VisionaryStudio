@@ -30,9 +30,26 @@
         "status": { "type": "string", "enum": ["pending", "selected", "generated", "skipped"] },
         "generatedImageUrl": { "type": "string" },
         "generationPrompt": { "type": "string" },
-        "preferred": { "type": "boolean" }
+        "preferred": { "type": "boolean" },
+        "activeGenerationId": { "type": "string", "description": "ID of the active row in the generations subcollection." },
+        "storagePath": { "type": "string" },
+        "isChunked": { "type": "boolean" }
       },
       "required": ["projectId", "frameNumber", "status"]
+    },
+    "FrameGeneration": {
+      "title": "Frame generation",
+      "description": "One stored image generation for a frame (version history).",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "storagePath": { "type": "string" },
+        "downloadUrl": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "generationPrompt": { "type": "string" },
+        "quality": { "type": "string", "enum": ["standard", "high"] }
+      },
+      "required": ["storagePath", "downloadUrl"]
     },
     "StyleReference": {
       "title": "Style Reference",
@@ -67,6 +84,10 @@
     "/projects/{projectId}/frames/{frameId}": {
       "schema": "Frame",
       "description": "Frames associated with a project."
+    },
+    "/projects/{projectId}/frames/{frameId}/generations/{generationId}": {
+      "schema": "FrameGeneration",
+      "description": "Version history of AI-generated images for a frame."
     },
     "/styleReferences/{refId}": {
       "schema": "StyleReference",
