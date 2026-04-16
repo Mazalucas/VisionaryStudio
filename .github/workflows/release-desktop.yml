@@ -88,12 +88,25 @@ jobs:
       - name: List release files
         run: find release-assets -type f -print
 
+      # Flatten paths: softprops + nested artifact folders can miss globs; copy to a single dir.
+      - name: Stage release assets
+        run: |
+          mkdir -p flat
+          find release-assets -type f \( -name '*.zip' -o -name '*.tar.gz' \) -exec cp -v {} flat/ \;
+          echo "--- flat/ ---"
+          ls -la flat/
+          count=$(find flat -type f | wc -l)
+          if [ "$count" -lt 1 ]; then
+            echo "No zip/tar.gz found under release-assets"
+            exit 1
+          fi
+
       - name: Publish GitHub Release
         uses: softprops/action-gh-release@v2
         with:
           files: |
-            release-assets/**/*.zip
-            release-assets/**/*.tar.gz
+            flat/*.zip
+            flat/*.tar.gz
           generate_release_notes: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

@@ -4,6 +4,16 @@ Aplicación web (Vite + React + TypeScript) para trabajar con proyectos creativo
 
 ---
 
+## Instalación rápida (sin clonar el repo)
+
+Descarga el paquete para **Windows** (`.zip`) o **macOS Apple Silicon** (`.tar.gz`) desde la página de **Releases** del repositorio, descomprime la carpeta y ejecuta el lanzador indicado en el `README.txt` del paquete.
+
+**[Ver releases y descargar la última versión](https://github.com/Mazalucas/VisionaryStudio/releases)**
+
+Los paquetes incluyen Node portable y arrancan un servidor local en **http://127.0.0.1:3000**. Más detalle: [`docs/RELEASE.md`](docs/RELEASE.md).
+
+---
+
 ## Requisitos
 
 | Herramienta | Versión recomendada |
@@ -116,6 +126,7 @@ Los archivos estáticos quedan en **`dist/`**. Puedes servirlos con cualquier ho
 
 ## Enlaces útiles
 
+- **[Releases — descarga para Windows / macOS](https://github.com/Mazalucas/VisionaryStudio/releases)**
 - [Documentación de Vite](https://vite.dev/)
 - [Google AI Studio – API keys](https://aistudio.google.com/apikey)
 - [Firebase – consola](https://console.firebase.google.com/)
@@ -126,5 +137,6 @@ Los archivos estáticos quedan en **`dist/`**. Puedes servirlos con cualquier ho
 
 - Versión actual del paquete: ver el campo **`version`** en `package.json`.
 - Código fuente: [github.com/Mazalucas/VisionaryStudio](https://github.com/Mazalucas/VisionaryStudio)
+- **Instaladores / paquetes desktop:** [página de Releases](https://github.com/Mazalucas/VisionaryStudio/releases) (se generan al publicar un tag `v*`; ver [`docs/RELEASE.md`](docs/RELEASE.md)).
 
 Si el proyecto se originó como plantilla de AI Studio, la integración con [Google AI Studio](https://ai.studio) puede seguir siendo relevante para el flujo de edición; la app se ejecuta de forma independiente con los pasos de esta guía.

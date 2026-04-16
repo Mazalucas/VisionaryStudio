@@ -16,11 +16,16 @@ El servidor local escucha en **http://127.0.0.1:3000** (puerto configurable con 
 2. Crea y sube un tag de versión con prefijo `v`, alineado con la versión del proyecto si procede:
 
    ```bash
-   git tag v0.0.6
-   git push origin v0.0.6
+   git tag v0.0.7
+   git push origin v0.0.7
    ```
 
 3. El workflow [`.github/workflows/release-desktop.yml`](../.github/workflows/release-desktop.yml) se ejecuta al hacer push del tag. Construye la app, empaqueta en Windows y macOS y crea un **GitHub Release** con los archivos adjuntos.
+
+### Si la página de Releases está vacía
+
+- Abre **Actions** en el repositorio y busca el workflow **Release desktop packages**. Si el job de Windows o macOS falla, el release no se publica (revisa los logs).
+- Los assets se suben solo si el job **release** termina bien. Tras corregir el workflow, publica un **nuevo tag** (no puedes reutilizar un tag ya subido sin borrarlo en remoto).
 
 ## Secreto opcional: `GEMINI_API_KEY`
 
