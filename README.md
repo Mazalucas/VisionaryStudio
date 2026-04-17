@@ -10,7 +10,7 @@ Descarga el paquete para **Windows** (`.zip`) o **macOS Apple Silicon** (`.tar.g
 
 **[Ver releases y descargar la última versión](https://github.com/Mazalucas/VisionaryStudio/releases)**
 
-Los paquetes incluyen Node portable y arrancan un servidor local en **http://127.0.0.1:3000**. Más detalle: [`docs/RELEASE.md`](docs/RELEASE.md).
+Los paquetes incluyen Node portable y arrancan un servidor local en **http://localhost:3000**. Más detalle: [`docs/RELEASE.md`](docs/RELEASE.md).
 
 ---
 

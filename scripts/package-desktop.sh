@@ -102,7 +102,7 @@ Visionary Studio — paquete local
 2. Ejecuta:
    - Windows: doble clic en "Visionary Studio.bat"
    - macOS: doble clic en "Visionary Studio.command" (si macOS bloquea la app, clic derecho → Abrir la primera vez).
-3. Se abrirá el navegador en http://127.0.0.1:3000
+3. Se abrirá el navegador en http://localhost:3000
 4. Para detener el servidor, cierra la ventana de terminal o pulsa Ctrl+C.
 
 No necesitas instalar Node.js por separado (va incluido en la carpeta "node").

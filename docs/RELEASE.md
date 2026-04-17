@@ -7,7 +7,7 @@ Este repositorio publica paquetes listos para descomprimir y ejecutar sin instal
 - **Windows** (`VisionaryStudio-windows-x64.zip`): Node portable, carpeta `dist`, dependencias de producción y `Visionary Studio.bat`.
 - **macOS Apple Silicon** (`VisionaryStudio-macos-arm64.tar.gz`): mismo contenido con `Visionary Studio.command`.
 
-El servidor local escucha en **http://127.0.0.1:3000** (puerto configurable con la variable de entorno `PORT`).
+El servidor local escucha en **http://localhost:3000** (puerto configurable con la variable de entorno `PORT`).
 
 ## Publicar un release en GitHub
 
