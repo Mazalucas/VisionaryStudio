@@ -30,8 +30,6 @@ jobs:
         run: npm ci
 
       - name: Build
-        env:
-          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
         run: npm run build
 
       - name: Package (portable Node + dist)
@@ -61,8 +59,6 @@ jobs:
         run: npm ci
 
       - name: Build
-        env:
-          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
         run: npm run build
 
       - name: Package (portable Node + dist)
