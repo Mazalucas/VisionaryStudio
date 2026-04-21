@@ -231,5 +231,3 @@ export function ProjectList({ onSelectProject }: ProjectListProps) {
     </div>
   );
 }
-  );
-}
