@@ -14,6 +14,7 @@ interface Project {
   name: string;
   createdAt: any;
   globalStylePrompt?: string;
+  status?: 'Empty' | 'On-going' | 'Completed' | 'Finalized';
 }
 
 interface ProjectListProps {
@@ -46,7 +47,8 @@ export function ProjectList({ onSelectProject }: ProjectListProps) {
         name: newProjectName,
         createdAt: serverTimestamp(),
         updatedAt: serverTimestamp(),
-        globalStylePrompt: "Cinematic 3D illustration, vibrant colors, detailed textures, soft lighting, educational style."
+        globalStylePrompt: "Simple illustration, low detail, educational style.",
+        status: 'Empty'
       });
       setNewProjectName('');
       setIsNewProjectOpen(false);
@@ -58,17 +60,23 @@ export function ProjectList({ onSelectProject }: ProjectListProps) {
     }
   };
 
-  const handleDeleteProject = async (e: React.MouseEvent, id: string) => {
+  const handleStatusChange = async (e: React.MouseEvent, id: string, status: string) => {
     e.stopPropagation();
-    if (!confirm('Are you sure you want to delete this project?')) return;
-    setDeletingProjectId(id);
     try {
-      await deleteDoc(doc(db, 'projects', id));
-      toast.success('Project deleted');
+      await updateDoc(doc(db, 'projects', id), { status, updatedAt: serverTimestamp() });
+      toast.success(`Status updated to ${status}`);
     } catch (error) {
-      toast.error('Failed to delete project');
-    } finally {
-      setDeletingProjectId(null);
+      toast.error('Failed to update status');
+    }
+  };
+
+  const getStatusColor = (status: string) => {
+    switch (status) {
+      case 'Empty': return 'bg-neutral-100 text-neutral-500 border-neutral-200';
+      case 'On-going': return 'bg-sky-50 text-sky-600 border-sky-100';
+      case 'Completed': return 'bg-emerald-50 text-emerald-600 border-emerald-100';
+      case 'Finalized': return 'bg-green-100 text-green-700 border-green-200';
+      default: return 'bg-neutral-100 text-neutral-500 border-neutral-200';
     }
   };
 
@@ -76,47 +84,47 @@ export function ProjectList({ onSelectProject }: ProjectListProps) {
     <div className="space-y-8">
       <div className="flex items-center justify-between">
         <div>
-          <h2 className="text-3xl font-bold tracking-tight text-neutral-950">Production Projects</h2>
-          <p className="text-neutral-950 mt-1">Manage your video episodes and background generations.</p>
+          <h2 className="text-4xl font-bold tracking-tight text-neutral-950">Production Projects</h2>
+          <p className="text-neutral-950/70 mt-2 text-lg">Manage your video episodes and background generations.</p>
         </div>
         
         <Dialog open={isNewProjectOpen} onOpenChange={setIsNewProjectOpen}>
-          <DialogTrigger render={
-            <Button className="h-11 px-6">
+          <DialogTrigger asChild>
+            <Button className="h-12 px-6 rounded-xl bg-neutral-950 text-white hover:bg-neutral-800 shadow-xl transition-all">
               <Plus className="mr-2 h-5 w-5" /> New Project
             </Button>
-          } />
-          <DialogContent>
+          </DialogTrigger>
+          <DialogContent className="rounded-2xl border-white/40 bg-white/80 backdrop-blur-2xl">
             <DialogHeader>
-              <DialogTitle>Create New Project</DialogTitle>
+              <DialogTitle className="text-2xl font-bold">Create New Project</DialogTitle>
               <DialogDescription>
                 Enter the name of the country or episode you are working on.
               </DialogDescription>
             </DialogHeader>
-            <div className="py-4 space-y-4">
+            <div className="py-6 space-y-4">
               <div className="space-y-2">
-                <Label htmlFor="name">Project Name</Label>
+                <Label htmlFor="name" className="text-sm font-semibold uppercase tracking-wider text-neutral-950/60">Project Name</Label>
                 <Input 
                   id="name" 
                   placeholder="e.g. Argentina - Episode 01" 
                   value={newProjectName}
                   onChange={(e) => setNewProjectName(e.target.value)}
+                  className="h-12 rounded-xl border-neutral-200/60 bg-white/50 focus:ring-violet-400/20"
                 />
               </div>
             </div>
             <DialogFooter>
-              <Button variant="outline" onClick={() => setIsNewProjectOpen(false)} disabled={isCreatingProject}>
+              <Button variant="ghost" onClick={() => setIsNewProjectOpen(false)} disabled={isCreatingProject} className="rounded-xl">
                 Cancel
               </Button>
               <Button
                 onClick={handleCreateProject}
                 disabled={isCreatingProject}
-                aria-busy={isCreatingProject}
-                className="min-w-[8.5rem] border border-neutral-400 bg-neutral-200 text-neutral-950 hover:bg-neutral-300"
+                className="min-w-[10rem] h-12 rounded-xl bg-violet-600 text-white hover:bg-violet-700 shadow-lg shadow-violet-500/20"
               >
                 {isCreatingProject ? (
                   <>
-                    <Loader2 className="mr-2 h-4 w-4 animate-spin" aria-hidden />
+                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
                     Creating…
                   </>
                 ) : (
@@ -128,57 +136,100 @@ export function ProjectList({ onSelectProject }: ProjectListProps) {
         </Dialog>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {projects.map((project) => (
-          <Card 
-            key={project.id} 
-            className="group hover:shadow-lg transition-all cursor-pointer border-gray-200 overflow-hidden"
-            onClick={() => onSelectProject(project.id)}
-          >
-            <CardHeader className="pb-4">
-              <div className="flex justify-between items-start">
-                <div className="p-2 bg-neutral-100 rounded-lg group-hover:bg-neutral-200 transition-colors text-neutral-950">
-                  <Globe size={20} />
-                </div>
-                <Button 
-                  variant="ghost" 
-                  size="icon" 
-                  className="text-neutral-950 hover:text-red-600 h-8 w-8"
-                  disabled={deletingProjectId === project.id}
-                  aria-busy={deletingProjectId === project.id}
-                  onClick={(e) => handleDeleteProject(e, project.id)}
-                >
-                  {deletingProjectId === project.id ? <Loader2 size={16} className="animate-spin" /> : <Trash2 size={16} />}
-                </Button>
-              </div>
-              <CardTitle className="mt-4 text-xl font-bold">{project.name}</CardTitle>
-              <CardDescription className="flex items-center mt-1">
-                <Calendar size={14} className="mr-1" />
-                {project.createdAt?.toDate().toLocaleDateString() || 'Just now'}
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <p className="text-sm text-neutral-950 line-clamp-2 italic">
-                {project.globalStylePrompt || 'No style prompt set.'}
-              </p>
-            </CardContent>
-            <CardFooter className="bg-neutral-50 py-3 flex justify-between items-center group-hover:bg-neutral-100 transition-colors">
-              <span className="text-xs font-semibold text-neutral-950 uppercase tracking-wider">Open Studio</span>
-              <ArrowRight size={16} className="text-neutral-950 group-hover:translate-x-1 transition-transform" />
-            </CardFooter>
-          </Card>
-        ))}
-
-        {projects.length === 0 && (
-          <div className="col-span-full py-20 text-center border-2 border-dashed border-gray-200 rounded-2xl">
-            <div className="mx-auto w-12 h-12 text-neutral-400 mb-4">
-              <Globe size={48} />
+      <div className="overflow-hidden rounded-3xl border border-white/45 bg-white/35 shadow-[0_8px_32px_rgba(31,38,135,0.06)] backdrop-blur-xl dark:border-white/10 dark:bg-white/[0.06]">
+        <div className="min-w-full inline-block align-middle">
+          <div className="border-b border-neutral-200/50 bg-white/20 px-6 py-4">
+            <div className="grid grid-cols-12 gap-4 text-xs font-bold uppercase tracking-[0.2em] text-neutral-950/40">
+              <div className="col-span-5">Project Name</div>
+              <div className="col-span-2">Status</div>
+              <div className="col-span-3 text-center">Created</div>
+              <div className="col-span-2 text-right">Actions</div>
             </div>
-            <h3 className="text-lg font-medium text-neutral-950">No projects yet</h3>
-            <p className="text-neutral-950">Create your first project to start generating backgrounds.</p>
           </div>
-        )}
+          
+          <div className="divide-y divide-neutral-200/40">
+            {projects.map((project) => (
+              <div 
+                key={project.id} 
+                className="grid grid-cols-12 gap-4 items-center px-6 py-5 hover:bg-white/40 transition-all cursor-pointer group"
+                onClick={() => onSelectProject(project.id)}
+              >
+                <div className="col-span-5 flex items-center gap-4">
+                  <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-white/40 bg-white/50 shadow-sm backdrop-blur-md dark:border-white/10 dark:bg-white/10 text-neutral-950">
+                    <Globe size={20} />
+                  </div>
+                  <div className="min-w-0">
+                    <h3 className="text-lg font-bold text-neutral-950 truncate group-hover:text-violet-600 transition-colors">{project.name}</h3>
+                    <p className="text-xs text-neutral-950/50 truncate max-w-[300px] mt-0.5">{project.globalStylePrompt}</p>
+                  </div>
+                </div>
+
+                <div className="col-span-2">
+                  <Select 
+                    value={project.status || 'Empty'} 
+                    onValueChange={(v) => handleStatusChange({ stopPropagation: () => {} } as any, project.id, v)}
+                  >
+                    <SelectTrigger 
+                      onClick={(e) => e.stopPropagation()}
+                      className={cn(
+                        "h-8 rounded-full border px-3 text-[11px] font-bold uppercase tracking-wider transition-all",
+                        getStatusColor(project.status || 'Empty')
+                      )}
+                    >
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent className="rounded-xl border-white/40 bg-white/90 backdrop-blur-xl">
+                      <SelectItem value="Empty">Empty</SelectItem>
+                      <SelectItem value="On-going">On-going</SelectItem>
+                      <SelectItem value="Completed">Completed</SelectItem>
+                      <SelectItem value="Finalized">Finalized</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+
+                <div className="col-span-3 text-center">
+                  <div className="inline-flex items-center gap-1.5 text-sm font-medium text-neutral-950/60">
+                    <Calendar size={14} className="opacity-70" />
+                    {project.createdAt?.toDate().toLocaleDateString() || 'Just now'}
+                  </div>
+                </div>
+
+                <div className="col-span-2 flex justify-end items-center gap-2">
+                  <Button 
+                    variant="ghost" 
+                    size="icon"
+                    className="h-9 w-9 rounded-full text-neutral-950/40 hover:bg-red-50 hover:text-red-500 transition-all"
+                    disabled={deletingProjectId === project.id}
+                    onClick={(e) => handleDeleteProject(e, project.id)}
+                  >
+                    {deletingProjectId === project.id ? <Loader2 size={16} className="animate-spin" /> : <Trash2 size={16} />}
+                  </Button>
+                  <div className="h-4 w-px bg-neutral-200/50 mx-1" />
+                  <Button 
+                    variant="ghost" 
+                    size="icon"
+                    className="h-9 w-9 rounded-full text-neutral-950/60 hover:bg-neutral-100 hover:translate-x-0.5 transition-all"
+                  >
+                    <ArrowRight size={18} />
+                  </Button>
+                </div>
+              </div>
+            ))}
+
+            {projects.length === 0 && (
+              <div className="py-24 text-center">
+                <div className="mx-auto w-16 h-16 bg-neutral-100 rounded-3xl flex items-center justify-center text-neutral-400 mb-6 shadow-inner">
+                  <Globe size={32} />
+                </div>
+                <h3 className="text-xl font-bold text-neutral-950">No projects yet</h3>
+                <p className="text-neutral-950/60 mt-2">Create your first project to start generating backgrounds.</p>
+              </div>
+            )}
+          </div>
+        </div>
       </div>
     </div>
+  );
+}
   );
 }

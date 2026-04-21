@@ -43,7 +43,7 @@ export const geminiService = {
         2. originalDescription: the full 'On Screen Visual' content.
         3. narratedText: the content from the 'Script' column.
         4. visualIntent: A "cleaned" version of the 'On Screen Visual' focusing ONLY on the background, landscape, or objects. Remove characters, narrators, and overlays.
-        5. category: One of [landscape, monument, city, animal, food, culture, map, object].
+        5. category: One of ["Objects, Instrument, Things", "city landscape", "Food on table", "crowded Place", "Animals", "Monuments", "natural Landscapes", "People"].
 
         Script Content:
         ${scriptRaw}`,

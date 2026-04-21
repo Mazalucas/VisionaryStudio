@@ -977,10 +977,10 @@ export function FrameGrid({
                       size="icon" 
                       className="h-6 w-6 text-neutral-950 hover:text-neutral-950"
                       onClick={() => {
-                        // Ensure generationPrompt is populated if empty so modal isn't "empty"
                         const frameToEdit = { ...frame };
+                        // Pre-fill generation prompt with visual intent if empty
                         if (!frameToEdit.generationPrompt) {
-                          frameToEdit.generationPrompt = ""; // Ensure it's at least an empty string for the textarea
+                          frameToEdit.generationPrompt = frameToEdit.visualIntent;
                         }
                         setEditingFrame(frameToEdit);
                       }}
@@ -1070,21 +1070,61 @@ export function FrameGrid({
 
       {/* Image Preview Dialog */}
       <Dialog open={!!previewImage} onOpenChange={(open) => !open && setPreviewImage(null)}>
-        <DialogContent className="max-w-[90vw] max-h-[90vh] p-0 overflow-hidden border-none bg-neutral-950">
-          <DialogHeader className="absolute top-4 left-4 z-20 bg-white/95 backdrop-blur-md p-2 rounded-lg border border-neutral-200">
-            <DialogTitle className="text-neutral-950 text-sm font-bold uppercase tracking-widest">
-              {previewImage?.title}
-            </DialogTitle>
-          </DialogHeader>
-          <div className="w-full h-full flex items-center justify-center p-4">
+        <DialogContent className="max-w-5xl max-h-[90vh] p-0 overflow-hidden border-none bg-neutral-950/95 shadow-2xl backdrop-blur-3xl animate-in zoom-in-95 duration-200">
+          <div className="absolute top-0 left-0 right-0 z-30 flex items-center justify-between p-6 bg-gradient-to-b from-black/80 to-transparent">
+            <div className="flex flex-col gap-1">
+              <h3 className="text-xl font-black text-white uppercase tracking-tighter drop-shadow-md">
+                {previewImage?.title}
+              </h3>
+              <p className="text-[10px] font-bold text-white/50 uppercase tracking-[0.2em]">Visionary Studio Premium Preview</p>
+            </div>
+            <Button 
+              grid-auto-flow="column"
+              variant="ghost" 
+              size="icon" 
+              onClick={() => setPreviewImage(null)}
+              className="rounded-full bg-white/10 text-white hover:bg-white/20 transition-all border border-white/10"
+            >
+              <Plus className="rotate-45" size={24} />
+            </Button>
+          </div>
+
+          <div className="relative w-full h-full flex items-center justify-center p-4 min-h-[60vh]">
             {previewImage && (
-              <img 
-                src={previewImage.url} 
-                alt={previewImage.title} 
-                className="max-w-full max-h-[80vh] object-contain shadow-2xl"
-                referrerPolicy="no-referrer"
-              />
+              <>
+                <div 
+                  className="absolute inset-0 z-0 opacity-40 blur-3xl scale-110 pointer-events-none"
+                  style={{ 
+                    backgroundImage: `url(${previewImage.url})`,
+                    backgroundSize: 'cover',
+                    backgroundPosition: 'center'
+                  }}
+                />
+                <img 
+                  src={previewImage.url} 
+                  alt={previewImage.title} 
+                  className="relative z-10 max-w-full max-h-[75vh] object-contain rounded-lg shadow-[0_32px_64px_rgba(0,0,0,0.5)] ring-1 ring-white/10"
+                  referrerPolicy="no-referrer"
+                />
+              </>
             )}
+          </div>
+          
+          <div className="absolute bottom-0 left-0 right-0 z-20 p-6 flex justify-center bg-gradient-to-t from-black/60 to-transparent">
+             <Button 
+               variant="outline" 
+               className="rounded-full bg-white/10 border-white/20 text-white hover:bg-white/20 backdrop-blur-md px-8"
+               onClick={() => {
+                 if (previewImage) {
+                   const link = document.createElement('a');
+                   link.href = previewImage.url;
+                   link.download = `${previewImage.title.replace(/\s+/g, '_')}.png`;
+                   link.click();
+                 }
+               }}
+             >
+               <Download size={18} className="mr-2" /> Download Image
+             </Button>
           </div>
         </DialogContent>
       </Dialog>

@@ -95,7 +95,7 @@ export const openaiService = {
   async parseScript(scriptRaw: string): Promise<FrameData[]> {
     const system = `You output only valid JSON. Return an object with key "frames" whose value is an array of objects with:
 frameNumber (string), originalDescription (string), narratedText (string), visualIntent (string), category (string).
-category must be one of: landscape, monument, city, animal, food, culture, map, object.`;
+category must be one of: "Objects, Instrument, Things", "city landscape", "Food on table", "crowded Place", "Animals", "Monuments", "natural Landscapes", "People".`;
     const user = `Parse this video script into frames. Extract Fr, On Screen Visual, Script, etc.
 
 Script:

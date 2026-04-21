@@ -62,26 +62,77 @@ const SCRIPT_TOOLBAR =
 
 interface StudioHeaderProps {
   projectName: string;
+  projectId: string;
   onBack: () => void;
   headerActions?: React.ReactNode;
 }
 
-function StudioHeader({ projectName, onBack, headerActions }: StudioHeaderProps) {
+function StudioHeader({ projectName, projectId, onBack, headerActions }: StudioHeaderProps) {
+  const [isEditing, setIsEditing] = useState(false);
+  const [name, setName] = useState(projectName);
+
+  useEffect(() => {
+    setName(projectName);
+  }, [projectName]);
+
+  const handleSave = async () => {
+    if (!name.trim() || name === projectName) {
+      setIsEditing(false);
+      setName(projectName);
+      return;
+    }
+    try {
+      await updateDoc(doc(db, 'projects', projectId), {
+        name: name.trim(),
+        updatedAt: serverTimestamp()
+      });
+      toast.success('Project name updated');
+    } catch (error) {
+      toast.error('Failed to update project name');
+      setName(projectName);
+    } finally {
+      setIsEditing(false);
+    }
+  };
+
   return (
     <header className={cn('overflow-hidden', GLASS_SHELL)}>
       <div className="flex flex-col gap-4 px-4 py-4 sm:flex-row sm:items-center sm:justify-between">
-        <div className="flex min-w-0 items-start gap-3">
+        <div className="flex min-w-0 items-start gap-4">
           <Button
             variant="ghost"
             size="icon"
             onClick={onBack}
-            className="mt-0.5 shrink-0 rounded-full text-neutral-950 hover:bg-white/20 hover:text-neutral-950 dark:hover:bg-white/10"
+            className="mt-1 shrink-0 rounded-full text-neutral-950 hover:bg-black/5 dark:hover:bg-white/10"
           >
-            <ArrowLeft size={20} />
+            <ArrowLeft size={22} />
           </Button>
           <div className="min-w-0 space-y-1">
-            <h1 className="truncate text-2xl font-semibold tracking-tight text-neutral-950 sm:text-3xl">{projectName}</h1>
-            <p className="text-xs font-medium uppercase tracking-[0.22em] text-neutral-950">Production Studio</p>
+            {isEditing ? (
+              <Input
+                autoFocus
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                onBlur={handleSave}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter') handleSave();
+                  if (e.key === 'Escape') {
+                    setIsEditing(false);
+                    setName(projectName);
+                  }
+                }}
+                className="h-9 w-full max-w-md border-none bg-transparent p-0 text-2xl font-bold tracking-tight text-neutral-950 focus-visible:ring-0 sm:text-3xl"
+              />
+            ) : (
+              <h1 
+                onClick={() => setIsEditing(true)}
+                className="group flex cursor-pointer items-center gap-2 truncate text-2xl font-bold tracking-tight text-neutral-950 hover:text-violet-600 sm:text-3xl"
+              >
+                {projectName}
+                <Sparkles size={16} className="opacity-0 transition-opacity group-hover:opacity-100" />
+              </h1>
+            )}
+            <p className="text-[10px] font-bold uppercase tracking-[0.25em] text-neutral-950/40">Production Studio</p>
           </div>
         </div>
         {headerActions != null ? (
@@ -322,13 +373,18 @@ export function ProjectDetail({ projectId, onBack }: ProjectDetailProps) {
       const batch = writeBatch(db);
       const framesRef = collection(db, 'projects', projectId, 'frames');
       
+      const styleRefSnap = await getDocs(collection(db, 'styleReferences'));
+      const styles = styleRefSnap.docs.map(d => ({ id: d.id, name: d.data().name }));
+
       frames.forEach((frame) => {
+        const matchedStyle = styles.find(s => s.name.toLowerCase() === frame.category.toLowerCase());
         const newFrameRef = doc(framesRef);
         batch.set(newFrameRef, {
           ...frame,
           projectId,
           status: 'pending',
-          createdAt: serverTimestamp()
+          createdAt: serverTimestamp(),
+          localStyleReferenceId: matchedStyle ? matchedStyle.id : 'global'
         });
       });
       
@@ -354,6 +410,7 @@ export function ProjectDetail({ projectId, onBack }: ProjectDetailProps) {
         <div ref={studioChromeRef} className="sticky top-0 z-30 flex flex-col gap-4">
           <StudioHeader
             projectName={project.name}
+            projectId={projectId}
             onBack={onBack}
             headerActions={
               activeTab === 'frames' ? (
