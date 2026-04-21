@@ -376,6 +376,7 @@ export function ProjectDetail({ projectId, onBack }: ProjectDetailProps) {
         <TabsContent value="frames" className="mt-0 outline-none focus-visible:ring-0">
           <FrameGrid
             projectId={projectId}
+            projectName={project.name}
             globalStyle={stylePrompt}
             styleReferenceId={styleRefId}
             availableStyles={availableStyles}

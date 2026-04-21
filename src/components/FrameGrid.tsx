@@ -101,6 +101,7 @@ function frameGridColsClass(cols: FrameGridColumnCount): string {
 
 interface FrameGridProps {
   projectId: string;
+  projectName: string;
   globalStyle: string;
   styleReferenceId?: string;
   availableStyles: StyleRef[];
@@ -161,6 +162,7 @@ function ChunkedImage({ frame, projectId, className }: { frame: Frame, projectId
 
 export function FrameGrid({
   projectId,
+  projectName,
   globalStyle,
   styleReferenceId,
   availableStyles,
@@ -185,6 +187,39 @@ export function FrameGrid({
   const [historyReloadToken, setHistoryReloadToken] = useState(0);
   const [importingHistory, setImportingHistory] = useState(false);
   const [settingActiveGenId, setSettingActiveGenId] = useState<string | null>(null);
+  const [isDownloadingMultiple, setIsDownloadingMultiple] = useState(false);
+
+  const getFrameFilename = (frameNumber: string) => {
+    let formattedNumber = frameNumber;
+    const match = frameNumber.match(/^(\d+)(.*)$/);
+    if (match) {
+      formattedNumber = match[1].padStart(2, '0') + match[2];
+    } else {
+      formattedNumber = frameNumber.padStart(2, '0');
+    }
+    const cleanProjectName = projectName ? projectName.replace(/[^a-zA-Z0-9_\-]/g, '_').toUpperCase() : 'PROJECT';
+    return `${formattedNumber}_${cleanProjectName}.png`;
+  };
+
+  const downloadImageAsBlob = async (url: string, filename: string) => {
+    try {
+      const response = await fetch(url);
+      if (!response.ok) throw new Error('Network response was not ok');
+      const blob = await response.blob();
+      const objectUrl = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = objectUrl;
+      link.download = filename;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      setTimeout(() => URL.revokeObjectURL(objectUrl), 100);
+    } catch (error) {
+      console.error("Download failed, opening instead:", error);
+      // Fallback to opening in new window if fetch fails (e.g., CORS)
+      window.open(url, '_blank');
+    }
+  };
 
   useEffect(() => {
     const q = query(collection(db, 'projects', projectId, 'frames'));
@@ -614,6 +649,47 @@ export function FrameGrid({
     }
   };
 
+  const handleDownloadSelected = async () => {
+    if (selectedFrameIds.size === 0) return;
+    
+    const selectedFrames = frames.filter(f => selectedFrameIds.has(f.id));
+    const framesWithImages = selectedFrames.filter(f => f.generatedImageUrl || f.isChunked);
+    
+    if (framesWithImages.length === 0) {
+      toast.error('No images available to download in the current selection');
+      return;
+    }
+
+    setIsDownloadingMultiple(true);
+    const progressToastId = toast.loading(`Downloading ${framesWithImages.length} images...`);
+
+    try {
+      for (const frame of framesWithImages) {
+        let url = frame.generatedImageUrl;
+        if (frame.isChunked) {
+          const chunksSnap = await getDocs(query(
+            collection(db, 'projects', projectId, 'frames', frame.id, 'chunks'),
+            orderBy('index', 'asc')
+          ));
+          url = chunksSnap.docs.map(d => d.data().data).join('');
+        }
+        
+        if (url) {
+          const extUrl = url;
+          await downloadImageAsBlob(extUrl, getFrameFilename(frame.frameNumber));
+          // Small delay to prevent browser from blocking multiple quick downloads
+          await new Promise(resolve => setTimeout(resolve, 300));
+        }
+      }
+      toast.success('Downloads started successfully!', { id: progressToastId });
+    } catch (error) {
+      console.error("Multiple download error:", error);
+      toast.error('Ocurrió un error al descargar algunas imágenes.', { id: progressToastId });
+    } finally {
+      setIsDownloadingMultiple(false);
+    }
+  };
+
   const glassToolbar =
     'rounded-2xl border border-neutral-200 bg-white/95 shadow-[0_8px_32px_rgba(31,38,135,0.07),inset_0_1px_0_0_rgba(255,255,255,0.5)] backdrop-blur-2xl backdrop-saturate-150 dark:border-white/10 dark:bg-white/[0.06] dark:shadow-[0_8px_32px_rgba(0,0,0,0.3),inset_0_1px_0_0_rgba(255,255,255,0.06)]';
 
@@ -656,6 +732,25 @@ export function FrameGrid({
         </div>
 
         <div className="flex flex-wrap items-center gap-2 sm:gap-3">
+          <Button
+            onClick={handleDownloadSelected}
+            disabled={selectedFrameIds.size === 0 || isDownloadingMultiple}
+            variant="outline"
+            className="h-9 min-w-[11.5rem] rounded-lg border border-neutral-300 bg-white text-neutral-950 backdrop-blur-sm hover:bg-neutral-50 dark:border-white/10 dark:bg-white/5 dark:hover:bg-white/10"
+          >
+            {isDownloadingMultiple ? (
+              <>
+                <Loader2 className="mr-2 h-4 w-4 animate-spin" aria-hidden />
+                Downloading...
+              </>
+            ) : (
+              <>
+                <Download className="mr-2 h-4 w-4" aria-hidden />
+                Download selected
+              </>
+            )}
+          </Button>
+
           <Select value={quality} onValueChange={(v: any) => setQuality(v)}>
             <SelectTrigger className="h-9 w-[9.5rem] rounded-lg border-neutral-300 bg-white text-neutral-950 backdrop-blur-md dark:border-white/10 dark:bg-white/5">
               <SelectValue placeholder="Quality" />
@@ -837,12 +932,8 @@ export function FrameGrid({
                             url = chunksSnap.docs.map(d => d.data().data).join('');
                           }
                           if (url) {
-                            const link = document.createElement('a');
-                            link.href = url;
-                            link.download = `frame-${frame.frameNumber}.png`;
-                            document.body.appendChild(link);
-                            link.click();
-                            document.body.removeChild(link);
+                            const filename = getFrameFilename(frame.frameNumber);
+                            await downloadImageAsBlob(url, filename);
                           } else {
                             toast.error("Image data not found");
                           }
@@ -1259,12 +1350,8 @@ export function FrameGrid({
                           type="button"
                           variant="outline"
                           onClick={() => {
-                            const link = document.createElement('a');
-                            link.href = selectedGen.downloadUrl;
-                            link.download = `frame-${historyFrame.frameNumber}-v${historyIndex + 1}.png`;
-                            document.body.appendChild(link);
-                            link.click();
-                            document.body.removeChild(link);
+                            const filename = getFrameFilename(`${historyFrame.frameNumber}_v${historyIndex + 1}`);
+                            downloadImageAsBlob(selectedGen.downloadUrl, filename);
                           }}
                         >
                           <Download className="mr-2 h-4 w-4" />
