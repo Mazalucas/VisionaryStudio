@@ -10,7 +10,7 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { Sparkles, Trash2, Eye, Download, CheckCircle2, Circle, RefreshCw, Image as ImageIcon, Edit3, Upload as UploadIcon, RotateCcw, Clapperboard, Loader2, History, ChevronLeft, ChevronRight } from 'lucide-react';
+import { Sparkles, Trash2, Eye, Download, CheckCircle2, Circle, RefreshCw, Image as ImageIcon, Edit3, Upload as UploadIcon, RotateCcw, Clapperboard, Loader2, History, ChevronLeft, ChevronRight, Plus } from 'lucide-react';
 import { toast } from 'sonner';
 
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter, DialogDescription } from '@/components/ui/dialog';
@@ -177,7 +177,7 @@ export function FrameGrid({
   const [isSavingFrame, setIsSavingFrame] = useState(false);
   const [deletingFrameId, setDeletingFrameId] = useState<string | null>(null);
   const [updatingStatusId, setUpdatingStatusId] = useState<string | null>(null);
-  const [quality, setQuality] = useState<'standard' | 'high'>('standard');
+  const [quality, setQuality] = useState<'standard' | 'high'>('high');
   const [previewImage, setPreviewImage] = useState<{ url: string, title: string } | null>(null);
   const [editingFrame, setEditingFrame] = useState<Frame | null>(null);
   const [historyFrame, setHistoryFrame] = useState<Frame | null>(null);
@@ -1103,7 +1103,7 @@ export function FrameGrid({
                 <img 
                   src={previewImage.url} 
                   alt={previewImage.title} 
-                  className="relative z-10 max-w-full max-h-[75vh] object-contain rounded-lg shadow-[0_32px_64px_rgba(0,0,0,0.5)] ring-1 ring-white/10"
+                  className="relative z-10 max-w-full max-h-[85vh] object-contain rounded-lg shadow-[0_32px_128px_rgba(0,0,0,0.8)] ring-1 ring-white/20"
                   referrerPolicy="no-referrer"
                 />
               </>

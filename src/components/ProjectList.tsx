@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { db, handleFirestoreError, OperationType } from '../firebase';
-import { collection, onSnapshot, query, orderBy, addDoc, serverTimestamp, deleteDoc, doc } from 'firebase/firestore';
+import { collection, onSnapshot, query, orderBy, addDoc, serverTimestamp, deleteDoc, doc, updateDoc } from 'firebase/firestore';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle, CardFooter } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
@@ -8,6 +8,8 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Plus, Trash2, ArrowRight, Calendar, Globe, Loader2 } from 'lucide-react';
 import { toast } from 'sonner';
+import { cn } from '@/lib/utils';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 
 interface Project {
   id: string;
@@ -60,6 +62,20 @@ export function ProjectList({ onSelectProject }: ProjectListProps) {
     }
   };
 
+  const handleDeleteProject = async (e: React.MouseEvent, id: string) => {
+    e.stopPropagation();
+    if (!confirm('Are you sure you want to delete this project?')) return;
+    setDeletingProjectId(id);
+    try {
+      await deleteDoc(doc(db, 'projects', id));
+      toast.success('Project deleted');
+    } catch (error) {
+      toast.error('Failed to delete project');
+    } finally {
+      setDeletingProjectId(null);
+    }
+  };
+
   const handleStatusChange = async (e: React.MouseEvent, id: string, status: string) => {
     e.stopPropagation();
     try {
@@ -74,7 +90,7 @@ export function ProjectList({ onSelectProject }: ProjectListProps) {
     switch (status) {
       case 'Empty': return 'bg-neutral-100 text-neutral-500 border-neutral-200';
       case 'On-going': return 'bg-sky-50 text-sky-600 border-sky-100';
-      case 'Completed': return 'bg-emerald-50 text-emerald-600 border-emerald-100';
+      case 'Completed': return 'bg-amber-50 text-amber-600 border-amber-100';
       case 'Finalized': return 'bg-green-100 text-green-700 border-green-200';
       default: return 'bg-neutral-100 text-neutral-500 border-neutral-200';
     }
@@ -89,11 +105,11 @@ export function ProjectList({ onSelectProject }: ProjectListProps) {
         </div>
         
         <Dialog open={isNewProjectOpen} onOpenChange={setIsNewProjectOpen}>
-          <DialogTrigger asChild>
+          <DialogTrigger render={
             <Button className="h-12 px-6 rounded-xl bg-neutral-950 text-white hover:bg-neutral-800 shadow-xl transition-all">
               <Plus className="mr-2 h-5 w-5" /> New Project
             </Button>
-          </DialogTrigger>
+          } />
           <DialogContent className="rounded-2xl border-white/40 bg-white/80 backdrop-blur-2xl">
             <DialogHeader>
               <DialogTitle className="text-2xl font-bold">Create New Project</DialogTitle>
@@ -164,13 +180,12 @@ export function ProjectList({ onSelectProject }: ProjectListProps) {
                   </div>
                 </div>
 
-                <div className="col-span-2">
+                <div className="col-span-2" onClick={(e) => e.stopPropagation()} onPointerDown={(e) => e.stopPropagation()}>
                   <Select 
                     value={project.status || 'Empty'} 
                     onValueChange={(v) => handleStatusChange({ stopPropagation: () => {} } as any, project.id, v)}
                   >
                     <SelectTrigger 
-                      onClick={(e) => e.stopPropagation()}
                       className={cn(
                         "h-8 rounded-full border px-3 text-[11px] font-bold uppercase tracking-wider transition-all",
                         getStatusColor(project.status || 'Empty')

@@ -1,0 +1,10 @@
+
+> react-example@0.0.12 lint
+> tsc --noEmit
+
+src/components/FrameGrid.tsx(1088,16): error TS2304: Cannot find name 'Plus'.
+src/components/ProjectDetail.tsx(112,16): error TS2552: Cannot find name 'Input'. Did you mean 'oninput'?
+src/components/ProjectDetail.tsx(376,34): error TS2304: Cannot find name 'getDocs'.
+src/components/ProjectList.tsx(94,26): error TS2322: Type '{ children: Element; asChild: true; }' is not assignable to type 'IntrinsicAttributes & Props<unknown>'.
+  Property 'asChild' does not exist on type 'IntrinsicAttributes & Props<unknown>'.
+src/components/ProjectList.tsx(205,37): error TS2552: Cannot find name 'handleDeleteProject'. Did you mean 'handleCreateProject'?

@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef, useLayoutEffect, useCallback } from 'react';
 import { db, handleFirestoreError, OperationType } from '../firebase';
-import { doc, onSnapshot, updateDoc, collection, serverTimestamp, query, writeBatch } from 'firebase/firestore';
+import { doc, onSnapshot, updateDoc, collection, serverTimestamp, query, writeBatch, getDocs } from 'firebase/firestore';
 import { geminiService } from '../geminiService';
 import { openaiService } from '../openaiService';
 import { getTextProvider } from '@/lib/apiKeysStorage';
@@ -14,6 +14,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { FrameGrid, type FrameGridColumnCount } from './FrameGrid';
 import { ArrowLeft, Sparkles, Settings2, Save, FileText, LayoutGrid, Loader2, Settings } from 'lucide-react';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
+import { Input } from '@/components/ui/input';
 import { toast } from 'sonner';
 
 interface Project {
