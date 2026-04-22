@@ -11,6 +11,7 @@ import { ProjectDetail } from './components/ProjectDetail';
 import { StyleReferenceManager } from './components/StyleReferenceManager';
 import { ApiKeysSettings } from './components/ApiKeysSettings';
 import { LogIn, LayoutDashboard, Loader2 } from 'lucide-react';
+import { logActivity } from './lib/activityLogger';
 
 export default function App() {
   const [user, setUser] = useState<User | null>(null);
@@ -33,6 +34,7 @@ export default function App() {
       const provider = new GoogleAuthProvider();
       await signInWithPopup(auth, provider);
       toast.success('Logged in successfully');
+      logActivity('User Login', 'User signed into the application.');
     } catch (error: unknown) {
       const err = error as { code?: string; message?: string };
       if (err.code === 'auth/popup-closed-by-user') {

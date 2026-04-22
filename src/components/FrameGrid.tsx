@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { auth, db, storage, handleFirestoreError, OperationType } from '../firebase';
-import { collection, onSnapshot, query, orderBy, doc, updateDoc, deleteDoc, getDoc, getDocs, writeBatch, serverTimestamp, setDoc, deleteField } from 'firebase/firestore';
+import { collection, onSnapshot, query, orderBy, doc, updateDoc, deleteDoc, getDoc, getDocs, writeBatch, serverTimestamp, setDoc, deleteField, increment } from 'firebase/firestore';
 import { ref, uploadBytes, getDownloadURL, deleteObject } from 'firebase/storage';
+import { logActivity } from '../lib/activityLogger';
 import { geminiService } from '../geminiService';
 import { openaiService } from '../openaiService';
 import { getImageProvider, getTextProvider } from '@/lib/apiKeysStorage';
@@ -10,7 +11,7 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { Sparkles, Trash2, Eye, Download, CheckCircle2, Circle, RefreshCw, Image as ImageIcon, Edit3, Upload as UploadIcon, RotateCcw, Clapperboard, Loader2, History, ChevronLeft, ChevronRight, Plus } from 'lucide-react';
+import { Sparkles, Trash2, Eye, Download, CheckCircle2, Circle, RefreshCw, Image as ImageIcon, Edit3, Upload as UploadIcon, RotateCcw, Clapperboard, Loader2, History, ChevronLeft, ChevronRight, Plus, Palette, ChevronDown } from 'lucide-react';
 import { toast } from 'sonner';
 
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter, DialogDescription } from '@/components/ui/dialog';
@@ -35,6 +36,8 @@ interface Frame {
   storagePath?: string;
   isChunked?: boolean;
   activeGenerationId?: string;
+  systemInstructionsOverride?: string;
+  masterStyleOverride?: string;
 }
 
 export interface FrameGeneration {
@@ -102,13 +105,42 @@ function frameGridColsClass(cols: FrameGridColumnCount): string {
 interface FrameGridProps {
   projectId: string;
   projectName: string;
-  globalStyle: string;
-  styleReferenceId?: string;
   availableStyles: StyleRef[];
   /** Viewport offset from top when sticking (studio header + tab bar height). */
   stickyTopOffsetPx?: number;
   /** Number of columns in the frames card grid (user preference). */
   gridColumns: FrameGridColumnCount;
+}
+
+const cleanSceneContext = (text: string | null | undefined) => {
+  if (!text) return "";
+  if (text.includes('[SCENE CONTEXT]')) {
+    const parts = text.split('[SCENE CONTEXT]');
+    return parts[parts.length - 1].trim();
+  }
+  return text;
+};
+
+function ExpandableText({ text }: { text: string }) {
+  const [expanded, setExpanded] = useState(false);
+  if (!text) return null;
+  const isLong = text.length > 80;
+
+  return (
+    <div className="mb-3">
+      <p className={`text-xs text-neutral-950 italic ${expanded ? '' : 'line-clamp-2'} transition-all duration-200`}>
+        "{text}"
+      </p>
+      {isLong && (
+        <button 
+          onClick={(e) => { e.preventDefault(); setExpanded(!expanded); }}
+          className="text-[10px] text-violet-600 font-bold hover:underline mt-1 focus:outline-none"
+        >
+          {expanded ? 'Ver menos' : 'Ver más'}
+        </button>
+      )}
+    </div>
+  );
 }
 
 function ChunkedImage({ frame, projectId, className }: { frame: Frame, projectId: string, className?: string }) {
@@ -163,8 +195,6 @@ function ChunkedImage({ frame, projectId, className }: { frame: Frame, projectId
 export function FrameGrid({
   projectId,
   projectName,
-  globalStyle,
-  styleReferenceId,
   availableStyles,
   stickyTopOffsetPx = 0,
   gridColumns,
@@ -327,21 +357,6 @@ export function FrameGrid({
       });
       await clearBatch.commit();
 
-      // Fetch global style reference data if selected
-      let globalStyleImages: string[] = [];
-      let globalStyleRefPrompt = "";
-      
-      if (styleReferenceId && styleReferenceId !== 'none') {
-        const styleDoc = await getDoc(doc(db, 'styleReferences', styleReferenceId));
-        if (styleDoc.exists()) {
-          const styleData = styleDoc.data();
-          globalStyleRefPrompt = styleData.stylePrompt || "";
-          
-          const imagesSnap = await getDocs(query(collection(db, 'styleReferences', styleReferenceId, 'images'), orderBy('createdAt', 'asc')));
-          globalStyleImages = imagesSnap.docs.map(d => d.data().url);
-        }
-      }
-
       for (let i = 0; i < selectedFrames.length; i++) {
         const frame = selectedFrames[i];
         const step = i + 1;
@@ -349,49 +364,36 @@ export function FrameGrid({
         setGenerationProgress({ current: step, total: totalFrames });
         toast.loading(`Generating frame ${frame.frameNumber} (${step} of ${totalFrames})…`, { id: progressToastId });
 
-        // Determine which style to use: Local override or Global
-        let currentStyleImages = globalStyleImages;
-        let currentStyleRefPrompt = globalStyleRefPrompt;
-        let currentGlobalStylePrompt = globalStyle;
+        // Determine style images (only local and library)
+        let libraryStyleImages: string[] = [];
 
         if (frame.localStyleReferenceId && frame.localStyleReferenceId !== 'none' && frame.localStyleReferenceId !== 'global') {
-          const localStyleDoc = await getDoc(doc(db, 'styleReferences', frame.localStyleReferenceId));
-          if (localStyleDoc.exists()) {
-            const localStyleData = localStyleDoc.data();
-            currentStyleRefPrompt = localStyleData.stylePrompt || "";
-            currentGlobalStylePrompt = ""; 
-            
-            const localImagesSnap = await getDocs(query(collection(db, 'styleReferences', frame.localStyleReferenceId, 'images'), orderBy('createdAt', 'asc')));
-            currentStyleImages = localImagesSnap.docs.map(d => d.data().url);
+          const localImagesSnap = await getDocs(query(collection(db, 'styleReferences', frame.localStyleReferenceId, 'images'), orderBy('createdAt', 'asc')));
+          libraryStyleImages = localImagesSnap.docs.map(d => d.data().url);
+        }
+
+        const localManualImages = frame.localStyleImageUrls || [];
+        const allStyleImages = [...localManualImages, ...libraryStyleImages];
+
+        // Construct rigid payload
+        const defaultMasterStyle = "Vector illustration. Childish cartoon. Slightly desaturated colors. Simplified rounded shapes.\nNo black stroke. Minimum or non-existent stroke. IF USED: thick and only in selected focus elements.\nMinimum or non-existent lights and shadows.\nMinimum or non-existent gradiants.";
+        const masterStyle = frame.masterStyleOverride || defaultMasterStyle;
+
+        let systemInstructions = frame.systemInstructionsOverride || "";
+        if (!systemInstructions) {
+          if (localManualImages.length > 0) {
+            systemInstructions = "ATTACHED IMAGES ROLE: The FIRST attached image is your STRICT layout and composition reference. Replicate its structural arrangement. ALL SUBSEQUENT images are your AESTHETIC references (color, texture, vector style). Do NOT use the style of the first image.";
+          } else if (libraryStyleImages.length > 0) {
+            systemInstructions = "ATTACHED IMAGES ROLE: All attached images are AESTHETIC style references ONLY. Use them to understand the desired visual look.";
+          } else {
+            systemInstructions = "Generate the image based solely on the text instructions.";
           }
         }
 
-        // 1. Determine prompt
-        let finalPrompt = frame.generationPrompt || "";
-        
-        if (!finalPrompt) {
-          const framePayload = {
-            frameNumber: frame.frameNumber,
-            originalDescription: frame.originalDescription,
-            narratedText: frame.narratedText,
-            visualIntent: frame.visualIntent,
-            category: frame.category,
-          };
-          finalPrompt =
-            textProvider === 'openai'
-              ? await openaiService.refineVisualIntent(framePayload, currentGlobalStylePrompt)
-              : await geminiService.refineVisualIntent(framePayload, currentGlobalStylePrompt);
-        }
-        
-        // 2. Combine style images
-        const localManualImages = frame.localStyleImageUrls || [];
-        const allStyleImages = [...localManualImages, ...currentStyleImages];
-        
-        if (localManualImages.length > 0) {
-          finalPrompt = `IMPORTANT: Use the first attached image as the primary visual reference for composition, content, and layout. Replicate the scene from that image exactly, but apply the following style: ${finalPrompt}`;
-        }
-        
-        // 3. Generate image
+        const sceneContext = frame.generationPrompt || frame.visualIntent || "";
+        const finalPrompt = `[SYSTEM INSTRUCTIONS]\n${systemInstructions}\n\n[MASTER STYLE AESTHETIC]\n${masterStyle}\n\n[SCENE CONTEXT]\n${sceneContext}`;
+
+        // Generate image
         if (
           imageProvider === 'openai' &&
           allStyleImages.length > 0 &&
@@ -411,14 +413,14 @@ export function FrameGrid({
                 quality,
                 '16:9',
                 allStyleImages,
-                currentStyleRefPrompt,
+                "", // No hidden style prompt anymore
               )
             : await geminiService.generateImage(
                 finalPrompt,
                 quality,
                 '16:9',
                 allStyleImages,
-                currentStyleRefPrompt,
+                "", // No hidden style prompt anymore
               );
         
         // 4. Upload to Firebase Storage (unique path per generation — keeps history)
@@ -461,14 +463,39 @@ export function FrameGrid({
 
           await pruneOldGenerations(projectId, frame.id);
 
-          await updateDoc(doc(db, 'projects', projectId, 'frames', frame.id), {
+          const projectRef = doc(db, 'projects', projectId);
+          const projectSnap = await getDoc(projectRef);
+          const projectData = projectSnap.exists() ? projectSnap.data() : null;
+
+          const updatePayload: any = {
             generatedImageUrl: downloadUrl,
             storagePath,
-            generationPrompt: finalPrompt,
             activeGenerationId: generationId,
             status: 'generated',
             isChunked: false,
-          });
+          };
+
+          // Auto-update status to On-going if it's Empty
+          if (projectData && projectData.status === 'Empty') {
+            updatePayload.status = 'On-going'; // Wait, this updates the FRAME status.
+            // I should update the PROJECT status.
+            await updateDoc(projectRef, { 
+              status: 'On-going',
+              updatedAt: serverTimestamp() 
+            });
+          }
+
+          // Increment generatedFrames if it's the first time
+          if (frame.status !== 'generated') {
+            await updateDoc(projectRef, {
+              generatedFrames: increment(1),
+              updatedAt: serverTimestamp()
+            });
+          }
+
+          await updateDoc(doc(db, 'projects', projectId, 'frames', frame.id), updatePayload);
+
+          logActivity('Generate Image', `Generated image for frame ${frame.frameNumber}.`, projectId, projectName);
         } catch (err) {
           handleFirestoreError(err, OperationType.UPDATE, `projects/${projectId}/frames/${frame.id}`);
           toast.error(`Failed to save frame ${frame.frameNumber}`);
@@ -515,6 +542,15 @@ export function FrameGrid({
       toast.error('Failed to update frame');
     } finally {
       setIsSavingFrame(false);
+    }
+  };
+
+  const handleUpdateFrameById = async (frameId: string, data: Partial<Frame>) => {
+    try {
+      await updateDoc(doc(db, 'projects', projectId, 'frames', frameId), data);
+      toast.success('Frame updated');
+    } catch (error) {
+      toast.error('Failed to update frame');
     }
   };
 
@@ -878,9 +914,39 @@ export function FrameGrid({
               </div>
 
               <div className="absolute top-3 right-3 z-20 flex flex-col gap-2 items-end">
-                <Badge variant={frame.status === 'generated' ? 'default' : 'secondary'} className="bg-white/90 text-black border-none">
-                  {frame.category}
-                </Badge>
+                <Select 
+                  value={frame.localStyleReferenceId || 'none'} 
+                  onValueChange={(newId) => handleUpdateFrameById(frame.id, { localStyleReferenceId: newId })}
+                >
+                  <SelectTrigger className="w-auto h-auto p-0 border-none bg-transparent shadow-none focus:ring-0 ring-0 focus:outline-none [&>svg]:hidden">
+                     {(!frame.localStyleReferenceId || frame.localStyleReferenceId === 'none') ? (
+                        <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-red-500/90 hover:bg-red-600 text-white text-[10px] font-bold uppercase tracking-wider shadow-lg backdrop-blur-md border border-white/20 transition-all cursor-pointer">
+                          <Sparkles size={12} className="animate-pulse" />
+                          <span>Asignar Estilo</span>
+                          <ChevronDown size={11} className="opacity-70 ml-0.5" />
+                        </div>
+                     ) : (
+                        <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/80 hover:bg-white text-neutral-950 text-[10px] font-bold uppercase tracking-wider shadow-lg backdrop-blur-md border border-white/40 transition-all cursor-pointer">
+                          <Palette size={12} className="text-violet-600" />
+                          <span className="truncate max-w-[140px] leading-none">
+                            {availableStyles.find(s => s.id === frame.localStyleReferenceId)?.name || frame.category || 'Sin Estilo'}
+                          </span>
+                          <ChevronDown size={11} className="opacity-50 ml-0.5" />
+                        </div>
+                     )}
+                  </SelectTrigger>
+                  <SelectContent align="end" className="min-w-[200px] rounded-xl border-white/20 bg-white/95 backdrop-blur-xl shadow-2xl p-1">
+                    <SelectItem value="none" className="rounded-lg text-xs font-medium focus:bg-neutral-100">
+                      <span className="opacity-50 italic">Ninguno</span>
+                    </SelectItem>
+                    <div className="h-px bg-neutral-100 my-1 mx-1" />
+                    {availableStyles.map((s) => (
+                      <SelectItem key={s.id} value={s.id} className="rounded-lg text-xs font-semibold focus:bg-violet-50 focus:text-violet-700">
+                        {s.name}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
                 {frame.localStyleImageUrls && frame.localStyleImageUrls.length > 0 && (
                   <Badge variant="outline" className="border-blue-300 bg-blue-100 text-neutral-950 text-[10px]">
                     Local Style Ref
@@ -982,6 +1048,15 @@ export function FrameGrid({
                         if (!frameToEdit.generationPrompt) {
                           frameToEdit.generationPrompt = frameToEdit.visualIntent;
                         }
+                        // Pre-fill advanced overrides if undefined so they are explicitly editable
+                        if (frameToEdit.masterStyleOverride === undefined) {
+                          frameToEdit.masterStyleOverride = "Vector illustration. Childish cartoon. Slightly desaturated colors. Simplified rounded shapes.\nNo black stroke. Minimum or non-existent stroke. IF USED: thick and only in selected focus elements.\nMinimum or non-existent lights and shadows.\nMinimum or non-existent gradiants.";
+                        }
+                        if (frameToEdit.systemInstructionsOverride === undefined) {
+                          // A sensible default if undefined. The generation logic dynamically updates this if manual images are added, 
+                          // but for the UI we provide the baseline aesthetic instruction to edit.
+                          frameToEdit.systemInstructionsOverride = "ATTACHED IMAGES ROLE: All attached images are AESTHETIC style references ONLY. Use them to understand the desired visual look.";
+                        }
                         setEditingFrame(frameToEdit);
                       }}
                     >
@@ -1021,45 +1096,22 @@ export function FrameGrid({
                     </Button>
                   </div>
                 </div>
-              <h4 className="font-semibold text-sm line-clamp-1 text-neutral-950">{frame.visualIntent}</h4>
-              {frame.generationPrompt && (
-                <div className="mt-2 p-2 bg-neutral-50 rounded border border-neutral-200">
-                  <p className="text-[10px] font-bold text-neutral-950 uppercase mb-1">AI Prompt Preview</p>
-                  <p className="text-[10px] text-neutral-950 line-clamp-2 leading-tight">
-                    {frame.generationPrompt}
-                  </p>
-                </div>
-              )}
+              <h4 className="font-semibold text-sm line-clamp-1 text-neutral-950" title={frame.visualIntent}>{frame.visualIntent}</h4>
             </CardHeader>
 
             <CardContent className="p-4 pt-0">
-              <p className="text-xs text-neutral-950 line-clamp-2 italic mb-3">
-                "{frame.narratedText}"
-              </p>
-              <div className="flex items-center gap-2">
-                <Button 
-                  variant="ghost" 
-                  size="sm" 
-                  className={`h-7 px-2 text-[10px] uppercase font-bold ${frame.status === 'skipped' ? 'text-red-700 bg-red-50' : 'text-neutral-950'}`}
-                  disabled={updatingStatusId === frame.id}
-                  aria-busy={updatingStatusId === frame.id}
-                  onClick={() => handleStatusChange(frame.id, frame.status === 'skipped' ? 'pending' : 'skipped')}
-                >
-                  {updatingStatusId === frame.id ? (
-                    <Loader2 className="h-3 w-3 animate-spin" />
-                  ) : frame.status === 'skipped' ? (
-                    'Skipped'
-                  ) : (
-                    'Skip'
-                  )}
-                </Button>
-                <div className="ml-auto flex items-center gap-1">
+              <ExpandableText text={frame.narratedText} />
+              
+              <div className="flex items-center justify-end mt-2 pt-3 border-t border-neutral-100">
+                <div className="flex items-center gap-1.5">
                   {frame.status === 'generated' ? (
                     <CheckCircle2 size={14} className="text-green-500" />
+                  ) : frame.status === 'skipped' ? (
+                    <Circle size={14} className="text-red-300" />
                   ) : (
                     <Circle size={14} className="text-neutral-300" />
                   )}
-                  <span className="text-[10px] uppercase font-bold text-neutral-950">{frame.status}</span>
+                  <span className="text-[10px] uppercase font-bold text-neutral-950 tracking-wider">{frame.status}</span>
                 </div>
               </div>
             </CardContent>
@@ -1070,7 +1122,7 @@ export function FrameGrid({
 
       {/* Image Preview Dialog */}
       <Dialog open={!!previewImage} onOpenChange={(open) => !open && setPreviewImage(null)}>
-        <DialogContent className="max-w-5xl max-h-[90vh] p-0 overflow-hidden border-none bg-neutral-950/95 shadow-2xl backdrop-blur-3xl animate-in zoom-in-95 duration-200">
+        <DialogContent className="sm:max-w-7xl max-h-[90vh] p-0 overflow-hidden border-none bg-neutral-950/95 shadow-2xl backdrop-blur-3xl animate-in zoom-in-95 duration-200">
           <div className="absolute top-0 left-0 right-0 z-30 flex items-center justify-between p-6 bg-gradient-to-b from-black/80 to-transparent">
             <div className="flex flex-col gap-1">
               <h3 className="text-xl font-black text-white uppercase tracking-tighter drop-shadow-md">
@@ -1103,7 +1155,7 @@ export function FrameGrid({
                 <img 
                   src={previewImage.url} 
                   alt={previewImage.title} 
-                  className="relative z-10 max-w-full max-h-[85vh] object-contain rounded-lg shadow-[0_32px_128px_rgba(0,0,0,0.8)] ring-1 ring-white/20"
+                  className="relative z-10 w-full max-h-[85vh] object-contain rounded-lg shadow-[0_32px_128px_rgba(0,0,0,0.8)] ring-1 ring-white/20"
                   referrerPolicy="no-referrer"
                 />
               </>
@@ -1134,87 +1186,117 @@ export function FrameGrid({
         <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
           <DialogHeader>
             <DialogTitle>Edit Frame {editingFrame?.frameNumber}</DialogTitle>
-            <DialogDescription>
-              Adjust the visual intent or the final AI prompt to guide the generation.
-            </DialogDescription>
           </DialogHeader>
 
           {editingFrame && (
             <div className="space-y-6 py-4">
-              <div className="space-y-2">
-                <Label>Style Library Override</Label>
-                <Select 
-                  value={editingFrame.localStyleReferenceId || 'global'} 
-                  onValueChange={(v) => setEditingFrame({ ...editingFrame, localStyleReferenceId: v })}
-                >
-                  <SelectTrigger className="w-full">
-                    <SelectValue placeholder="Select a style...">
-                      {(value) =>
-                        frameStyleOverrideLabel(
-                          value as string | null | undefined,
-                          availableStyles,
-                        )}
-                    </SelectValue>
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="global">Use Project Global Style</SelectItem>
-                    <SelectItem value="none">None (No Library Style)</SelectItem>
-                    {availableStyles.map((s) => (
-                      <SelectItem key={s.id} value={s.id}>{s.name}</SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-                <p className="text-[10px] text-neutral-950">
-                  Selecting a style here will override the project's global style for this frame.
-                </p>
-              </div>
+              {/* --- Section: Content --- */}
+              <div className="space-y-4">
+                <div className="flex items-center gap-2 mb-1 px-1">
+                  <Edit3 size={16} className="text-violet-600" />
+                  <h4 className="text-xs font-bold uppercase tracking-widest text-neutral-950">Scene Context</h4>
+                </div>
 
-              <div className="space-y-2">
-                <Label>Visual Intent</Label>
-                <Input 
-                  value={editingFrame.visualIntent} 
-                  onChange={(e) => setEditingFrame({ ...editingFrame, visualIntent: e.target.value })}
-                  placeholder="Describe the visual scene..."
-                />
-              </div>
-
-              <div className="space-y-2">
-                <Label>AI Generation Prompt (Manual Override)</Label>
-                <Textarea 
-                  value={editingFrame.generationPrompt || ""} 
-                  onChange={(e) => setEditingFrame({ ...editingFrame, generationPrompt: e.target.value })}
-                  placeholder="The final prompt sent to the AI. Leave empty to auto-generate from visual intent."
-                  className="min-h-[120px] font-mono text-xs"
-                />
-                <p className="text-[10px] text-neutral-950">
-                  If you write something here, it will be used exactly as is for generation.
-                </p>
-              </div>
-
-              <div className="space-y-3">
-                <Label>Local Style References (Frame Specific)</Label>
-                <div className="flex flex-wrap gap-2">
-                  {editingFrame.localStyleImageUrls?.map((url, idx) => (
-                    <div key={idx} className="relative group w-20 h-20 rounded-lg overflow-hidden border border-gray-200">
-                      <img src={url} className="w-full h-full object-cover" />
-                      <button 
-                        onClick={() => {
-                          const updated = editingFrame.localStyleImageUrls?.filter((_, i) => i !== idx);
-                          setEditingFrame({ ...editingFrame, localStyleImageUrls: updated });
-                        }}
-                        className="absolute inset-0 bg-white/85 opacity-0 group-hover:opacity-100 flex items-center justify-center text-neutral-950 transition-opacity"
-                      >
-                        <Trash2 size={14} />
-                      </button>
-                    </div>
-                  ))}
-                  <label className="w-20 h-20 flex flex-col items-center justify-center border-2 border-dashed border-gray-200 rounded-lg cursor-pointer hover:border-black hover:bg-gray-50 transition-all">
-                    <UploadIcon size={20} className="text-neutral-950" />
-                    <span className="text-[10px] mt-1 font-medium text-neutral-950">Add</span>
-                    <input type="file" multiple accept="image/*" className="hidden" onChange={handleLocalStyleUpload} />
-                  </label>
+                <div className="space-y-2">
+                  <Label className="text-[10px] uppercase text-neutral-500 font-bold">Scene Context (Visual Intent)</Label>
+                  <Textarea 
+                    value={cleanSceneContext(editingFrame.generationPrompt) || editingFrame.visualIntent} 
+                    onChange={(e) => setEditingFrame({ ...editingFrame, generationPrompt: e.target.value })}
+                    placeholder="Describe the scene context. e.g. 'Snowy Pyrenees Mountains with ski tracks.'"
+                    className="min-h-[120px] font-medium text-sm rounded-xl border-neutral-200 focus:ring-violet-500"
+                  />
+                  <p className="text-[10px] text-neutral-400 italic">
+                    This text describes the specific figurative elements of this frame.
+                  </p>
                 </div>
               </div>
+
+              {/* --- Section: Visual Reference --- */}
+              <div className="p-4 rounded-2xl bg-neutral-50 border border-neutral-100 space-y-4">
+                <div className="flex items-center gap-2 mb-1">
+                  <Palette size={16} className="text-violet-600" />
+                  <h4 className="text-xs font-bold uppercase tracking-widest text-neutral-950">Visual Reference</h4>
+                </div>
+                
+                <div className="space-y-2">
+                  <Label className="text-[10px] uppercase text-neutral-500 font-bold">Style Category</Label>
+                  <Select 
+                    value={editingFrame.localStyleReferenceId || 'none'} 
+                    onValueChange={(v) => setEditingFrame({ ...editingFrame, localStyleReferenceId: v })}
+                  >
+                    <SelectTrigger className="w-full bg-white">
+                      <SelectValue placeholder="Select a style...">
+                        {(value) =>
+                          frameStyleOverrideLabel(
+                            value as string | null | undefined,
+                            availableStyles,
+                          )}
+                      </SelectValue>
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="none">None</SelectItem>
+                      {availableStyles.map((s) => (
+                        <SelectItem key={s.id} value={s.id}>{s.name}</SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                </div>
+
+                <div className="space-y-3">
+                  <Label className="text-[10px] uppercase text-neutral-500 font-bold">Local Images (Layout Reference)</Label>
+                  <div className="flex flex-wrap gap-2">
+                    {editingFrame.localStyleImageUrls?.map((url, idx) => (
+                      <div key={idx} className="relative group w-16 h-16 rounded-xl overflow-hidden border border-neutral-200 shadow-sm">
+                        <img src={url} className="w-full h-full object-cover" />
+                        <button 
+                          onClick={() => {
+                            const updated = editingFrame.localStyleImageUrls?.filter((_, i) => i !== idx);
+                            setEditingFrame({ ...editingFrame, localStyleImageUrls: updated });
+                          }}
+                          className="absolute inset-0 bg-red-500/80 opacity-0 group-hover:opacity-100 flex items-center justify-center text-white transition-opacity"
+                        >
+                          <Trash2 size={14} />
+                        </button>
+                      </div>
+                    ))}
+                    <label className="w-16 h-16 flex flex-col items-center justify-center border-2 border-dashed border-neutral-200 rounded-xl cursor-pointer hover:border-violet-500 hover:bg-violet-50 transition-all">
+                      <UploadIcon size={18} className="text-neutral-400" />
+                      <input type="file" multiple accept="image/*" className="hidden" onChange={handleLocalStyleUpload} />
+                    </label>
+                  </div>
+                </div>
+              </div>
+
+              {/* --- Section: Advanced (Collapsible) --- */}
+              <details className="group border border-neutral-200 rounded-2xl overflow-hidden [&_summary::-webkit-details-marker]:hidden">
+                <summary className="flex items-center justify-between px-4 py-3 bg-neutral-50/50 cursor-pointer select-none text-xs font-bold uppercase tracking-widest text-neutral-950 hover:bg-neutral-100/50">
+                  <div className="flex items-center gap-2">
+                    <Sparkles size={14} className="text-violet-600" />
+                    <span>Advanced Generation Overrides</span>
+                  </div>
+                  <ChevronDown size={14} className="group-open:rotate-180 transition-transform text-neutral-400" />
+                </summary>
+                <div className="p-4 space-y-4 border-t border-neutral-200 bg-white">
+                  <div className="space-y-2">
+                    <Label className="text-[10px] uppercase text-neutral-500 font-bold">System Instructions Override</Label>
+                    <Textarea
+                      value={editingFrame.systemInstructionsOverride ?? ""}
+                      onChange={(e) => setEditingFrame({ ...editingFrame, systemInstructionsOverride: e.target.value })}
+                      placeholder="Leave empty to remove this instruction entirely for this frame."
+                      className="min-h-[80px] font-mono text-[11px] bg-neutral-50"
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <Label className="text-[10px] uppercase text-neutral-500 font-bold">Master Style Aesthetic Override</Label>
+                    <Textarea
+                      value={editingFrame.masterStyleOverride ?? ""}
+                      onChange={(e) => setEditingFrame({ ...editingFrame, masterStyleOverride: e.target.value })}
+                      placeholder="Leave empty to remove this instruction entirely for this frame."
+                      className="min-h-[100px] font-mono text-[11px] bg-neutral-50"
+                    />
+                  </div>
+                </div>
+              </details>
             </div>
           )}
 

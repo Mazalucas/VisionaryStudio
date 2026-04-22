@@ -16,13 +16,12 @@ import { ArrowLeft, Sparkles, Settings2, Save, FileText, LayoutGrid, Loader2, Se
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import { Input } from '@/components/ui/input';
 import { toast } from 'sonner';
+import { logActivity } from '../lib/activityLogger';
 
 interface Project {
   id: string;
   name: string;
   scriptRaw?: string;
-  globalStylePrompt?: string;
-  styleReferenceId?: string;
 }
 
 interface StyleRef {
@@ -279,8 +278,6 @@ function WorkspaceTabBar() {
 export function ProjectDetail({ projectId, onBack }: ProjectDetailProps) {
   const [project, setProject] = useState<Project | null>(null);
   const [scriptInput, setScriptInput] = useState('');
-  const [stylePrompt, setStylePrompt] = useState('');
-  const [styleRefId, setStyleRefId] = useState<string>('none');
   const [availableStyles, setAvailableStyles] = useState<StyleRef[]>([]);
   const [isParsing, setIsParsing] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
@@ -311,8 +308,6 @@ export function ProjectDetail({ projectId, onBack }: ProjectDetailProps) {
         const data = snapshot.data() as Project;
         setProject({ id: snapshot.id, ...data });
         setScriptInput(data.scriptRaw || '');
-        setStylePrompt(data.globalStylePrompt || '');
-        setStyleRefId(data.styleReferenceId || 'none');
       }
     }, (error) => {
       handleFirestoreError(error, OperationType.GET, `projects/${projectId}`);
@@ -334,8 +329,6 @@ export function ProjectDetail({ projectId, onBack }: ProjectDetailProps) {
     try {
       await updateDoc(doc(db, 'projects', projectId), {
         scriptRaw: scriptInput,
-        globalStylePrompt: stylePrompt,
-        styleReferenceId: styleRefId === 'none' ? null : styleRefId,
         updatedAt: serverTimestamp()
       });
       toast.success('Settings saved');
@@ -382,14 +375,24 @@ export function ProjectDetail({ projectId, onBack }: ProjectDetailProps) {
         const newFrameRef = doc(framesRef);
         batch.set(newFrameRef, {
           ...frame,
+          generationPrompt: frame.originalDescription,
           projectId,
           status: 'pending',
           createdAt: serverTimestamp(),
-          localStyleReferenceId: matchedStyle ? matchedStyle.id : 'global'
+          localStyleReferenceId: matchedStyle ? matchedStyle.id : null
         });
       });
       
       await batch.commit();
+      
+      // Update totalFrames in the project document
+      await updateDoc(doc(db, 'projects', projectId), {
+        totalFrames: frames.length,
+        updatedAt: serverTimestamp()
+      });
+
+      logActivity('Parse Script', `Created ${frames.length} frames from script.`, projectId, project.name);
+      
       toast.success(`Parsed ${frames.length} frames successfully`);
       setActiveTab('frames');
     } catch (error) {
@@ -435,8 +438,6 @@ export function ProjectDetail({ projectId, onBack }: ProjectDetailProps) {
           <FrameGrid
             projectId={projectId}
             projectName={project.name}
-            globalStyle={stylePrompt}
-            styleReferenceId={styleRefId}
             availableStyles={availableStyles}
             stickyTopOffsetPx={studioChromePx}
             gridColumns={frameGridColumns}
@@ -444,8 +445,8 @@ export function ProjectDetail({ projectId, onBack }: ProjectDetailProps) {
         </TabsContent>
 
         <TabsContent value="script" className="mt-0 outline-none focus-visible:ring-0">
-          <div className="grid grid-cols-1 gap-8 lg:grid-cols-3 lg:gap-10">
-            <Card className={cn('group/card relative overflow-hidden lg:col-span-2', GLASS_CARD)}>
+          <div className="flex flex-col gap-8">
+            <Card className={cn('group/card relative overflow-hidden', GLASS_CARD)}>
               <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-violet-400/25 to-transparent" aria-hidden />
               <CardHeader className="space-y-1 border-b border-white/25 pb-5 pt-6 dark:border-white/10">
                 <div className="flex items-start gap-4">
@@ -474,76 +475,6 @@ export function ProjectDetail({ projectId, onBack }: ProjectDetailProps) {
                 />
               </CardContent>
             </Card>
-
-            <div className="flex flex-col gap-6 lg:col-span-1">
-              <Card className={cn('overflow-hidden', GLASS_CARD)}>
-                <CardHeader className="space-y-1 border-b border-white/25 pb-5 pt-6 dark:border-white/10">
-                  <div className="flex items-start gap-4">
-                    <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-white/40 bg-white/50 shadow-sm backdrop-blur-md dark:border-white/10 dark:bg-white/10">
-                      <Settings2 size={20} className="text-violet-600 dark:text-violet-400" />
-                    </div>
-                    <div className="min-w-0 space-y-1">
-                      <CardTitle className="text-lg font-semibold tracking-tight text-neutral-950">Global style</CardTitle>
-                      <CardDescription className="text-sm leading-relaxed text-neutral-950">
-                        Keep a consistent look across every frame in this project.
-                      </CardDescription>
-                    </div>
-                  </div>
-                </CardHeader>
-                <CardContent className="space-y-6 p-5 sm:p-6">
-                  <div className="space-y-2">
-                    <Label className="text-xs font-medium text-neutral-950">Style reference library</Label>
-                    <Select value={styleRefId} onValueChange={setStyleRefId}>
-                      <SelectTrigger className={cn('h-11 rounded-xl', GLASS_INPUT)}>
-                        <SelectValue placeholder="Select a style…">
-                          {(value) =>
-                            globalStyleSelectLabel(
-                              value as string | null | undefined,
-                              availableStyles,
-                            )}
-                        </SelectValue>
-                      </SelectTrigger>
-                      <SelectContent className="rounded-xl">
-                        <SelectItem value="none">None (manual prompt only)</SelectItem>
-                        {availableStyles.map((s) => (
-                          <SelectItem key={s.id} value={s.id}>
-                            {s.name}
-                          </SelectItem>
-                        ))}
-                      </SelectContent>
-                    </Select>
-                  </div>
-
-                  <div className="space-y-2">
-                    <Label className="text-xs font-medium text-neutral-950">Manual style prompt</Label>
-                    <Textarea
-                      placeholder="e.g. cinematic 3D illustration, vibrant colors, detailed textures, soft lighting…"
-                      className={cn(
-                        'min-h-[200px] resize-y rounded-xl p-4 text-sm leading-relaxed transition-[box-shadow,border-color]',
-                        'focus-visible:border-violet-400/50 focus-visible:ring-2 focus-visible:ring-violet-400/25',
-                        GLASS_INPUT,
-                      )}
-                      value={stylePrompt}
-                      onChange={(e) => setStylePrompt(e.target.value)}
-                    />
-                  </div>
-                </CardContent>
-              </Card>
-
-              <div className="relative overflow-hidden rounded-2xl border border-neutral-200 bg-white p-6 text-neutral-950 shadow-[0_8px_32px_rgba(31,38,135,0.07)] backdrop-blur-xl dark:border-white/10 dark:bg-violet-950/40 dark:text-white">
-                <div className="pointer-events-none absolute -right-8 -top-8 h-32 w-32 rounded-full bg-violet-400/30 blur-3xl dark:bg-violet-500/20" aria-hidden />
-                <div className="pointer-events-none absolute -bottom-6 -left-6 h-24 w-24 rounded-full bg-amber-300/20 blur-2xl dark:bg-amber-400/10" aria-hidden />
-                <p className="mb-3 flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.18em] text-neutral-950 dark:text-violet-200/90">
-                  <Sparkles size={14} className="text-neutral-950 dark:text-amber-300" />
-                  Pro tip
-                </p>
-                <p className="text-sm leading-relaxed text-neutral-950 dark:text-slate-300">
-                  Try phrases like <span className="font-medium">&quot;vibrant colors&quot;</span>,{' '}
-                  <span className="font-medium">&quot;cinematic lighting&quot;</span>, or{' '}
-                  <span className="font-medium">&quot;watercolor&quot;</span> to keep frames visually aligned.
-                </p>
-              </div>
-            </div>
           </div>
         </TabsContent>
         </section>
