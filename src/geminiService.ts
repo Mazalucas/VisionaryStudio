@@ -113,7 +113,7 @@ export const geminiService = {
         config: {
           imageConfig: {
             aspectRatio: aspectRatio,
-            imageSize: quality === 'high' ? "1K" : undefined,
+            imageSize: quality === 'high' ? "2K" : "1K",
           },
         },
       });

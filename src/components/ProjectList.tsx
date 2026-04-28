@@ -11,7 +11,7 @@ import { toast } from 'sonner';
 import { cn } from '@/lib/utils';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { logActivity } from '@/lib/activityLogger';
-import { Lock, Unlock, ChevronUp, ChevronDown, Archive, ShieldCheck, Search, Clock, User, FileText } from 'lucide-react';
+import { Lock, Unlock, ChevronUp, ChevronDown, Archive, ShieldCheck, Search, Clock, User, FileText, History } from 'lucide-react';
 
 interface Project {
   id: string;
@@ -41,6 +41,7 @@ export function ProjectList({ onSelectProject }: ProjectListProps) {
   const [password, setPassword] = useState('');
   const [activityLogs, setActivityLogs] = useState<any[]>([]);
   const [isLoadingLogs, setIsLoadingLogs] = useState(false);
+  const [searchTerm, setSearchTerm] = useState('');
 
   // Sorting State
   const [sortConfig, setSortConfig] = useState<{ key: 'name' | 'status' | 'createdAt', direction: 'asc' | 'desc' }>({
@@ -149,6 +150,7 @@ export function ProjectList({ onSelectProject }: ProjectListProps) {
 
   const sortedProjects = [...projects]
     .filter(p => !p.isArchived)
+    .filter(p => p.name.toLowerCase().includes(searchTerm.toLowerCase()))
     .sort((a, b) => {
       const dir = sortConfig.direction === 'asc' ? 1 : -1;
       if (sortConfig.key === 'createdAt') {
@@ -176,11 +178,11 @@ export function ProjectList({ onSelectProject }: ProjectListProps) {
 
   const getStatusColor = (status: string) => {
     switch (status) {
-      case 'Empty': return 'bg-neutral-100 text-neutral-500 border-neutral-200';
-      case 'On-going': return 'bg-sky-50 text-sky-600 border-sky-100';
-      case 'Completed': return 'bg-amber-50 text-amber-600 border-amber-100';
-      case 'Finalized': return 'bg-green-100 text-green-700 border-green-200';
-      default: return 'bg-neutral-100 text-neutral-500 border-neutral-200';
+      case 'Empty': return 'bg-muted text-muted-foreground border-border';
+      case 'On-going': return 'bg-sky-500/10 text-sky-500 border-sky-500/20';
+      case 'Completed': return 'bg-amber-500/10 text-amber-500 border-amber-500/20';
+      case 'Finalized': return 'bg-emerald-500/10 text-emerald-500 border-emerald-500/20';
+      default: return 'bg-muted text-muted-foreground border-border';
     }
   };
 
@@ -188,8 +190,8 @@ export function ProjectList({ onSelectProject }: ProjectListProps) {
     <div className="space-y-8">
       <div className="flex items-center justify-between">
         <div>
-          <h2 className="text-4xl font-bold tracking-tight text-neutral-950">Production Projects</h2>
-          <p className="text-neutral-950/70 mt-2 text-lg">Manage your video episodes and background generations.</p>
+          <h2 className="text-4xl font-bold tracking-tight text-foreground">Production Projects</h2>
+          <p className="text-muted-foreground mt-2 text-lg">Manage your video episodes and background generations.</p>
         </div>
         
         <div className="flex items-center gap-3">
@@ -201,14 +203,14 @@ export function ProjectList({ onSelectProject }: ProjectListProps) {
             }
           }}>
             <DialogTrigger render={
-              <Button variant="ghost" size="icon" className="h-12 w-12 rounded-xl text-neutral-950/40 hover:text-neutral-950 transition-all border border-neutral-200">
+              <Button variant="ghost" size="icon" className="h-12 w-12 rounded-xl text-muted-foreground hover:text-foreground transition-all border border-border">
                 {isUnlocked ? <Unlock size={20} /> : <Lock size={20} />}
               </Button>
             } />
-            <DialogContent className="max-w-4xl max-h-[80vh] overflow-hidden flex flex-col rounded-2xl bg-white/95 backdrop-blur-2xl">
+            <DialogContent className="max-w-4xl max-h-[80vh] overflow-hidden flex flex-col rounded-2xl bg-card/95 backdrop-blur-2xl">
               <DialogHeader>
                 <DialogTitle className="flex items-center gap-2 text-2xl">
-                  <ShieldCheck className="text-violet-600" /> Activity Registry
+                  <ShieldCheck className="text-primary" /> Activity Registry
                 </DialogTitle>
                 <DialogDescription>
                   Audit trail of project actions and generation activity.
@@ -217,12 +219,12 @@ export function ProjectList({ onSelectProject }: ProjectListProps) {
               
               {!isUnlocked ? (
                 <div className="flex flex-col items-center justify-center py-12 space-y-6">
-                  <div className="p-4 rounded-full bg-neutral-100 text-neutral-400">
+                  <div className="p-4 rounded-full bg-muted text-muted-foreground">
                     <Lock size={48} />
                   </div>
                   <div className="text-center space-y-2">
                     <h3 className="text-lg font-bold">Registry Locked</h3>
-                    <p className="text-sm text-neutral-500">Please enter the moderator password to access the logs.</p>
+                    <p className="text-sm text-muted-foreground">Please enter the moderator password to access the logs.</p>
                   </div>
                   <div className="flex gap-2 w-full max-w-xs">
                     <Input 
@@ -231,42 +233,42 @@ export function ProjectList({ onSelectProject }: ProjectListProps) {
                       value={password}
                       onChange={(e) => setPassword(e.target.value)}
                       onKeyDown={(e) => e.key === 'Enter' && handleUnlockLogs()}
-                      className="rounded-xl h-11"
+                      className="rounded-xl h-11 bg-background"
                     />
-                    <Button onClick={handleUnlockLogs} className="h-11 rounded-xl bg-violet-600">Access</Button>
+                    <Button onClick={handleUnlockLogs} className="h-11 rounded-xl bg-primary text-primary-foreground">Access</Button>
                   </div>
                 </div>
               ) : (
                 <div className="flex-1 overflow-y-auto mt-4 pr-2 custom-scrollbar">
                   {isLoadingLogs ? (
                     <div className="flex items-center justify-center py-20">
-                      <Loader2 className="animate-spin text-violet-600" size={32} />
+                      <Loader2 className="animate-spin text-primary" size={32} />
                     </div>
                   ) : activityLogs.length === 0 ? (
                     <div className="text-center py-20 text-neutral-400">No activity recorded yet.</div>
                   ) : (
                     <div className="space-y-3">
                       {activityLogs.map((log) => (
-                        <div key={log.id} className="p-4 rounded-xl border border-neutral-100 bg-neutral-50/50 flex flex-col gap-2">
+                        <div key={log.id} className="p-4 rounded-xl border border-border bg-muted/30 flex flex-col gap-2">
                           <div className="flex items-center justify-between">
                             <div className="flex items-center gap-2">
-                              <div className="h-7 w-7 rounded-full bg-violet-100 text-violet-700 flex items-center justify-center">
+                              <div className="h-7 w-7 rounded-full bg-primary/10 text-primary flex items-center justify-center">
                                 <User size={14} />
                               </div>
-                              <span className="text-sm font-bold text-neutral-900">{log.userName}</span>
-                              <span className="text-[10px] uppercase font-bold px-2 py-0.5 rounded bg-violet-600 text-white tracking-widest">{log.action}</span>
+                              <span className="text-sm font-bold text-foreground">{log.userName}</span>
+                              <span className="text-[10px] uppercase font-bold px-2 py-0.5 rounded bg-primary text-primary-foreground tracking-widest">{log.action}</span>
                             </div>
-                            <div className="flex items-center gap-1.5 text-xs text-neutral-400">
+                            <div className="flex items-center gap-1.5 text-xs text-muted-foreground">
                               <Clock size={12} />
                               {log.timestamp?.toDate().toLocaleString() || 'Recent'}
                             </div>
                           </div>
-                          <div className="pl-9 text-sm text-neutral-600">
+                          <div className="pl-9 text-sm text-muted-foreground">
                             {log.details}
                             {log.projectName && (
                               <div className="mt-1 flex items-center gap-1.5">
-                                <span className="text-[10px] font-bold text-neutral-400 uppercase tracking-wider">Project:</span>
-                                <span className="text-[10px] font-bold text-violet-600 px-2 py-0.5 rounded bg-violet-50 border border-violet-100">{log.projectName}</span>
+                                <span className="text-[10px] font-bold text-muted-foreground uppercase tracking-wider">Project:</span>
+                                <span className="text-[10px] font-bold text-primary px-2 py-0.5 rounded bg-primary/10 border border-primary/20">{log.projectName}</span>
                               </div>
                             )}
                           </div>
@@ -279,13 +281,23 @@ export function ProjectList({ onSelectProject }: ProjectListProps) {
             </DialogContent>
           </Dialog>
 
+          <div className="relative">
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+            <Input 
+              placeholder="Search projects..." 
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              className="h-12 pl-10 pr-4 rounded-xl border-border bg-card/50 backdrop-blur-md w-64 focus:ring-primary/20 transition-all"
+            />
+          </div>
+
           <Dialog open={isNewProjectOpen} onOpenChange={setIsNewProjectOpen}>
-            <DialogTrigger asChild>
-              <Button className="h-12 px-6 rounded-xl bg-neutral-950 text-white hover:bg-neutral-800 shadow-xl transition-all">
+            <DialogTrigger render={
+              <Button className="h-12 px-6 rounded-xl bg-primary text-primary-foreground hover:opacity-90 shadow-xl transition-all">
                 <Plus className="mr-2 h-5 w-5" /> New Project
               </Button>
-            </DialogTrigger>
-            <DialogContent className="rounded-2xl border-white/40 bg-white/80 backdrop-blur-2xl">
+            } />
+            <DialogContent className="rounded-2xl border-border bg-card/80 backdrop-blur-2xl">
             <DialogHeader>
               <DialogTitle className="text-2xl font-bold">Create New Project</DialogTitle>
               <DialogDescription>
@@ -294,13 +306,13 @@ export function ProjectList({ onSelectProject }: ProjectListProps) {
             </DialogHeader>
             <div className="py-6 space-y-4">
               <div className="space-y-2">
-                <Label htmlFor="name" className="text-sm font-semibold uppercase tracking-wider text-neutral-950/60">Project Name</Label>
+                <Label htmlFor="name" className="text-sm font-semibold uppercase tracking-wider text-muted-foreground">Project Name</Label>
                 <Input 
                   id="name" 
                   placeholder="e.g. Argentina - Episode 01" 
                   value={newProjectName}
                   onChange={(e) => setNewProjectName(e.target.value)}
-                  className="h-12 rounded-xl border-neutral-200/60 bg-white/50 focus:ring-violet-400/20"
+                  className="h-12 rounded-xl border-border bg-background focus:ring-primary/20"
                 />
               </div>
             </div>
@@ -311,7 +323,7 @@ export function ProjectList({ onSelectProject }: ProjectListProps) {
               <Button
                 onClick={handleCreateProject}
                 disabled={isCreatingProject}
-                className="min-w-[10rem] h-12 rounded-xl bg-violet-600 text-white hover:bg-violet-700 shadow-lg shadow-violet-500/20"
+                className="min-w-[10rem] h-12 rounded-xl bg-primary text-primary-foreground hover:opacity-90 shadow-lg shadow-primary/20"
               >
                 {isCreatingProject ? (
                   <>
@@ -328,18 +340,18 @@ export function ProjectList({ onSelectProject }: ProjectListProps) {
       </div>
       </div>
 
-      <div className="overflow-hidden rounded-3xl border border-white/45 bg-white/35 shadow-[0_8px_32px_rgba(31,38,135,0.06)] backdrop-blur-xl dark:border-white/10 dark:bg-white/[0.06]">
+      <div className="overflow-hidden rounded-3xl border border-border bg-card/35 shadow-xl backdrop-blur-xl">
         <div className="min-w-full inline-block align-middle">
-          <div className="border-b border-neutral-200/50 bg-white/20 px-6 py-4">
-            <div className="grid grid-cols-12 gap-4 text-xs font-bold uppercase tracking-[0.2em] text-neutral-950/40">
+          <div className="border-b border-border bg-muted/20 px-6 py-4">
+            <div className="grid grid-cols-12 gap-4 text-xs font-bold uppercase tracking-[0.2em] text-muted-foreground">
               <div 
-                className="col-span-5 flex items-center gap-1 cursor-pointer hover:text-neutral-950 transition-colors"
+                className="col-span-5 flex items-center gap-1 cursor-pointer hover:text-foreground transition-colors"
                 onClick={() => toggleSort('name')}
               >
                 Project Name {sortConfig.key === 'name' && (sortConfig.direction === 'asc' ? <ChevronUp size={12} /> : <ChevronDown size={12} />)}
               </div>
               <div 
-                className="col-span-2 flex items-center gap-1 cursor-pointer hover:text-neutral-950 transition-colors"
+                className="col-span-2 flex items-center gap-1 cursor-pointer hover:text-foreground transition-colors"
                 onClick={() => toggleSort('status')}
               >
                 Status {sortConfig.key === 'status' && (sortConfig.direction === 'asc' ? <ChevronUp size={12} /> : <ChevronDown size={12} />)}
@@ -350,20 +362,20 @@ export function ProjectList({ onSelectProject }: ProjectListProps) {
             </div>
           </div>
           
-          <div className="divide-y divide-neutral-200/40">
+          <div className="divide-y divide-border">
             {sortedProjects.map((project) => (
               <div 
                 key={project.id} 
-                className="grid grid-cols-12 gap-4 items-center px-6 py-5 hover:bg-white/40 transition-all cursor-pointer group"
+                className="grid grid-cols-12 gap-4 items-center px-6 py-5 hover:bg-muted/10 transition-all cursor-pointer group"
                 onClick={() => onSelectProject(project.id)}
               >
                 <div className="col-span-5 flex items-center gap-4">
-                  <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-white/40 bg-white/50 shadow-sm backdrop-blur-md dark:border-white/10 dark:bg-white/10 text-neutral-950">
+                  <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-border bg-muted shadow-sm backdrop-blur-md text-foreground">
                     <Globe size={20} />
                   </div>
                   <div className="min-w-0">
-                    <h3 className="text-lg font-bold text-neutral-950 truncate group-hover:text-violet-600 transition-colors">{project.name}</h3>
-                    <p className="text-xs text-neutral-950/50 truncate max-w-[300px] mt-0.5">{project.globalStylePrompt}</p>
+                    <h3 className="text-lg font-bold text-foreground truncate group-hover:text-primary transition-colors">{project.name}</h3>
+                    <p className="text-xs text-muted-foreground truncate max-w-[300px] mt-0.5">{project.globalStylePrompt}</p>
                   </div>
                 </div>
 
@@ -380,7 +392,7 @@ export function ProjectList({ onSelectProject }: ProjectListProps) {
                     >
                       <SelectValue />
                     </SelectTrigger>
-                    <SelectContent className="rounded-xl border-white/40 bg-white/90 backdrop-blur-xl">
+                    <SelectContent className="rounded-xl border-border bg-card/90 backdrop-blur-xl">
                       <SelectItem value="Empty">Empty</SelectItem>
                       <SelectItem value="On-going">On-going</SelectItem>
                       <SelectItem value="Completed">Completed</SelectItem>
@@ -391,10 +403,10 @@ export function ProjectList({ onSelectProject }: ProjectListProps) {
 
                 <div className="col-span-2 text-center">
                   <div className="inline-flex flex-col items-center">
-                    <span className="text-sm font-bold text-neutral-950">{project.generatedFrames || 0} / {project.totalFrames || 0}</span>
-                    <div className="w-16 h-1 bg-neutral-100 rounded-full mt-1.5 overflow-hidden">
+                    <span className="text-sm font-bold text-foreground">{project.generatedFrames || 0} / {project.totalFrames || 0}</span>
+                    <div className="w-16 h-1 bg-muted rounded-full mt-1.5 overflow-hidden">
                       <div 
-                        className="h-full bg-violet-500 transition-all" 
+                        className="h-full bg-primary transition-all" 
                         style={{ width: `${Math.min(100, (project.generatedFrames || 0) / (project.totalFrames || 1) * 100)}%` }} 
                       />
                     </div>
@@ -402,7 +414,7 @@ export function ProjectList({ onSelectProject }: ProjectListProps) {
                 </div>
 
                 <div className="col-span-1 text-center">
-                  <div className="inline-flex flex-col text-center text-[11px] font-medium text-neutral-950/60 leading-tight">
+                  <div className="inline-flex flex-col text-center text-[11px] font-medium text-muted-foreground leading-tight">
                     <span>{project.createdAt?.toDate().toLocaleDateString() || 'Just now'}</span>
                   </div>
                 </div>
@@ -411,17 +423,16 @@ export function ProjectList({ onSelectProject }: ProjectListProps) {
                   <Button 
                     variant="ghost" 
                     size="icon"
-                    className="h-9 w-9 rounded-full text-neutral-950/40 hover:bg-amber-50 hover:text-amber-600 transition-all"
+                    className="h-9 w-9 rounded-full text-muted-foreground hover:bg-amber-500/10 hover:text-amber-500 transition-all"
                     disabled={archivingProjectId === project.id}
                     onClick={(e) => handleArchiveProject(e, project)}
                   >
                     {archivingProjectId === project.id ? <Loader2 size={16} className="animate-spin" /> : <Archive size={16} />}
                   </Button>
-                  <div className="h-4 w-px bg-neutral-200/50 mx-1" />
                   <Button 
                     variant="ghost" 
                     size="icon"
-                    className="h-9 w-9 rounded-full text-neutral-950/60 hover:bg-neutral-100 hover:translate-x-0.5 transition-all"
+                    className="h-9 w-9 rounded-full text-muted-foreground hover:bg-muted hover:translate-x-0.5 transition-all"
                   >
                     <ArrowRight size={18} />
                   </Button>
@@ -429,15 +440,23 @@ export function ProjectList({ onSelectProject }: ProjectListProps) {
               </div>
             ))}
 
-            {projects.length === 0 && (
+            {projects.length === 0 ? (
               <div className="py-24 text-center">
-                <div className="mx-auto w-16 h-16 bg-neutral-100 rounded-3xl flex items-center justify-center text-neutral-400 mb-6 shadow-inner">
+                <div className="mx-auto w-16 h-16 bg-muted rounded-3xl flex items-center justify-center text-muted-foreground mb-6 shadow-inner">
                   <Globe size={32} />
                 </div>
-                <h3 className="text-xl font-bold text-neutral-950">No projects yet</h3>
-                <p className="text-neutral-950/60 mt-2">Create your first project to start generating backgrounds.</p>
+                <h3 className="text-xl font-bold text-foreground">No projects yet</h3>
+                <p className="text-muted-foreground mt-2">Create your first project to start generating backgrounds.</p>
               </div>
-            )}
+            ) : sortedProjects.length === 0 ? (
+              <div className="py-24 text-center">
+                <div className="mx-auto w-16 h-16 bg-muted rounded-3xl flex items-center justify-center text-muted-foreground mb-6 shadow-inner">
+                  <Search size={32} />
+                </div>
+                <h3 className="text-xl font-bold text-foreground">No matches found</h3>
+                <p className="text-muted-foreground mt-2">Try adjusting your search for "{searchTerm}".</p>
+              </div>
+            ) : null}
           </div>
         </div>
       </div>

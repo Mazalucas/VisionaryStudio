@@ -130,13 +130,13 @@ function ExpandableText({ text }: { text: string }) {
 
   return (
     <div className="mb-3">
-      <p className={`text-xs text-neutral-950 italic ${expanded ? '' : 'line-clamp-2'} transition-all duration-200`}>
+      <p className={`text-xs text-foreground italic ${expanded ? '' : 'line-clamp-2'} transition-all duration-200`}>
         "{text}"
       </p>
       {isLong && (
         <button 
           onClick={(e) => { e.preventDefault(); setExpanded(!expanded); }}
-          className="text-[10px] text-violet-600 font-bold hover:underline mt-1 focus:outline-none"
+          className="text-[10px] text-primary font-bold hover:underline mt-1 focus:outline-none"
         >
           {expanded ? 'Ver menos' : 'Ver más'}
         </button>
@@ -176,8 +176,8 @@ function ChunkedImage({ frame, projectId, className }: { frame: Frame, projectId
 
   if (loading) {
     return (
-      <div className="flex h-full w-full items-center justify-center bg-white/30 backdrop-blur-sm dark:bg-white/5">
-        <RefreshCw className="h-6 w-6 animate-spin text-neutral-950/40" />
+      <div className="flex h-full w-full items-center justify-center bg-card/30 backdrop-blur-sm">
+        <RefreshCw className="h-6 w-6 animate-spin text-muted-foreground/40" />
       </div>
     );
   }
@@ -233,7 +233,7 @@ export function FrameGrid({
     return `${formattedNumber}_${cleanProjectName}.png`;
   };
 
-  const sanitizeImageBlob = async (blob: Blob): Promise<Blob> => {
+  const sanitizeImageBlob = async (blob: Blob, force1080p: boolean = true): Promise<Blob> => {
     return new Promise((resolve, reject) => {
       const img = new Image();
       const objectUrl = URL.createObjectURL(blob);
@@ -241,14 +241,40 @@ export function FrameGrid({
       img.onload = () => {
         URL.revokeObjectURL(objectUrl);
         const canvas = document.createElement('canvas');
-        canvas.width = img.width;
-        canvas.height = img.height;
+        
+        let width = img.width;
+        let height = img.height;
+
+        if (force1080p) {
+          // Detect if landscape or portrait to apply 1920px to the longest side
+          if (width >= height) {
+            if (width < 1920) {
+              const ratio = 1920 / width;
+              width = 1920;
+              height = Math.round(height * ratio);
+            }
+          } else {
+            if (height < 1920) {
+              const ratio = 1920 / height;
+              height = 1920;
+              width = Math.round(width * ratio);
+            }
+          }
+        }
+
+        canvas.width = width;
+        canvas.height = height;
         const ctx = canvas.getContext('2d');
         if (!ctx) {
           reject(new Error('Failed to get canvas context'));
           return;
         }
-        ctx.drawImage(img, 0, 0);
+
+        // Enable high-quality scaling
+        ctx.imageSmoothingEnabled = true;
+        ctx.imageSmoothingQuality = 'high';
+
+        ctx.drawImage(img, 0, 0, width, height);
         canvas.toBlob((cleanBlob) => {
           if (cleanBlob) resolve(cleanBlob);
           else reject(new Error('Failed to create clean blob from canvas'));
@@ -799,15 +825,15 @@ export function FrameGrid({
         }}
       >
         <div className="flex flex-wrap items-center gap-3">
-          <div className="inline-flex items-center gap-2 rounded-full border border-neutral-200 bg-white px-3 py-1.5 text-sm font-medium text-neutral-950 shadow-inner backdrop-blur-md dark:border-white/10 dark:bg-white/5">
-            <span className="tabular-nums text-neutral-950">{selectedFrameIds.size}</span>
+          <div className="inline-flex items-center gap-2 rounded-full border border-border bg-card px-3 py-1.5 text-sm font-medium text-foreground shadow-inner backdrop-blur-md">
+            <span className="tabular-nums text-foreground">{selectedFrameIds.size}</span>
             <span>selected</span>
           </div>
           <div className="flex flex-wrap gap-2">
             <Button
               variant="outline"
               size="sm"
-              className="rounded-lg border-neutral-300 bg-white text-neutral-950 backdrop-blur-sm hover:bg-neutral-50 dark:border-white/10 dark:bg-white/5 dark:hover:bg-white/10"
+              className="rounded-lg border-border bg-card text-foreground backdrop-blur-sm hover:bg-muted"
               onClick={() => setSelectedFrameIds(new Set(frames.map(f => f.id)))}
             >
               Select all
@@ -815,7 +841,7 @@ export function FrameGrid({
             <Button
               variant="outline"
               size="sm"
-              className="rounded-lg border-neutral-300 bg-white text-neutral-950 backdrop-blur-sm hover:bg-neutral-50 dark:border-white/10 dark:bg-white/5 dark:hover:bg-white/10"
+              className="rounded-lg border-border bg-card text-foreground backdrop-blur-sm hover:bg-muted"
               onClick={() => setSelectedFrameIds(new Set())}
             >
               Deselect all
@@ -828,7 +854,7 @@ export function FrameGrid({
             onClick={handleDownloadSelected}
             disabled={selectedFrameIds.size === 0 || isDownloadingMultiple}
             variant="outline"
-            className="h-9 min-w-[11.5rem] rounded-lg border border-neutral-300 bg-white text-neutral-950 backdrop-blur-sm hover:bg-neutral-50 dark:border-white/10 dark:bg-white/5 dark:hover:bg-white/10"
+            className="h-9 min-w-[11.5rem] rounded-lg border border-border bg-card text-foreground backdrop-blur-sm hover:bg-muted"
           >
             {isDownloadingMultiple ? (
               <>
@@ -844,7 +870,7 @@ export function FrameGrid({
           </Button>
 
           <Select value={quality} onValueChange={(v: any) => setQuality(v)}>
-            <SelectTrigger className="h-9 w-[9.5rem] rounded-lg border-neutral-300 bg-white text-neutral-950 backdrop-blur-md dark:border-white/10 dark:bg-white/5">
+            <SelectTrigger className="h-9 w-[9.5rem] rounded-lg border-border bg-card text-foreground backdrop-blur-md">
               <SelectValue placeholder="Quality" />
             </SelectTrigger>
             <SelectContent>
@@ -857,7 +883,7 @@ export function FrameGrid({
             onClick={handleGenerateSelected}
             disabled={isGenerating || selectedFrameIds.size === 0}
             aria-busy={isGenerating}
-            className="h-9 min-w-[11.5rem] rounded-lg border border-neutral-300 bg-neutral-100 text-neutral-950 shadow-[0_4px_16px_rgba(0,0,0,0.08)] backdrop-blur-sm hover:bg-neutral-200 dark:border-white/10 dark:bg-white/15 dark:text-neutral-950 dark:hover:bg-white/25"
+            className="h-9 min-w-[11.5rem] rounded-lg border border-border bg-primary text-primary-foreground shadow-[0_4px_16px_rgba(0,0,0,0.08)] backdrop-blur-sm hover:opacity-90 transition-all"
           >
             {isGenerating ? (
               <>
@@ -878,11 +904,11 @@ export function FrameGrid({
 
       {frames.length === 0 && (
         <div className="flex flex-col items-center justify-center rounded-2xl border border-dashed border-white/50 bg-white/25 px-8 py-16 text-center shadow-[inset_0_1px_0_0_rgba(255,255,255,0.4)] backdrop-blur-xl dark:border-white/10 dark:bg-white/[0.04]">
-          <div className="mb-4 flex h-14 w-14 items-center justify-center rounded-2xl border border-white/50 bg-white/45 shadow-md backdrop-blur-md dark:border-white/10 dark:bg-white/10">
+          <div className="mb-4 flex h-14 w-14 items-center justify-center rounded-2xl border border-border bg-card shadow-md backdrop-blur-md">
             <Clapperboard className="h-7 w-7 text-violet-600 dark:text-violet-400" />
           </div>
-          <h3 className="text-lg font-semibold tracking-tight text-neutral-950">No frames yet</h3>
-          <p className="mt-2 max-w-md text-sm leading-relaxed text-neutral-950">
+          <h3 className="text-lg font-semibold tracking-tight text-foreground">No frames yet</h3>
+          <p className="mt-2 max-w-md text-sm leading-relaxed text-muted-foreground">
             Go to <span className="font-medium">Script & Style</span>, paste your script table, then run <span className="font-medium">Parse Script</span> to generate frames here.
           </p>
         </div>
@@ -933,7 +959,7 @@ export function FrameGrid({
                   className="w-full h-full object-cover" 
                 />
               ) : (
-                <div className="flex h-full w-full flex-col items-center justify-center gap-2 text-neutral-950/80">
+                <div className="flex h-full w-full flex-col items-center justify-center gap-2 text-muted-foreground">
                   <div className="rounded-xl bg-background/80 p-3 shadow-sm ring-1 ring-border/50">
                     <ImageIcon className="h-10 w-10 opacity-50" />
                   </div>
@@ -982,7 +1008,7 @@ export function FrameGrid({
                           <ChevronDown size={11} className="opacity-70 ml-0.5" />
                         </div>
                      ) : (
-                        <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/80 hover:bg-white text-neutral-950 text-[10px] font-bold uppercase tracking-wider shadow-lg backdrop-blur-md border border-white/40 transition-all cursor-pointer">
+                        <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-card/80 hover:bg-card text-foreground text-[10px] font-bold uppercase tracking-wider shadow-lg backdrop-blur-md border border-border transition-all cursor-pointer">
                           <Palette size={12} className="text-violet-600" />
                           <span className="truncate max-w-[140px] leading-none">
                             {availableStyles.find(s => s.id === frame.localStyleReferenceId)?.name || frame.category || 'Sin Estilo'}
@@ -991,20 +1017,20 @@ export function FrameGrid({
                         </div>
                      )}
                   </SelectTrigger>
-                  <SelectContent align="end" className="min-w-[200px] rounded-xl border-white/20 bg-white/95 backdrop-blur-xl shadow-2xl p-1">
-                    <SelectItem value="none" className="rounded-lg text-xs font-medium focus:bg-neutral-100">
+                  <SelectContent align="end" className="min-w-[200px] rounded-xl border-border bg-popover text-popover-foreground backdrop-blur-xl shadow-2xl p-1">
+                    <SelectItem value="none" className="rounded-lg text-xs font-medium focus:bg-accent focus:text-accent-foreground">
                       <span className="opacity-50 italic">Ninguno</span>
                     </SelectItem>
-                    <div className="h-px bg-neutral-100 my-1 mx-1" />
+                    <div className="h-px bg-border my-1 mx-1" />
                     {availableStyles.map((s) => (
-                      <SelectItem key={s.id} value={s.id} className="rounded-lg text-xs font-semibold focus:bg-violet-50 focus:text-violet-700">
+                      <SelectItem key={s.id} value={s.id} className="rounded-lg text-xs font-semibold focus:bg-accent focus:text-accent-foreground">
                         {s.name}
                       </SelectItem>
                     ))}
                   </SelectContent>
                 </Select>
                 {frame.localStyleImageUrls && frame.localStyleImageUrls.length > 0 && (
-                  <Badge variant="outline" className="border-blue-300 bg-blue-100 text-neutral-950 text-[10px]">
+                  <Badge variant="outline" className="border-blue-500/30 bg-blue-500/10 text-blue-500 text-[10px]">
                     Local Style Ref
                   </Badge>
                 )}
@@ -1075,7 +1101,7 @@ export function FrameGrid({
 
             <CardHeader className="p-4 pb-2 space-y-1">
                 <div className="flex justify-between items-start">
-                  <div className="text-xs font-bold text-neutral-950 uppercase tracking-tighter">Frame {frame.frameNumber}</div>
+                  <div className="text-xs font-bold text-foreground uppercase tracking-tighter">Frame {frame.frameNumber}</div>
                   <div className="flex gap-1">
                     <Tooltip>
                       <TooltipTrigger
@@ -1083,7 +1109,7 @@ export function FrameGrid({
                           <Button
                             variant="ghost"
                             size="icon"
-                            className="h-6 w-6 text-neutral-950 hover:text-violet-700"
+                            className="h-6 w-6 text-foreground hover:text-primary"
                             onClick={() => setHistoryFrame(frame)}
                           >
                             <History size={14} />
@@ -1097,7 +1123,7 @@ export function FrameGrid({
                     <Button 
                       variant="ghost" 
                       size="icon" 
-                      className="h-6 w-6 text-neutral-950 hover:text-neutral-950"
+                      className="h-6 w-6 text-foreground hover:text-foreground"
                       onClick={() => {
                         const frameToEdit = { ...frame };
                         // Pre-fill generation prompt with visual intent if empty
@@ -1124,7 +1150,7 @@ export function FrameGrid({
                           <Button 
                             variant="ghost" 
                             size="icon" 
-                            className="h-6 w-6 text-neutral-950 hover:text-blue-700"
+                            className="h-6 w-6 text-foreground hover:text-primary"
                             disabled={isGenerating}
                             aria-busy={isGenerating}
                             onClick={() => {
@@ -1143,7 +1169,7 @@ export function FrameGrid({
                     <Button 
                       variant="ghost" 
                       size="icon" 
-                      className="h-6 w-6 text-neutral-950 hover:text-red-600"
+                      className="h-6 w-6 text-foreground hover:text-destructive"
                       disabled={deletingFrameId === frame.id}
                       aria-busy={deletingFrameId === frame.id}
                       onClick={() => handleDeleteFrame(frame.id)}
@@ -1152,22 +1178,22 @@ export function FrameGrid({
                     </Button>
                   </div>
                 </div>
-              <h4 className="font-semibold text-sm line-clamp-1 text-neutral-950" title={frame.visualIntent}>{frame.visualIntent}</h4>
+              <h4 className="font-semibold text-sm line-clamp-1 text-foreground" title={frame.visualIntent}>{frame.visualIntent}</h4>
             </CardHeader>
 
             <CardContent className="p-4 pt-0">
               <ExpandableText text={frame.narratedText} />
               
-              <div className="flex items-center justify-end mt-2 pt-3 border-t border-neutral-100">
+              <div className="flex items-center justify-end mt-2 pt-3 border-t border-border">
                 <div className="flex items-center gap-1.5">
                   {frame.status === 'generated' ? (
-                    <CheckCircle2 size={14} className="text-green-500" />
+                    <CheckCircle2 size={14} className="text-emerald-500" />
                   ) : frame.status === 'skipped' ? (
-                    <Circle size={14} className="text-red-300" />
+                    <Circle size={14} className="text-red-400" />
                   ) : (
-                    <Circle size={14} className="text-neutral-300" />
+                    <Circle size={14} className="text-muted-foreground/30" />
                   )}
-                  <span className="text-[10px] uppercase font-bold text-neutral-950 tracking-wider">{frame.status}</span>
+                  <span className="text-[10px] uppercase font-bold text-foreground tracking-wider">{frame.status}</span>
                 </div>
               </div>
             </CardContent>
@@ -1247,17 +1273,17 @@ export function FrameGrid({
               {/* --- Section: Content --- */}
               <div className="space-y-4">
                 <div className="flex items-center gap-2 mb-1 px-1">
-                  <Edit3 size={16} className="text-violet-600" />
-                  <h4 className="text-xs font-bold uppercase tracking-widest text-neutral-950">Scene Context</h4>
+                  <Edit3 size={16} className="text-primary" />
+                  <h4 className="text-xs font-bold uppercase tracking-widest text-foreground">Scene Context</h4>
                 </div>
 
                 <div className="space-y-2">
-                  <Label className="text-[10px] uppercase text-neutral-500 font-bold">Scene Context (Visual Intent)</Label>
+                  <Label className="text-[10px] uppercase text-muted-foreground font-bold">Scene Context (Visual Intent)</Label>
                   <Textarea 
                     value={cleanSceneContext(editingFrame.generationPrompt) || editingFrame.visualIntent} 
                     onChange={(e) => setEditingFrame({ ...editingFrame, generationPrompt: e.target.value })}
                     placeholder="Describe the scene context. e.g. 'Snowy Pyrenees Mountains with ski tracks.'"
-                    className="min-h-[120px] font-medium text-sm rounded-xl border-neutral-200 focus:ring-violet-500"
+                    className="min-h-[120px] font-medium text-sm rounded-xl border-border bg-background focus:ring-primary"
                   />
                   <p className="text-[10px] text-neutral-400 italic">
                     This text describes the specific figurative elements of this frame.
@@ -1266,19 +1292,19 @@ export function FrameGrid({
               </div>
 
               {/* --- Section: Visual Reference --- */}
-              <div className="p-4 rounded-2xl bg-neutral-50 border border-neutral-100 space-y-4">
+              <div className="p-4 rounded-2xl bg-muted/30 border border-border space-y-4">
                 <div className="flex items-center gap-2 mb-1">
-                  <Palette size={16} className="text-violet-600" />
-                  <h4 className="text-xs font-bold uppercase tracking-widest text-neutral-950">Visual Reference</h4>
+                  <Palette size={16} className="text-primary" />
+                  <h4 className="text-xs font-bold uppercase tracking-widest text-foreground">Visual Reference</h4>
                 </div>
                 
                 <div className="space-y-2">
-                  <Label className="text-[10px] uppercase text-neutral-500 font-bold">Style Category</Label>
+                  <Label className="text-[10px] uppercase text-muted-foreground font-bold">Style Category</Label>
                   <Select 
                     value={editingFrame.localStyleReferenceId || 'none'} 
                     onValueChange={(v) => setEditingFrame({ ...editingFrame, localStyleReferenceId: v })}
                   >
-                    <SelectTrigger className="w-full bg-white">
+                    <SelectTrigger className="w-full bg-background border-border text-foreground">
                       <SelectValue placeholder="Select a style...">
                         {(value) =>
                           frameStyleOverrideLabel(
@@ -1297,56 +1323,56 @@ export function FrameGrid({
                 </div>
 
                 <div className="space-y-3">
-                  <Label className="text-[10px] uppercase text-neutral-500 font-bold">Local Images (Layout Reference)</Label>
-                  <div className="flex flex-wrap gap-2">
-                    {editingFrame.localStyleImageUrls?.map((url, idx) => (
-                      <div key={idx} className="relative group w-16 h-16 rounded-xl overflow-hidden border border-neutral-200 shadow-sm">
-                        <img src={url} className="w-full h-full object-cover" />
-                        <button 
-                          onClick={() => {
-                            const updated = editingFrame.localStyleImageUrls?.filter((_, i) => i !== idx);
-                            setEditingFrame({ ...editingFrame, localStyleImageUrls: updated });
-                          }}
-                          className="absolute inset-0 bg-red-500/80 opacity-0 group-hover:opacity-100 flex items-center justify-center text-white transition-opacity"
-                        >
-                          <Trash2 size={14} />
-                        </button>
-                      </div>
-                    ))}
-                    <label className="w-16 h-16 flex flex-col items-center justify-center border-2 border-dashed border-neutral-200 rounded-xl cursor-pointer hover:border-violet-500 hover:bg-violet-50 transition-all">
-                      <UploadIcon size={18} className="text-neutral-400" />
-                      <input type="file" multiple accept="image/*" className="hidden" onChange={handleLocalStyleUpload} />
-                    </label>
-                  </div>
+                  <Label className="text-[10px] uppercase text-muted-foreground font-bold">Local Images (Layout Reference)</Label>
+                    <div className="flex flex-wrap gap-2">
+                      {editingFrame.localStyleImageUrls?.map((url, idx) => (
+                        <div key={idx} className="relative group w-16 h-16 rounded-xl overflow-hidden border border-border shadow-sm">
+                          <img src={url} className="w-full h-full object-cover" />
+                          <button 
+                            onClick={() => {
+                              const updated = editingFrame.localStyleImageUrls?.filter((_, i) => i !== idx);
+                              setEditingFrame({ ...editingFrame, localStyleImageUrls: updated });
+                            }}
+                            className="absolute inset-0 bg-destructive/80 opacity-0 group-hover:opacity-100 flex items-center justify-center text-destructive-foreground transition-opacity"
+                          >
+                            <Trash2 size={14} />
+                          </button>
+                        </div>
+                      ))}
+                      <label className="w-16 h-16 flex flex-col items-center justify-center border-2 border-dashed border-border rounded-xl cursor-pointer hover:border-primary hover:bg-primary/5 transition-all">
+                        <UploadIcon size={18} className="text-muted-foreground" />
+                        <input type="file" multiple accept="image/*" className="hidden" onChange={handleLocalStyleUpload} />
+                      </label>
+                    </div>
                 </div>
               </div>
 
               {/* --- Section: Advanced (Collapsible) --- */}
-              <details className="group border border-neutral-200 rounded-2xl overflow-hidden [&_summary::-webkit-details-marker]:hidden">
-                <summary className="flex items-center justify-between px-4 py-3 bg-neutral-50/50 cursor-pointer select-none text-xs font-bold uppercase tracking-widest text-neutral-950 hover:bg-neutral-100/50">
+              <details className="group border border-border rounded-2xl overflow-hidden [&_summary::-webkit-details-marker]:hidden">
+                <summary className="flex items-center justify-between px-4 py-3 bg-muted/30 cursor-pointer select-none text-xs font-bold uppercase tracking-widest text-foreground hover:bg-muted/50">
                   <div className="flex items-center gap-2">
-                    <Sparkles size={14} className="text-violet-600" />
+                    <Sparkles size={14} className="text-primary" />
                     <span>Advanced Generation Overrides</span>
                   </div>
-                  <ChevronDown size={14} className="group-open:rotate-180 transition-transform text-neutral-400" />
+                  <ChevronDown size={14} className="group-open:rotate-180 transition-transform text-muted-foreground" />
                 </summary>
-                <div className="p-4 space-y-4 border-t border-neutral-200 bg-white">
+                <div className="p-4 space-y-4 border-t border-border bg-card">
                   <div className="space-y-2">
-                    <Label className="text-[10px] uppercase text-neutral-500 font-bold">System Instructions Override</Label>
+                    <Label className="text-[10px] uppercase text-muted-foreground font-bold">System Instructions Override</Label>
                     <Textarea
                       value={editingFrame.systemInstructionsOverride ?? ""}
                       onChange={(e) => setEditingFrame({ ...editingFrame, systemInstructionsOverride: e.target.value })}
                       placeholder="Leave empty to remove this instruction entirely for this frame."
-                      className="min-h-[80px] font-mono text-[11px] bg-neutral-50"
+                      className="min-h-[80px] font-mono text-[11px] bg-background border-border"
                     />
                   </div>
                   <div className="space-y-2">
-                    <Label className="text-[10px] uppercase text-neutral-500 font-bold">Master Style Aesthetic Override</Label>
+                    <Label className="text-[10px] uppercase text-muted-foreground font-bold">Master Style Aesthetic Override</Label>
                     <Textarea
                       value={editingFrame.masterStyleOverride ?? ""}
                       onChange={(e) => setEditingFrame({ ...editingFrame, masterStyleOverride: e.target.value })}
                       placeholder="Leave empty to remove this instruction entirely for this frame."
-                      className="min-h-[100px] font-mono text-[11px] bg-neutral-50"
+                      className="min-h-[100px] font-mono text-[11px] bg-background border-border"
                     />
                   </div>
                 </div>
@@ -1389,7 +1415,7 @@ export function FrameGrid({
                   <Loader2 className="h-8 w-8 animate-spin text-neutral-400" />
                 </div>
               ) : historyGenerations.length === 0 ? (
-                <div className="rounded-xl border border-neutral-200 bg-white p-6 text-center shadow-sm dark:border-white/10 dark:bg-neutral-900">
+                <div className="rounded-xl border border-border bg-card p-6 text-center shadow-sm">
                   <p className="text-sm text-neutral-600 dark:text-neutral-300">
                     No saved generations yet. New runs will appear here. If you already have an image from before this
                     feature, you can import it once.
@@ -1433,7 +1459,7 @@ export function FrameGrid({
                         )}
                       </div>
 
-                      <div className="relative aspect-video w-full overflow-hidden rounded-xl border border-neutral-200 bg-white dark:border-white/10">
+                      <div className="relative aspect-video w-full overflow-hidden rounded-xl border border-border bg-background">
                         <img
                           src={selectedGen.downloadUrl}
                           alt=""
@@ -1468,7 +1494,7 @@ export function FrameGrid({
                         </div>
                       </div>
 
-                      <div className="rounded-xl border border-neutral-200 bg-white p-3 dark:border-white/10 dark:bg-neutral-900">
+                      <div className="rounded-xl border border-border bg-card p-3">
                         <p className="mb-2 text-[10px] font-bold uppercase text-neutral-500">Thumbnails</p>
                         <div className="flex gap-2 overflow-x-auto pb-1">
                           {historyGenerations.map((g, idx) => (

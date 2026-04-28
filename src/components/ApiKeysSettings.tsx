@@ -152,23 +152,23 @@ export function ApiKeysSettings() {
   return (
     <div className="max-w-3xl space-y-8">
       <div>
-        <h2 className="text-3xl font-bold tracking-tight text-neutral-950">API Keys</h2>
-        <p className="text-sm text-neutral-950 mt-2 leading-relaxed">
-          Las claves se guardan en <span className="font-medium">localStorage</span> de este
+        <h2 className="text-3xl font-bold tracking-tight text-foreground">API Keys</h2>
+        <p className="text-sm text-muted-foreground mt-2 leading-relaxed">
+          Las claves se guardan en <span className="font-medium text-foreground">localStorage</span> de este
           navegador. No se envían a Firebase. Para producción, usa variables de entorno en el build
           (Gemini) o un backend seguro.
         </p>
       </div>
 
-      <Card className="border-gray-200 shadow-sm rounded-2xl overflow-hidden">
-        <CardHeader className="border-b border-gray-50 bg-gray-50/30">
+      <Card className="border-border shadow-sm rounded-2xl overflow-hidden bg-card">
+        <CardHeader className="border-b border-border bg-muted/30">
           <div className="flex items-center gap-3">
-            <div className="p-2 bg-white rounded-lg shadow-sm border border-gray-100">
-              <Sparkles className="h-5 w-5 text-neutral-950" />
+            <div className="p-2 bg-background rounded-lg shadow-sm border border-border">
+              <Sparkles className="h-5 w-5 text-foreground" />
             </div>
             <div>
-              <CardTitle className="text-lg">Proveedores por defecto</CardTitle>
-              <CardDescription>
+              <CardTitle className="text-lg text-foreground">Proveedores por defecto</CardTitle>
+              <CardDescription className="text-muted-foreground">
                 Elige qué API usa el parseo de guion y el refinado de prompts, y cuál genera las imágenes.
               </CardDescription>
             </div>
@@ -207,22 +207,22 @@ export function ApiKeysSettings() {
               </Select>
             </div>
           </div>
-          <p className="text-xs text-amber-800/90 bg-amber-50 border border-amber-200/80 rounded-lg px-3 py-2">
+          <p className="text-xs text-amber-500 bg-amber-500/10 border border-amber-500/20 rounded-lg px-3 py-2">
             DALL·E 3 solo recibe texto: las referencias de estilo por imagen de la biblioteca se
             resumen en el prompt; Gemini puede usar imágenes de referencia adjuntas.
           </p>
         </CardContent>
       </Card>
 
-      <Card className="border-gray-200 shadow-sm rounded-2xl overflow-hidden">
-        <CardHeader className="border-b border-gray-50 bg-gray-50/30">
+      <Card className="border-border shadow-sm rounded-2xl overflow-hidden bg-card">
+        <CardHeader className="border-b border-border bg-muted/30">
           <div className="flex items-center gap-3">
-            <div className="p-2 bg-white rounded-lg shadow-sm border border-gray-100">
-              <Sparkles className="h-5 w-5 text-neutral-950" />
+            <div className="p-2 bg-background rounded-lg shadow-sm border border-border">
+              <Sparkles className="h-5 w-5 text-foreground" />
             </div>
             <div>
-              <CardTitle className="text-lg">Modelos</CardTitle>
-              <CardDescription>
+              <CardTitle className="text-lg text-foreground">Modelos</CardTitle>
+              <CardDescription className="text-muted-foreground">
                 Se aplican según el proveedor activo (Gemini u OpenAI). La calidad &quot;estándar&quot; / &quot;alta
                 fidelidad&quot; en frames usa el modelo de imagen Gemini correspondiente.
               </CardDescription>
@@ -231,7 +231,7 @@ export function ApiKeysSettings() {
         </CardHeader>
         <CardContent className="pt-6 space-y-8">
           <div className="space-y-4">
-            <p className="text-xs font-semibold uppercase tracking-wide text-neutral-950">Google Gemini</p>
+            <p className="text-xs font-semibold uppercase tracking-wide text-foreground">Google Gemini</p>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               <div className="space-y-2">
                 <Label>Texto (parseo y refinado)</Label>
@@ -281,8 +281,8 @@ export function ApiKeysSettings() {
             </div>
           </div>
 
-          <div className="space-y-4 border-t border-gray-100 pt-8">
-            <p className="text-xs font-semibold uppercase tracking-wide text-neutral-950">OpenAI</p>
+          <div className="space-y-4 border-t border-border pt-8">
+            <p className="text-xs font-semibold uppercase tracking-wide text-foreground">OpenAI</p>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="space-y-2">
                 <Label>Texto (parseo y refinado)</Label>
@@ -319,18 +319,18 @@ export function ApiKeysSettings() {
         </CardContent>
       </Card>
 
-      <Card className="border-gray-200 shadow-sm rounded-2xl overflow-hidden">
-        <CardHeader className="border-b border-gray-50 bg-gray-50/30">
+      <Card className="border-border shadow-sm rounded-2xl overflow-hidden bg-card">
+        <CardHeader className="border-b border-border bg-muted/30">
           <div className="flex items-center justify-between gap-4 flex-wrap">
             <div className="flex items-center gap-3">
-              <div className="p-2 bg-white rounded-lg shadow-sm border border-gray-100">
-                <KeyRound className="h-5 w-5 text-neutral-950" />
+              <div className="p-2 bg-background rounded-lg shadow-sm border border-border">
+                <KeyRound className="h-5 w-5 text-foreground" />
               </div>
               <div>
-                <CardTitle className="text-lg">Google Gemini</CardTitle>
-                <CardDescription>
+                <CardTitle className="text-lg text-foreground">Google Gemini</CardTitle>
+                <CardDescription className="text-muted-foreground">
                   Necesaria si Gemini es proveedor de texto o de imágenes, o como respaldo desde{' '}
-                  <code className="text-xs bg-gray-100 px-1 rounded">GEMINI_API_KEY</code> en build.
+                  <code className="text-xs bg-muted px-1 rounded text-foreground">GEMINI_API_KEY</code> en build.
                 </CardDescription>
               </div>
             </div>
@@ -338,7 +338,7 @@ export function ApiKeysSettings() {
               href="https://aistudio.google.com/apikey"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1 text-sm font-medium text-neutral-950 hover:underline"
+              className="inline-flex items-center gap-1 text-sm font-medium text-foreground hover:underline"
             >
               Obtener clave <ExternalLink className="h-4 w-4" />
             </a>
@@ -347,7 +347,7 @@ export function ApiKeysSettings() {
         <CardContent className="pt-6 space-y-4">
           <div className="flex items-center gap-2">
             <span
-              className={`text-xs font-semibold uppercase tracking-wide ${meta.geminiConfigured ? 'text-green-700' : 'text-neutral-950'}`}
+              className={`text-xs font-semibold uppercase tracking-wide ${meta.geminiConfigured ? 'text-emerald-500' : 'text-muted-foreground'}`}
             >
               {meta.geminiConfigured ? 'Clave configurada' : 'Sin clave en el navegador'}
             </span>
@@ -375,16 +375,16 @@ export function ApiKeysSettings() {
         </CardContent>
       </Card>
 
-      <Card className="border-gray-200 shadow-sm rounded-2xl overflow-hidden">
-        <CardHeader className="border-b border-gray-50 bg-gray-50/30">
+      <Card className="border-border shadow-sm rounded-2xl overflow-hidden bg-card">
+        <CardHeader className="border-b border-border bg-muted/30">
           <div className="flex items-center justify-between gap-4 flex-wrap">
             <div className="flex items-center gap-3">
-              <div className="p-2 bg-white rounded-lg shadow-sm border border-gray-100">
-                <KeyRound className="h-5 w-5 text-neutral-950" />
+              <div className="p-2 bg-background rounded-lg shadow-sm border border-border">
+                <KeyRound className="h-5 w-5 text-foreground" />
               </div>
               <div>
-                <CardTitle className="text-lg">OpenAI (ChatGPT / DALL·E)</CardTitle>
-                <CardDescription>
+                <CardTitle className="text-lg text-foreground">OpenAI (ChatGPT / DALL·E)</CardTitle>
+                <CardDescription className="text-muted-foreground">
                   Necesaria si usas OpenAI para texto o para imágenes (DALL·E 3).
                 </CardDescription>
               </div>
@@ -393,7 +393,7 @@ export function ApiKeysSettings() {
               href="https://platform.openai.com/api-keys"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1 text-sm font-medium text-neutral-950 hover:underline"
+              className="inline-flex items-center gap-1 text-sm font-medium text-foreground hover:underline"
             >
               Obtener clave <ExternalLink className="h-4 w-4" />
             </a>
@@ -402,7 +402,7 @@ export function ApiKeysSettings() {
         <CardContent className="pt-6 space-y-4">
           <div className="flex items-center gap-2">
             <span
-              className={`text-xs font-semibold uppercase tracking-wide ${meta.openaiConfigured ? 'text-green-700' : 'text-neutral-950'}`}
+              className={`text-xs font-semibold uppercase tracking-wide ${meta.openaiConfigured ? 'text-emerald-500' : 'text-muted-foreground'}`}
             >
               {meta.openaiConfigured ? 'Clave configurada' : 'Sin clave en el navegador'}
             </span>

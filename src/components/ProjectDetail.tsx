@@ -46,19 +46,19 @@ interface ProjectDetailProps {
 }
 
 const GLASS_SHELL =
-  'rounded-2xl border border-white/50 bg-white/45 shadow-[0_8px_32px_rgba(31,38,135,0.08),inset_0_1px_0_0_rgba(255,255,255,0.55)] backdrop-blur-2xl backdrop-saturate-150 dark:border-white/10 dark:bg-white/5 dark:shadow-[0_8px_32px_rgba(0,0,0,0.35),inset_0_1px_0_0_rgba(255,255,255,0.06)]';
+  'rounded-2xl border border-border bg-card/45 shadow-xl backdrop-blur-2xl backdrop-saturate-150';
 
 const GLASS_CARD =
-  'rounded-2xl border border-white/45 bg-white/35 shadow-[0_8px_32px_rgba(31,38,135,0.06),inset_0_1px_0_0_rgba(255,255,255,0.5)] backdrop-blur-xl backdrop-saturate-150 dark:border-white/10 dark:bg-white/[0.06] dark:shadow-[0_8px_32px_rgba(0,0,0,0.25)]';
+  'rounded-2xl border border-border bg-card/35 shadow-lg backdrop-blur-xl backdrop-saturate-150';
 
 const GLASS_INPUT =
-  'border-white/40 bg-white/50 shadow-inner backdrop-blur-sm dark:border-white/10 dark:bg-white/5';
+  'border-border bg-background shadow-inner backdrop-blur-sm';
 
 const tabTriggerClass =
-  'relative flex min-h-11 items-center justify-center gap-2 rounded-xl border border-transparent px-4 py-3 text-sm font-medium text-neutral-950/70 shadow-none transition-all after:hidden hover:bg-white/30 hover:text-neutral-950 dark:hover:bg-white/10 data-active:border-white/40 data-active:bg-white/65 data-active:text-neutral-950 data-active:shadow-[0_4px_16px_rgba(0,0,0,0.08)] dark:data-active:border-white/15 dark:data-active:bg-white/15 [&_svg]:opacity-70 data-active:[&_svg]:opacity-100';
+  'relative flex min-h-11 items-center justify-center gap-2 rounded-xl border border-transparent px-4 py-3 text-sm font-medium text-muted-foreground shadow-none transition-all after:hidden hover:bg-muted/50 hover:text-foreground data-active:border-border data-active:bg-card data-active:text-foreground data-active:shadow-md [&_svg]:opacity-70 data-active:[&_svg]:opacity-100';
 
 const SCRIPT_TOOLBAR =
-  'rounded-2xl border border-neutral-200 bg-white/90 shadow-[0_8px_32px_rgba(31,38,135,0.07),inset_0_1px_0_0_rgba(255,255,255,0.5)] backdrop-blur-2xl backdrop-saturate-150 dark:border-white/10 dark:bg-white/[0.06]';
+  'rounded-2xl border border-border bg-card/90 shadow-xl backdrop-blur-2xl backdrop-saturate-150';
 
 interface StudioHeaderProps {
   projectName: string;
@@ -103,7 +103,7 @@ function StudioHeader({ projectName, projectId, onBack, headerActions }: StudioH
             variant="ghost"
             size="icon"
             onClick={onBack}
-            className="mt-1 shrink-0 rounded-full text-neutral-950 hover:bg-black/5 dark:hover:bg-white/10"
+            className="mt-1 shrink-0 rounded-full text-foreground hover:bg-muted"
           >
             <ArrowLeft size={22} />
           </Button>
@@ -121,18 +121,18 @@ function StudioHeader({ projectName, projectId, onBack, headerActions }: StudioH
                     setName(projectName);
                   }
                 }}
-                className="h-9 w-full max-w-md border-none bg-transparent p-0 text-2xl font-bold tracking-tight text-neutral-950 focus-visible:ring-0 sm:text-3xl"
+                className="h-9 w-full max-w-md border-none bg-transparent p-0 text-2xl font-bold tracking-tight text-foreground focus-visible:ring-0 sm:text-3xl"
               />
             ) : (
               <h1 
                 onClick={() => setIsEditing(true)}
-                className="group flex cursor-pointer items-center gap-2 truncate text-2xl font-bold tracking-tight text-neutral-950 hover:text-violet-600 sm:text-3xl"
+                className="group flex cursor-pointer items-center gap-2 truncate text-2xl font-bold tracking-tight text-foreground hover:text-primary sm:text-3xl"
               >
                 {projectName}
                 <Sparkles size={16} className="opacity-0 transition-opacity group-hover:opacity-100" />
               </h1>
             )}
-            <p className="text-[10px] font-bold uppercase tracking-[0.25em] text-neutral-950/40">Production Studio</p>
+            <p className="text-[10px] font-bold uppercase tracking-[0.25em] text-muted-foreground">Production Studio</p>
           </div>
         </div>
         {headerActions != null ? (
@@ -172,7 +172,7 @@ function FrameGridColumnsPopover({
           type="button"
           variant="ghost"
           size="icon"
-          className="shrink-0 rounded-full text-neutral-950 hover:bg-white/20 hover:text-neutral-950 dark:hover:bg-white/10"
+          className="shrink-0 rounded-full text-foreground hover:bg-muted"
           aria-label="Grid columns"
         >
           <Settings size={20} aria-hidden />
@@ -224,7 +224,7 @@ function ScriptStyleToolbar({ onSave, onParseScript, isParsing, isSaving }: Scri
         onClick={onSave}
         disabled={isSaving || isParsing}
         aria-busy={isSaving}
-        className="h-11 min-w-[10.5rem] rounded-xl border-neutral-300 bg-white px-5 text-neutral-950 shadow-sm hover:bg-neutral-50"
+        className="h-11 min-w-[10.5rem] rounded-xl border-border bg-card px-5 text-foreground shadow-sm hover:bg-muted"
       >
         {isSaving ? (
           <>
@@ -241,7 +241,7 @@ function ScriptStyleToolbar({ onSave, onParseScript, isParsing, isSaving }: Scri
         onClick={onParseScript}
         disabled={isParsing || isSaving}
         aria-busy={isParsing}
-        className="h-11 min-w-[10.5rem] rounded-xl border border-neutral-300 bg-neutral-100 px-6 text-neutral-950 shadow-[0_4px_20px_rgba(0,0,0,0.08)] hover:bg-neutral-200"
+        className="h-11 min-w-[10.5rem] rounded-xl border border-border bg-primary text-primary-foreground px-6 shadow-xl hover:opacity-90"
       >
         {isParsing ? (
           <>
@@ -448,16 +448,16 @@ export function ProjectDetail({ projectId, onBack }: ProjectDetailProps) {
           <div className="flex flex-col gap-8">
             <Card className={cn('group/card relative overflow-hidden', GLASS_CARD)}>
               <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-violet-400/25 to-transparent" aria-hidden />
-              <CardHeader className="space-y-1 border-b border-white/25 pb-5 pt-6 dark:border-white/10">
+              <CardHeader className="space-y-1 border-b border-border pb-5 pt-6">
                 <div className="flex items-start gap-4">
-                  <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-white/40 bg-white/50 shadow-sm backdrop-blur-md dark:border-white/10 dark:bg-white/10">
-                    <FileText size={20} className="text-violet-600 dark:text-violet-400" />
+                  <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-border bg-muted shadow-sm backdrop-blur-md">
+                    <FileText size={20} className="text-primary" />
                   </div>
                   <div className="min-w-0 space-y-1">
-                    <CardTitle className="text-lg font-semibold tracking-tight text-neutral-950">Raw script input</CardTitle>
-                    <CardDescription className="text-sm leading-relaxed text-neutral-950">
+                    <CardTitle className="text-lg font-semibold tracking-tight text-foreground">Raw script input</CardTitle>
+                    <CardDescription className="text-sm leading-relaxed text-muted-foreground">
                       Paste your script table (Fr, On Screen Visual, Script…), then run{' '}
-                      <span className="font-medium">Parse Script</span> to create frames.
+                      <span className="font-medium text-foreground">Parse Script</span> to create frames.
                     </CardDescription>
                   </div>
                 </div>
