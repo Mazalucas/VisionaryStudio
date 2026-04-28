@@ -13,6 +13,8 @@ import { Checkbox } from '@/components/ui/checkbox';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Sparkles, Trash2, Eye, Download, CheckCircle2, Circle, RefreshCw, Image as ImageIcon, Edit3, Upload as UploadIcon, RotateCcw, Clapperboard, Loader2, History, ChevronLeft, ChevronRight, Plus, Palette, ChevronDown } from 'lucide-react';
 import { toast } from 'sonner';
+import JSZip from 'jszip';
+import { saveAs } from 'file-saver';
 
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter, DialogDescription } from '@/components/ui/dialog';
 import { Label } from '@/components/ui/label';
@@ -231,12 +233,44 @@ export function FrameGrid({
     return `${formattedNumber}_${cleanProjectName}.png`;
   };
 
+  const sanitizeImageBlob = async (blob: Blob): Promise<Blob> => {
+    return new Promise((resolve, reject) => {
+      const img = new Image();
+      const objectUrl = URL.createObjectURL(blob);
+      
+      img.onload = () => {
+        URL.revokeObjectURL(objectUrl);
+        const canvas = document.createElement('canvas');
+        canvas.width = img.width;
+        canvas.height = img.height;
+        const ctx = canvas.getContext('2d');
+        if (!ctx) {
+          reject(new Error('Failed to get canvas context'));
+          return;
+        }
+        ctx.drawImage(img, 0, 0);
+        canvas.toBlob((cleanBlob) => {
+          if (cleanBlob) resolve(cleanBlob);
+          else reject(new Error('Failed to create clean blob from canvas'));
+        }, 'image/png');
+      };
+      
+      img.onerror = (e) => {
+        URL.revokeObjectURL(objectUrl);
+        reject(e);
+      };
+      
+      img.src = objectUrl;
+    });
+  };
+
   const downloadImageAsBlob = async (url: string, filename: string) => {
     try {
       const response = await fetch(url);
       if (!response.ok) throw new Error('Network response was not ok');
-      const blob = await response.blob();
-      const objectUrl = URL.createObjectURL(blob);
+      const rawBlob = await response.blob();
+      const cleanBlob = await sanitizeImageBlob(rawBlob);
+      const objectUrl = URL.createObjectURL(cleanBlob);
       const link = document.createElement('a');
       link.href = objectUrl;
       link.download = filename;
@@ -697,10 +731,16 @@ export function FrameGrid({
     }
 
     setIsDownloadingMultiple(true);
-    const progressToastId = toast.loading(`Downloading ${framesWithImages.length} images...`);
+    const progressToastId = toast.loading(`Preparing ZIP with ${framesWithImages.length} images...`);
 
     try {
+      const zip = new JSZip();
+      let count = 0;
+
       for (const frame of framesWithImages) {
+        count++;
+        toast.loading(`Adding image ${count} of ${framesWithImages.length} to ZIP...`, { id: progressToastId });
+        
         let url = frame.generatedImageUrl;
         if (frame.isChunked) {
           const chunksSnap = await getDocs(query(
@@ -711,16 +751,32 @@ export function FrameGrid({
         }
         
         if (url) {
-          const extUrl = url;
-          await downloadImageAsBlob(extUrl, getFrameFilename(frame.frameNumber));
-          // Small delay to prevent browser from blocking multiple quick downloads
-          await new Promise(resolve => setTimeout(resolve, 300));
+          const filename = getFrameFilename(frame.frameNumber);
+          
+          try {
+            const response = await fetch(url);
+            if (!response.ok) throw new Error('Network response was not ok');
+            const rawBlob = await response.blob();
+            const cleanBlob = await sanitizeImageBlob(rawBlob);
+            zip.file(filename, cleanBlob);
+          } catch (fetchError) {
+            console.error(`Failed to fetch image for frame ${frame.frameNumber}:`, fetchError);
+            // If fetch fails (CORS etc), we might want to skip or handle it
+            // For now, let's continue with other images if one fails
+          }
         }
       }
-      toast.success('Downloads started successfully!', { id: progressToastId });
+
+      toast.loading('Generating ZIP file...', { id: progressToastId });
+      const content = await zip.generateAsync({ type: 'blob' });
+      
+      const cleanProjectName = projectName ? projectName.replace(/[^a-zA-Z0-9_\-]/g, '_').toUpperCase() : 'PROJECT';
+      saveAs(content, `${cleanProjectName}_IMAGES.zip`);
+      
+      toast.success('ZIP download started!', { id: progressToastId });
     } catch (error) {
       console.error("Multiple download error:", error);
-      toast.error('Ocurrió un error al descargar algunas imágenes.', { id: progressToastId });
+      toast.error('Ocurrió un error al crear el archivo ZIP.', { id: progressToastId });
     } finally {
       setIsDownloadingMultiple(false);
     }
@@ -1166,12 +1222,10 @@ export function FrameGrid({
              <Button 
                variant="outline" 
                className="rounded-full bg-white/10 border-white/20 text-white hover:bg-white/20 backdrop-blur-md px-8"
-               onClick={() => {
+               onClick={async () => {
                  if (previewImage) {
-                   const link = document.createElement('a');
-                   link.href = previewImage.url;
-                   link.download = `${previewImage.title.replace(/\s+/g, '_')}.png`;
-                   link.click();
+                   const filename = `${previewImage.title.replace(/\s+/g, '_')}.png`;
+                   await downloadImageAsBlob(previewImage.url, filename);
                  }
                }}
              >

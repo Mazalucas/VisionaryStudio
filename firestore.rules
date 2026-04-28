@@ -128,6 +128,10 @@ service cloud.firestore {
       }
     }
 
+    match /activity_logs/{logId} {
+      allow read, write: if isAuthenticated();
+    }
+
     match /{path=**} {
       allow read, write: if false;
     }
