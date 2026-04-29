@@ -99,6 +99,9 @@ npm -v
 
 - **Qué es:** el cliente web usa la configuración del SDK web definida en **`firebase-applet-config.json`** (identificadores del proyecto, `apiKey` web, dominios, bucket de Storage, etc.). La plantilla **`firebase-applet-config.example.json`** muestra la forma del archivo; los valores reales solo deben existir en **`firebase-applet-config.json`**, que está listado en **`.gitignore`** y no debe subirse al repositorio.
 - **Dónde obtener los valores:** [Firebase Console](https://console.firebase.google.com/) → tu proyecto → ⚙️ Ajustes del proyecto → **Tus aplicaciones** → aplicación web → fragmento de configuración del SDK.
+
+**GitHub Actions — secreto `FIREBASE_APPLET_CONFIG_JSON`:** debe ser **JSON estricto**, igual de forma que [`firebase-applet-config.example.json`](firebase-applet-config.example.json): todas las claves entre comillas dobles `"`, sin `const`, sin comentarios y sin comillas simples en claves/valores. La consola a veces muestra JavaScript (`apiKey: '…'`); transpón el objeto a JSON válido antes de pegarlo en el secreto. El workflow valida el JSON con Node antes del build; si falla, corrige el contenido del secreto.
+
 - **Seguridad:** la capa que protege datos y ficheros son las reglas en **`firestore.rules`** y **`storage.rules`** (además de restricciones en Consola para la API key web). Despliega reglas cuando las cambies (ver scripts más abajo). El correo de contacto / marca para OAuth (Google Sign-In) se configura en **Firebase Console → Authentication → Settings**, no en este repositorio.
 
 #### Repositorio público: si una configuración ya se publicó por error

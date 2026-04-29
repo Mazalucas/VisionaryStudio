@@ -11,7 +11,7 @@ El servidor local escucha en **http://localhost:3000** (puerto configurable con 
 
 ## Secretos en GitHub Actions (build en la nube)
 
-Para que **`npm run build`** funcione en los workflows (GitHub Pages y releases de escritorio), define el secreto del repositorio **`FIREBASE_APPLET_CONFIG_JSON`**: pega el objeto JSON de configuración del **SDK web** tal como lo muestra Firebase Console → Ajustes del proyecto → Tus aplicaciones → tu app web (mismo contenido que usarías en `firebase-applet-config.json` local). Sin este secreto, el job fallará al generar ese archivo antes del build.
+Para que **`npm run build`** funcione en los workflows (GitHub Pages y releases de escritorio), define el secreto del repositorio **`FIREBASE_APPLET_CONFIG_JSON`**: pega el objeto JSON de configuración del **SDK web** (mismo contenido que `firebase-applet-config.json` local). Debe ser **JSON válido** (claves entre `"`), no JavaScript suelto de la consola. Sin este secreto, el job fallará al validar o generar ese archivo antes del build.
 
 **Ruta:** GitHub → Settings → Secrets and variables → Actions → New repository secret.
 
