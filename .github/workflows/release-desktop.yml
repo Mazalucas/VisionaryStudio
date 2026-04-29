@@ -29,6 +29,16 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Write Firebase web app config
+        env:
+          FIREBASE_APPLET_CONFIG_JSON: ${{ secrets.FIREBASE_APPLET_CONFIG_JSON }}
+        run: |
+          if [ -z "${FIREBASE_APPLET_CONFIG_JSON}" ]; then
+            echo "::error::Repository secret FIREBASE_APPLET_CONFIG_JSON is required (paste the Firebase web app SDK JSON from Firebase Console)."
+            exit 1
+          fi
+          printf '%s' "$FIREBASE_APPLET_CONFIG_JSON" > firebase-applet-config.json
+
       - name: Build
         run: npm run build
 
@@ -57,6 +67,16 @@ jobs:
 
       - name: Install dependencies
         run: npm ci
+
+      - name: Write Firebase web app config
+        env:
+          FIREBASE_APPLET_CONFIG_JSON: ${{ secrets.FIREBASE_APPLET_CONFIG_JSON }}
+        run: |
+          if [ -z "${FIREBASE_APPLET_CONFIG_JSON}" ]; then
+            echo "::error::Repository secret FIREBASE_APPLET_CONFIG_JSON is required (paste the Firebase web app SDK JSON from Firebase Console)."
+            exit 1
+          fi
+          printf '%s' "$FIREBASE_APPLET_CONFIG_JSON" > firebase-applet-config.json
 
       - name: Build
         run: npm run build

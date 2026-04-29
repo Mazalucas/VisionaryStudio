@@ -9,6 +9,12 @@ Este repositorio publica paquetes listos para descomprimir y ejecutar sin instal
 
 El servidor local escucha en **http://localhost:3000** (puerto configurable con la variable de entorno `PORT`).
 
+## Secretos en GitHub Actions (build en la nube)
+
+Para que **`npm run build`** funcione en los workflows (GitHub Pages y releases de escritorio), define el secreto del repositorio **`FIREBASE_APPLET_CONFIG_JSON`**: pega el objeto JSON de configuración del **SDK web** tal como lo muestra Firebase Console → Ajustes del proyecto → Tus aplicaciones → tu app web (mismo contenido que usarías en `firebase-applet-config.json` local). Sin este secreto, el job fallará al generar ese archivo antes del build.
+
+**Ruta:** GitHub → Settings → Secrets and variables → Actions → New repository secret.
+
 ## Publicar un release en GitHub
 
 1. Asegúrate de que `main` (o la rama que uses) tenga el código que quieres publicar y que el build pase en local (`npm run build`).
@@ -31,7 +37,7 @@ El servidor local escucha en **http://localhost:3000** (puerto configurable con 
 
 Si defines en el repositorio el secreto **`GEMINI_API_KEY`**, la build del release inyectará esa clave en el bundle (Vite la embebe en tiempo de compilación). Si no existe el secreto, la build sigue siendo válida y los usuarios pueden configurar claves desde la aplicación según el flujo habitual del proyecto.
 
-**Ruta:** GitHub → Settings → Secrets and variables → Actions → New repository secret.
+**Ruta:** GitHub → Settings → Secrets and variables → Actions → New repository secret (el mismo apartado donde configuras `FIREBASE_APPLET_CONFIG_JSON`).
 
 ## Empaquetado en local
 

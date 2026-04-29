@@ -1,6 +1,10 @@
 # Visionary Studio
 
-Aplicación web (Vite + React + TypeScript) para trabajar con proyectos creativos usando modelos de **Google Gemini** y **OpenAI**, con datos en **Firebase** (Firestore y Storage).
+Aplicación web (Vite + React + TypeScript) para trabajar con proyectos creativos usando modelos de **Google Gemini** y **OpenAI**.
+
+Esta aplicación está pensada para usar [**Firebase**](https://firebase.google.com/): **Authentication** (p. ej. inicio de sesión con Google), base de datos en tiempo real con **Cloud Firestore**, y ficheros en **Cloud Storage**. El acceso a datos está acotado por **`firestore.rules`** y **`storage.rules`** (desplegadas con Firebase CLI).
+
+**Privacidad en el repositorio:** no incluyas en commits API keys de Firebase/Gemini/OpenAI, emails personales ni archivos de configuración con secretos. Los valores reales van en archivos ignorados por Git (véase más abajo) o en secretos del proveedor de CI.
 
 ---
 
@@ -39,9 +43,17 @@ npm -v
    npm install
    ```
 
-3. **Configurar variables de entorno** (ver siguiente sección).
+3. **Configurar Firebase para el cliente web:** copia la plantilla y rellénala con el objeto de configuración de tu app web en Firebase Console → Ajustes del proyecto → Tus aplicaciones.
 
-4. **Arrancar en desarrollo:**
+   ```bash
+   cp firebase-applet-config.example.json firebase-applet-config.json
+   ```
+
+   Edita **`firebase-applet-config.json`** con tus valores (este archivo **no** se sube a Git).
+
+4. **Configurar variables de entorno** para Gemini (ver siguiente sección).
+
+5. **Arrancar en desarrollo:**
 
    ```bash
    npm run dev
@@ -83,11 +95,16 @@ npm -v
 - **Dónde obtenerla:** [OpenAI API keys](https://platform.openai.com/api-keys).
 - **Cómo configurarla:** solo desde la **interfaz de la aplicación** (sección de claves / ajustes). Se guarda en el **almacenamiento local del navegador** (`localStorage`), no en `.env.local`.
 
-### Firebase (proyecto, Firestore, Storage)
+### Firebase (Auth, Firestore, Storage)
 
-- **Qué es:** el cliente web usa la configuración pública de Firebase definida en **`firebase-applet-config.json`** (proyecto, `apiKey` web, buckets, etc.).
-- **Uso:** no hace falta tocar este archivo para un desarrollo normal si ya apunta al proyecto correcto.
-- **Seguridad:** las reglas de acceso a datos están en **`firestore.rules`** y **`storage.rules`**. Despliega reglas cuando las cambies (ver scripts más abajo).
+- **Qué es:** el cliente web usa la configuración del SDK web definida en **`firebase-applet-config.json`** (identificadores del proyecto, `apiKey` web, dominios, bucket de Storage, etc.). La plantilla **`firebase-applet-config.example.json`** muestra la forma del archivo; los valores reales solo deben existir en **`firebase-applet-config.json`**, que está listado en **`.gitignore`** y no debe subirse al repositorio.
+- **Dónde obtener los valores:** [Firebase Console](https://console.firebase.google.com/) → tu proyecto → ⚙️ Ajustes del proyecto → **Tus aplicaciones** → aplicación web → fragmento de configuración del SDK.
+- **Seguridad:** la capa que protege datos y ficheros son las reglas en **`firestore.rules`** y **`storage.rules`** (además de restricciones en Consola para la API key web). Despliega reglas cuando las cambies (ver scripts más abajo). El correo de contacto / marca para OAuth (Google Sign-In) se configura en **Firebase Console → Authentication → Settings**, no en este repositorio.
+
+#### Repositorio público: si una configuración ya se publicó por error
+
+- Restringe la API key web en [Google Cloud Console](https://console.cloud.google.com/apis/credentials) (referrers HTTP y/o aplicaciones Android/iOS) y considera **rotar** credenciales si tu política lo exige.
+- Eliminar un archivo sensible del último commit **no** borra el historial público de Git. Para borrar datos sensibles de commits antiguos puedes usar herramientas como [**git filter-repo**](https://github.com/newren/git-filter-repo) o BFG Repo-Cleaner y luego un push forzado coordinado con quien clone el repo.
 
 ---
 
