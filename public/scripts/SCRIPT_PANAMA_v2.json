@@ -1,0 +1,170 @@
+[
+  {
+    "frame": "03",
+    "visuals": "A tropical landscape in Panama during the rainy season with lush green vegetation and dark rain clouds over a distant forest. No text, no signs, no written words.",
+    "script": "Its shape is long and skinny, kind of like an S, and it’s wrapped in tropical weather. Think hot, humid, and rainy, especially from May to November. Don’t forget your umbrella!",
+    "text_overlays": "",
+    "comments": "",
+    "style": "Natural Landscapes"
+  },
+  {
+    "frame": "04",
+    "visuals": "A massive cargo ship passing through the locks of the Panama Canal, with tropical hills in the background and mechanical mules on the side. No text, no signs, no written words.",
+    "script": "But wait, there’s more… The legendary Panama Canal cuts across the country! It’s like a giant watery highway where ships cruise from the Atlantic to the Pacific in record time. The canal earns money by charging ships tolls to use this shortcut between oceans. Amazing!",
+    "text_overlays": "Panama Canal",
+    "comments": "",
+    "style": "Natural Landscapes"
+  },
+  {
+    "frame": "06",
+    "visuals": "A powerful harpy eagle with its distinct grey crest feathers perched on a high branch in the Panamanian rainforest. No text, no signs, no written words.",
+    "script": "Now for my favorite part: Panama’s mighty mascot! Say hello to the harpy eagle, a national bird with cool feathers and strong talons. It’s rare and rules the rainforest skies.",
+    "text_overlays": "Harpy eagle",
+    "comments": "",
+    "style": "Animals"
+  },
+  {
+    "frame": "07.1",
+    "visuals": "The Amador Causeway in Panama bustling with people and inhabitants. Open space, not closed. No text, no signs, no written words.",
+    "script": "Speaking of rainforests, meet some wild locals: slow-moving sloths.",
+    "text_overlays": "Sloth",
+    "comments": "",
+    "style": "Crowded Place"
+  },
+  {
+    "frame": "07.2",
+    "visuals": "A tiny, bright yellow Panamanian golden frog resting on a green leaf. No text, no signs, no written words.",
+    "script": "Bright golden frogs.",
+    "text_overlays": "Golden frog",
+    "comments": "",
+    "style": "Cities"
+  },
+  {
+    "frame": "07.3",
+    "visuals": "A stealthy jaguar prowling through the shadows of a protected Panamanian nature reserve. No text, no signs, no written words.",
+    "script": "And even stealthy jaguars in protected reserves. It’s a creature celebration!",
+    "text_overlays": "Jaguar",
+    "comments": "",
+    "style": "Cities"
+  },
+  {
+    "frame": "08",
+    "visuals": "The modern skyline of Panama City with its unique skyscrapers reflecting the tropical sun near the coast. No text, no signs, no written words.",
+    "script": "Now… what’s the capital city, you ask? Drumroll, please: it’s Panama City! Picture tall skyscrapers next to lush rainforest. It’s nature and tech, side by side.",
+    "text_overlays": "Panama City",
+    "comments": "",
+    "style": "Cities"
+  },
+  {
+    "frame": "09.1",
+    "visuals": "A colorful port scene in Colón, Panama, with Caribbean-style buildings and large cargo ships. No text, no signs, no written words.",
+    "script": "Other cities to check out? There’s Colón, a Caribbean port city.",
+    "text_overlays": "Colón",
+    "comments": "",
+    "style": "Cities"
+  },
+  {
+    "frame": "09.2",
+    "visuals": "Lush green coffee plantations in the highlands near David, Panama, with mountains in the background. No text, no signs, no written words.",
+    "script": "And David, near the mountains in a coffee-growing region. Each one has its own local flavor!",
+    "text_overlays": "David",
+    "comments": "",
+    "style": "Crowded Place"
+  },
+  {
+    "frame": "10",
+    "visuals": "The Amador Causeway in Panama bustling with people and inhabitants. Open space, not closed. No text, no signs, no written words.",
+    "script": "Want to chat with locals? Most people speak Spanish, but English and Indigenous languages like Ngäbere are also common. It’s a language party!",
+    "text_overlays": "",
+    "comments": "",
+    "style": "Crowded Place"
+  },
+  {
+    "frame": "11",
+    "visuals": "The Amador Causeway in Panama bustling with people and inhabitants. Open space, not closed. No text, no signs, no written words.",
+    "script": "Panama’s home to around 4 million people! That’s about the same number of folks as in Los Angeles County. They all fit in one US region!",
+    "text_overlays": "",
+    "comments": "",
+    "style": "Crowded Place"
+  },
+  {
+    "frame": "12",
+    "visuals": "A steaming bowl of traditional Panamanian sancocho (chicken soup) with corn and yam, served on a rustic wooden table. No text, no signs, no written words.",
+    "script": "Feeling hungry? Let’s dig into sancocho, a delicious chicken soup perfect for sharing on holidays. It’s warm, hearty, and full of veggies. Yum!",
+    "text_overlays": "Sancocho",
+    "comments": "",
+    "style": "Food"
+  },
+  {
+    "frame": "13",
+    "visuals": "A breakfast plate in Panama with golden, crispy hojaldres (fried bread) and a cup of local coffee. No text, no signs, no written words.",
+    "script": "For breakfast, try hojaldres: crispy fried bread treats often served with coffee or cheese. One bite, and you’ll be hooked.",
+    "text_overlays": "Hojaldres",
+    "comments": "",
+    "style": "Food"
+  },
+  {
+    "frame": "14.1",
+    "visuals": "Vast banana plantations in the Panamanian countryside with workers harvesting bunches of fruit. No text, no signs, no written words.",
+    "script": "And out in the countryside, farmers grow bananas.",
+    "text_overlays": "Bananas",
+    "comments": "",
+    "style": "People"
+  },
+  {
+    "frame": "14.2",
+    "visuals": "A sunny field of ripe pineapples in Panama with a farmer inspecting the crops. No text, no signs, no written words.",
+    "script": "Pineapples, and other tasty crops under the sun. These are grown for export, but they taste sweetest in their homeland.",
+    "text_overlays": "Pineapples",
+    "comments": "",
+    "style": "Food"
+  },
+  {
+    "frame": "15",
+    "visuals": "A Panamanian woman wearing a magnificent, hand-embroidered white pollera dress with intricate lace and gold jewelry. No text, no signs, no written words.",
+    "script": "Let’s dance now! Ever seen a pollera? It’s a colorful traditional dress worn at cultural parades, often paired with tamborito music: drums, claps, and joyful voices. Some dresses take up to a year to make by hand!",
+    "text_overlays": "Pollera",
+    "comments": "",
+    "style": "People"
+  },
+  {
+    "frame": "16",
+    "visuals": "Dancers in Panama performing the traditional tamborito with drums and rhythmic movements in a festive setting. No text, no signs, no written words.",
+    "script": "Tamborito dancing is full of energy and rhythm. You’ll see it on festival days when everyone’s moving to the beat and celebrating together.",
+    "text_overlays": "Tamborito",
+    "comments": "",
+    "style": "Objects, instruments, things"
+  },
+  {
+    "frame": "17",
+    "visuals": "A soccer ball on a soccer field. No text, no signs, no written words.",
+    "script": "Guess what made Panama cheer in 2018? Their men’s soccer team played in their first-ever World Cup! Fans were bursting with pride, win or lose.",
+    "text_overlays": "2018 World Cup",
+    "comments": "",
+    "style": "Objects, instruments, things"
+  },
+  {
+    "frame": "18.1",
+    "visuals": "Panamanian soccer player Román Torres celebrating a goal with his national team jersey. No text, no signs, no written words.",
+    "script": "And get this: Panama’s got sports stars too! Like Román Torres, the powerful soccer player who helped earn their spot in 2018.",
+    "text_overlays": "Román Torres",
+    "comments": "",
+    "style": "People"
+  },
+  {
+    "frame": "18.2",
+    "visuals": "Baseball legend Mariano Rivera in his uniform, preparing to pitch on a professional baseball field. No text, no signs, no written words.",
+    "script": "Or Mariano Rivera, the baseball legend now honored in the US Hall of Fame.",
+    "text_overlays": "Mariano Rivera",
+    "comments": "",
+    "style": "People"
+  },
+  {
+    "frame": "19",
+    "visuals": "A breathtaking view from the top of Volcán Barú in Panama at dawn, where both the Atlantic and Pacific oceans are visible on the horizon. No text, no signs, no written words.",
+    "script": "Here's a sunrise surprise: in certain spots in Panama, you can see the sun rise over the Pacific and set over the Atlantic.\nOn the same day! Mind = blown.",
+    "text_overlays": "Volcán Barú",
+    "comments": "",
+    "style": "Objects, instruments, things"
+  }
+]

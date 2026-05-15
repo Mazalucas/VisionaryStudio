@@ -1,0 +1,135 @@
+[
+  {
+    "frame": "03",
+    "visuals": "A traditional desert town in Saudi Arabia with a visible heat shimmer effect over the sandy streets and palm trees. No text, no signs, no written words.",
+    "script": "Now for the climate—some Saudi towns see summer temps over 43°C—like a hair dryer outside! It’s mostly desert, with super hot summers and winters that are way milder, like someone gently turning down the oven.",
+    "text_overlays": "",
+    "style": "Natural Landscapes"
+  },
+  {
+    "frame": "04",
+    "visuals": "The vast, golden sand dunes of the Rub' al Khali (Empty Quarter) in Saudi Arabia, stretching to the horizon under a bright sun. No text, no signs, no written words.",
+    "script": "And get this: Saudi Arabia is home to the Rub' al Khali, or the “Empty Quarter.” It’s the biggest sandy desert on Earth, full of golden dunes that look like waves frozen in time.",
+    "text_overlays": "Rub' al Khali",
+    "style": "Natural Landscapes"
+  },
+  {
+    "frame": "05",
+    "visuals": "Vibrant, colorful coral reefs in the clear turquoise waters of the Red Sea near the Saudi Arabian coast, with tropical fish. No text, no signs, no written words.",
+    "script": "But wait—there’s more than just sand! Along the coast of the Red Sea, you’ll find bright coral reefs, colorful fish, and water so clear you’d think someone cleaned it just before you arrived.",
+    "text_overlays": "Red Sea Coral Reefs",
+    "style": "Food"
+  },
+  {
+    "frame": "07.1",
+    "visuals": "The historical Diriyah in Saudi Arabia bustling with people and inhabitants. Open space, not closed. No text, no signs, no written words.",
+    "script": "Speaking of symbols, the mighty dromedary camel is common here.",
+    "text_overlays": "Dromedary camel",
+    "style": "Animals"
+  },
+  {
+    "frame": "07.2",
+    "visuals": "An elegant white Arabian oryx with long, straight horns standing in a rocky Saudi Arabian landscape. No text, no signs, no written words.",
+    "script": "And the elegant Arabian oryx.",
+    "text_overlays": "Arabian oryx",
+    "style": "Cities"
+  },
+  {
+    "frame": "07.3",
+    "visuals": "A rare and elusive Arabian leopard prowling through the rugged mountains of Saudi Arabia. No text, no signs, no written words.",
+    "script": "The rare Arabian leopard also hides in the mountains—good luck spotting that shy kitty!",
+    "text_overlays": "Arabian leopard",
+    "style": "Cities"
+  },
+  {
+    "frame": "08",
+    "visuals": "The modern Riyadh skyline in Saudi Arabia at night, with the illuminated Kingdom Centre tower rising above the city. No text, no signs, no written words.",
+    "script": "The capital city of Saudi Arabia is Riyadh. It’s packed with skyscrapers and shiny buildings that rise up from the desert like building blocks of light.",
+    "text_overlays": "Riyadh",
+    "style": "Cities"
+  },
+  {
+    "frame": "09.1",
+    "visuals": "The Jeddah waterfront in Saudi Arabia, featuring modern outdoor sculptures and a view of the Red Sea. No text, no signs, no written words.",
+    "script": "Over by the sea, there’s Jeddah, famous for outdoor sculpture parks and modern art.",
+    "text_overlays": "Jeddah",
+    "style": "Natural Landscapes"
+  },
+  {
+    "frame": "09.2",
+    "visuals": "The Grand Mosque in Mecca, Saudi Arabia, with its massive courtyard and the central Kaaba. No text, no signs, no written words.",
+    "script": "And then there’s Mecca, which fills up big time during special religious visits each year.",
+    "text_overlays": "Mecca",
+    "style": "Crowded Place"
+  },
+  {
+    "frame": "10",
+    "visuals": "The historical Diriyah in Saudi Arabia bustling with people and inhabitants. Open space, not closed. No text, no signs, no written words.",
+    "script": "People mainly speak Arabic here, but you can find some English speakers also.",
+    "text_overlays": "Arabic, English",
+    "style": "Crowded Place"
+  },
+  {
+    "frame": "11",
+    "visuals": "The historical Diriyah in Saudi Arabia bustling with people and inhabitants. Open space, not closed. No text, no signs, no written words.",
+    "script": "About 35 million people live in Saudi Arabia—that’s like the entire city of Tokio packed into one huge sandbox.",
+    "text_overlays": "35 million",
+    "style": "Crowded Place"
+  },
+  {
+    "frame": "12",
+    "visuals": "A large traditional platter of Saudi Arabian kabsa (spiced rice and lamb), garnished with roasted nuts and raisins. No text, no signs, no written words.",
+    "script": "Hungry yet? Kabsa is a popular rice and meat dish often served at family feasts. It’s pure comfort food! Yum!",
+    "text_overlays": "Kabsa",
+    "style": "Food"
+  },
+  {
+    "frame": "13",
+    "visuals": "A tray with a variety of fresh Saudi Arabian dates served alongside a traditional golden dallah coffee pot and small cups. No text, no signs, no written words.",
+    "script": "And when guests visit, it’s tradition to offer sweet dates and strong Arabic coffee. It’s not just a snack—it’s a way to say “welcome!”",
+    "text_overlays": "Arabic coffee",
+    "style": "Food"
+  },
+  {
+    "frame": "14",
+    "visuals": "Saudi Arabian families in new traditional clothes celebrating Eid, with children holding bags of sweets and gifts. No text, no signs, no written words.",
+    "script": "For big celebrations like Eid, people dress up in new clothes, share candies, and spend time with family.",
+    "text_overlays": "Eid",
+    "style": "People"
+  },
+  {
+    "frame": "15",
+    "visuals": "Men in traditional thobes and ghutras performing the Ardha sword dance in Saudi Arabia, with rhythmic drums in the background. No text, no signs, no written words.",
+    "script": "The Ardha is a traditional dance where men line up and swing swords while drums beat loud and proud. It’s a cultural show and a celebration rolled into one!",
+    "text_overlays": "Ardah",
+    "style": "People"
+  },
+  {
+    "frame": "16",
+    "visuals": "A soccer ball on a soccer field. No text, no signs, no written words.",
+    "script": "In 1994, Saudi Arabia beat Belgium in their first World Cup appearance. Their fans still cheer for that epic win.",
+    "text_overlays": "1994 World Cup",
+    "style": "Objects, instruments, things"
+  },
+  {
+    "frame": "17",
+    "visuals": "A soccer ball on a soccer field. No text, no signs, no written words.",
+    "script": "And in 2022? Salem Al-Dawsari scored a famous World Cup goal in a win over Argentina. This triumph was celebrated nationwide!",
+    "text_overlays": "Salem Al-Dawsari",
+    "style": "Objects, instruments, things"
+  },
+  {
+    "frame": "18",
+    "visuals": "A lush green golf course in Saudi Arabia with a professional golfer preparing a shot during an international tournament. No text, no signs, no written words.",
+    "script": "Golf is getting big too, with Yasir Al-Rumayyan helping plan cool new sports and international golf events.",
+    "text_overlays": "Sports Expansion",
+    "style": "Objects, instruments, things"
+  },
+  {
+    "frame": "19",
+    "visuals": "The historical Diriyah in Saudi Arabia bustling with people and inhabitants. Open space, not closed. No text, no signs, no written words.",
+    "script": "Here’s something you won’t believe—some towns still use ancient wind-catching towers to cool buildings without any electricity. Nature’s AC, folks!",
+    "text_overlays": "Wind Towers",
+    "style": "Crowded Place"
+  }
+]

@@ -1,0 +1,162 @@
+[
+  {
+    "frame": "03.1",
+    "visuals": "The snowy peaks of the Ecuadorian Andes mountains under a clear blue sky. No text, no signs, no written words.",
+    "script": "Talk about a country with variety! One minute you're hiking in the Andes Mountains.",
+    "text_overlays": "Andes Mountains",
+    "comments": "",
+    "style": "Natural Landscapes"
+  },
+  {
+    "frame": "03.2",
+    "visuals": "A lush, green tropical rainforest in the Ecuadorian Amazon with a winding river. No text, no signs, no written words.",
+    "script": "Next you're exploring thick Amazon jungles.",
+    "text_overlays": "Amazon Rainforest",
+    "comments": "",
+    "style": "Natural Landscapes"
+  },
+  {
+    "frame": "03.3",
+    "visuals": "A sunny Pacific coastline in Ecuador with sandy beaches and tropical plants. No text, no signs, no written words.",
+    "script": "Chilling on tropical beaches, or wandering dry forests.",
+    "text_overlays": "Tropical Coast",
+    "comments": "",
+    "style": "Natural Landscapes"
+  },
+  {
+    "frame": "04",
+    "visuals": "The majestic Cotopaxi volcano in Ecuador, a snow-capped cone rising from the green Andean mountains. No text, no signs, no written words.",
+    "script": "Did someone say volcanoes? Yes! Cotopaxi, one of the world’s tallest active volcanoes, rises up from the Andes like a massive cone of fire and ice.",
+    "text_overlays": "Cotopaxi",
+    "comments": "",
+    "style": "Natural Landscapes"
+  },
+  {
+    "frame": "06",
+    "visuals": "A massive Andean condor with wings spread wide soaring above the mountain peaks of Ecuador. No text, no signs, no written words.",
+    "script": "Soaring over it all is the Andean condor, Ecuador’s mighty national bird; and a symbol of freedom and strength.",
+    "text_overlays": "Andean condor",
+    "comments": "",
+    "style": "Animals"
+  },
+  {
+    "frame": "07.1",
+    "visuals": "A giant Galápagos tortoise slowly walking through the dry grass of the Galápagos Islands, Ecuador. No text, no signs, no written words.",
+    "script": "Ecuador is home to the giant Galápagos tortoise; slow, wise, and ancient.",
+    "text_overlays": "Galápagos tortoise",
+    "comments": "",
+    "style": "Cities"
+  },
+  {
+    "frame": "07.2",
+    "visuals": "A blue-footed booby bird with bright blue feet standing on a volcanic rock in the Galápagos Islands, Ecuador. No text, no signs, no written words.",
+    "script": "Plus, the silly-looking blue-footed booby that happily struts on the Galápagos Islands.",
+    "text_overlays": "Blue-footed booby",
+    "comments": "",
+    "style": "Cities"
+  },
+  {
+    "frame": "08",
+    "visuals": "The historic Old Town of Quito, Ecuador, with its colonial church towers and colorful buildings nestled in the Andean mountains. No text, no signs, no written words.",
+    "script": "The capital is Quito! Can you believe it sits high in the mountains, with volcano views AND one of the best-preserved old towns in Latin America?",
+    "text_overlays": "Quito",
+    "comments": "",
+    "style": "Cities"
+  },
+  {
+    "frame": "09",
+    "visuals": "The Malecón 2000 riverfront in Guayaquil, Ecuador, with its parks, sculptures, and the wide Guayas River in the background. No text, no signs, no written words.",
+    "script": "Over in Guayaquil, kids can play on a giant iguana-shaped playground near the riverfront.",
+    "text_overlays": "Guayaquil",
+    "comments": "",
+    "style": "Crowded Place"
+  },
+  {
+    "frame": "10",
+    "visuals": "A quiet, historic street in Cuenca, Ecuador, with white colonial buildings and a large blue-domed cathedral in the background. No text, no signs, no written words.",
+    "script": "And Cuenca? It’s like walking through a time machine with its neat plazas and churches.",
+    "text_overlays": "Cuenca",
+    "comments": "",
+    "style": "Objects, instruments, things"
+  },
+  {
+    "frame": "11",
+    "visuals": "The historic center of Quito in Ecuador bustling with people and inhabitants. Open space, not closed. No text, no signs, no written words.",
+    "script": "Spanish is the main language, but you'll also hear Quechua and other Indigenous tongues all across Ecuador.",
+    "text_overlays": "",
+    "comments": "",
+    "style": "Crowded Place"
+  },
+  {
+    "frame": "12",
+    "visuals": "The Malecon 2000 in Guayaquil in Ecuador bustling with people and inhabitants. Open space, not closed. No text, no signs, no written words.",
+    "script": "Ecuador has about 18 million people. That’s about half the number of folks in Mexico City and Los Angeles combined!",
+    "text_overlays": "",
+    "comments": "",
+    "style": "Crowded Place"
+  },
+  {
+    "frame": "13",
+    "visuals": "A plate of authentic Ecuadorian llapingachos (cheesy potato patties) served with an egg, avocado, and a side salad. No text, no signs, no written words.",
+    "script": "Food? Try llapingachos, yummy potato patties stuffed with cheese. Fried to perfection and served with a side of salad or sausage.",
+    "text_overlays": "Llapingachos",
+    "comments": "",
+    "style": "Food"
+  },
+  {
+    "frame": "14",
+    "visuals": "A traditional festive platter in Ecuador featuring a roasted guinea pig (cuy) served with potatoes and corn. No text, no signs, no written words.",
+    "script": "Want something exciting? In the highlands, people enjoy roasted guinea pig as a special treat.",
+    "text_overlays": "Cuy",
+    "comments": "",
+    "style": "People"
+  },
+  {
+    "frame": "15",
+    "visuals": "A ceramic mug of steaming canelazo (warm cinnamon drink) on a wooden table with the Ecuadorian mountains in the background. No text, no signs, no written words.",
+    "script": "If you're chilly in the mountains, sip canelazo, a warm cinnamon drink shared at festivals and family parties.",
+    "text_overlays": "Canelazo",
+    "comments": "",
+    "style": "Food"
+  },
+  {
+    "frame": "16",
+    "visuals": "Cotopaxi National Park in Ecuador bustling with people and inhabitants. Open space, not closed. No text, no signs, no written words.",
+    "script": "Speaking of parties, don’t miss Inti Raymi! It’s a traditional sun festival with music, bright costumes, and dancing everywhere.",
+    "text_overlays": "Inti Raymi",
+    "comments": "",
+    "style": "Crowded Place"
+  },
+  {
+    "frame": "17",
+    "visuals": "A soccer ball on a soccer field. No text, no signs, no written words.",
+    "script": "Ecuador made it to the Round of 16 in the 2006 World Cup and the fans went wild, jumping and singing across the country.",
+    "text_overlays": "",
+    "comments": "",
+    "style": "Objects, instruments, things"
+  },
+  {
+    "frame": "18.1",
+    "visuals": "A soccer ball on a soccer field. No text, no signs, no written words.",
+    "script": "Antonio Valencia rocked soccer at Manchester United.",
+    "text_overlays": "Antonio Valencia",
+    "comments": "",
+    "style": "Objects, instruments, things"
+  },
+  {
+    "frame": "18.2",
+    "visuals": "Ecuadorian cyclist Richard Carapaz celebrating with a gold medal while on his bicycle. No text, no signs, no written words.",
+    "script": "While Richard Carapaz zoomed to Olympic gold in cycling.",
+    "text_overlays": "Richard Carapaz",
+    "comments": "",
+    "style": "Objects, instruments, things"
+  },
+  {
+    "frame": "19",
+    "visuals": "A pristine Ecuadorian rainforest river with lush greenery and a sign that says 'Derechos de la Naturaleza' (Rights of Nature). No text, no signs, no written words.",
+    "script": "Ecuador was the first country to give legal rights to nature. That’s like making forests and rivers part of the family!",
+    "text_overlays": "Rights of Nature",
+    "comments": "",
+    "style": "Natural Landscapes"
+  }
+]

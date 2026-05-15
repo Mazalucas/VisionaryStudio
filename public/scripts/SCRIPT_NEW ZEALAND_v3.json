@@ -1,0 +1,154 @@
+[
+  {
+    "frame": "03.1",
+    "visuals": "The snow-capped Southern Alps of New Zealand under a clear blue sky. No text, no signs, no written words.",
+    "script": "Now, imagine a land where you can hike mountains, peek into glowing caves.",
+    "text_overlays": "Southern Alps",
+    "comments": "",
+    "style": "Natural Landscapes"
+  },
+  {
+    "frame": "03.2",
+    "visuals": "Steaming geothermal hot springs in Rotorua, New Zealand, with bubbling mud and sulfur vents. No text, no signs, no written words.",
+    "script": "Smell sulfur from hot springs, and maybe even spot a volcano.",
+    "text_overlays": "Hot Springs",
+    "comments": "",
+    "style": "Natural Landscapes"
+  },
+  {
+    "frame": "03.3",
+    "visuals": "Lush, green temperate rainforest in New Zealand with tall ferns and mossy trees. No text, no signs, no written words.",
+    "script": "That’s New Zealand for you! It’s like nature’s all-you-can-eat buffet: lava, lakes, and even lush rainforests.",
+    "text_overlays": "Rainforest",
+    "comments": "",
+    "style": "Food"
+  },
+  {
+    "frame": "04",
+    "visuals": "The interior of the Waitomo Caves in New Zealand with thousands of tiny, bright blue glowworms lighting up the dark limestone ceiling. No text, no signs, no written words.",
+    "script": "Have you ever seen a glowing cave? The Waitomo Caves are filled with thousands of tiny glowworms that light up the dark!",
+    "text_overlays": "Waitomo Caves",
+    "comments": "",
+    "style": "Natural Landscapes"
+  },
+  {
+    "frame": "06",
+    "visuals": "A soccer ball on a soccer field. No text, no signs, no written words.",
+    "script": "Another symbol that Kiwis (that’s what people from New Zealand are nicknamed) are super proud of is the silver fern. It’s on sports jerseys and everywhere else, from team logos to souvenirs. Nature meets national pride!",
+    "text_overlays": "silver fern",
+    "comments": "",
+    "style": "People"
+  },
+  {
+    "frame": "07",
+    "visuals": "A fuzzy, flightless brown kiwi bird foraging on the forest floor in New Zealand at night. No text, no signs, no written words.",
+    "script": "Meet the Kiwi! It is a fuzzy, flightless bird that only lives here. And here’s a wild fact: there are no snakes in the wild here. None. Zero. Zip! Even Indiana Jones would approve.",
+    "text_overlays": "Kiwi Bird",
+    "comments": "",
+    "style": "Animals"
+  },
+  {
+    "frame": "08",
+    "visuals": "A hilly street in Wellington, New Zealand, with colorful houses, street art, and the windy harbor in the background. No text, no signs, no written words.",
+    "script": "Now hold onto your hat, it might blow away! The capital is Wellington, which is known for two things: being super artsy and super windy! You’ll spot cool cafés, street art, and hilly neighborhoods that almost wave back at you.",
+    "text_overlays": "Wellington",
+    "comments": "",
+    "style": "Cities"
+  },
+  {
+    "frame": "09",
+    "visuals": "The Auckland skyline in New Zealand with the iconic Sky Tower and the busy Waitematā Harbour filled with sailboats. No text, no signs, no written words.",
+    "script": "Auckland is the largest city and is built on a field of 50 volcanoes. It is also known as the City of Sails because of all its boats!",
+    "text_overlays": "Auckland",
+    "comments": "",
+    "style": "Cities"
+  },
+  {
+    "frame": "10",
+    "visuals": "The open grounds of Waitangi in New Zealand bustling with people and inhabitants. Open space, not closed. No text, no signs, no written words.",
+    "script": "Most people speak English, but there’s another important language spoken too: Māori, the language of the Indigenous Māori people. It’s more than a language, it’s the heartbeat of Māori culture, with stories, songs, and traditions passed down for generations.",
+    "text_overlays": "",
+    "comments": "",
+    "style": "Crowded Place"
+  },
+  {
+    "frame": "11",
+    "visuals": "The waterfront of Auckland in New Zealand bustling with people and inhabitants. Open space, not closed. No text, no signs, no written words.",
+    "script": "So, how many people live here? Around 5 million. That’s about the same as the state of Colorado! Now imagine having 5 million best friends… would you ever run out of people to play with? Nope!",
+    "text_overlays": "",
+    "comments": "",
+    "style": "Crowded Place"
+  },
+  {
+    "frame": "12",
+    "visuals": "Lush green rolling hills in New Zealand with a massive herd of white sheep grazing under a sunny sky. No text, no signs, no written words.",
+    "script": "And believe it or not… there are more sheep than people in New Zealand. Seriously! Imagine a giant game of hide-and-seek with woolly friends. Baa-rilliant!",
+    "text_overlays": "Sheep",
+    "comments": "",
+    "style": "People"
+  },
+  {
+    "frame": "13",
+    "visuals": "A table spread with fresh New Zealand produce: green kiwifruit, crisp apples, and various creamy dairy products like cheese and butter. No text, no signs, no written words.",
+    "script": "Let’s talk food! New Zealand grows fresh apples, fuzzy kiwis (the fruit, not the bird!), juicy grapes, and makes loads of creamy dairy products, from milk to cheese to yum-tastic ice cream. Moooh yeah!",
+    "text_overlays": "",
+    "comments": "",
+    "style": "Animals"
+  },
+  {
+    "frame": "14",
+    "visuals": "A seaside picnic in New Zealand with a parcel of fish and chips, a meat pie, and a cone of hokey pokey ice cream. No text, no signs, no written words.",
+    "script": "If you visit, don’t miss out on tasty bites like meat pies, fish and chips (best near the beach!), and something called hokey pokey ice cream, a crunchy-caramel dream cone!",
+    "text_overlays": "Hokey pokey ice cream",
+    "comments": "",
+    "style": "Food"
+  },
+  {
+    "frame": "15",
+    "visuals": "A soccer ball on a soccer field. No text, no signs, no written words.",
+    "script": "Ready to dance? The haka is a traditional Māori dance. It’s full of stomping, chanting, and fierce moves! You might’ve seen the famous All Blacks rugby team performing it before matches, it’s their way of showing strength and spirit!",
+    "text_overlays": "The haka",
+    "comments": "",
+    "style": "People"
+  },
+  {
+    "frame": "16",
+    "visuals": "Traditional Māori wood carvings and an illustration of a tā moko tattoo displayed in a New Zealand cultural museum. No text, no signs, no written words.",
+    "script": "Māori culture also brings beautiful wood carvings, intricate tattoos called tā moko, and storytelling that brings legends to life.",
+    "text_overlays": "Tā moko",
+    "comments": "",
+    "style": "Objects, instruments, things"
+  },
+  {
+    "frame": "17",
+    "visuals": "A photo of the New Zealand All Blacks rugby team performing the haka on the pitch before a match. No text, no signs, no written words.",
+    "script": "Rugby is HUGE in New Zealand. Picture a country where almost everyone has kicked, tossed, or chased a ball at some point.",
+    "text_overlays": "",
+    "comments": "",
+    "style": "Objects, instruments, things"
+  },
+  {
+    "frame": "18",
+    "visuals": "A mural in a New Zealand street depicting soccer star Chris Wood celebrating a goal in his national team jersey. No text, no signs, no written words.",
+    "script": "Soccer’s loved too, and Chris Wood is one of their top soccer stars, having played in the English Premier League!",
+    "text_overlays": "Chris Wood",
+    "comments": "",
+    "style": "Objects, instruments, things"
+  },
+  {
+    "frame": "19",
+    "visuals": "The picturesque Hobbiton movie set in Matamata, New Zealand, with its small hobbit holes built into rolling green hills. No text, no signs, no written words.",
+    "script": "And movie fans, listen up! The “Lord of the Rings” trilogy was filmed all over New Zealand. Think rolling green hills and epic mountains that look like they’re straight out of a fantasy novel. Because they are!",
+    "text_overlays": "",
+    "comments": "",
+    "style": "Objects, instruments, things"
+  },
+  {
+    "frame": "20",
+    "visuals": "A beautiful coastal landscape in New Zealand with people planting native trees and paddling a traditional waka (canoe) on the water. No text, no signs, no written words.",
+    "script": "New Zealand may be small in size but it's jumbo in heart. Its people care deeply about nature, culture, and being awesome global buddies.",
+    "text_overlays": "",
+    "comments": "",
+    "style": "People"
+  }
+]

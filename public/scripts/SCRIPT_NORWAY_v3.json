@@ -1,0 +1,170 @@
+[
+  {
+    "frame": "03.1",
+    "visuals": "A jagged Norwegian coastline with thousands of small islands and rocky shores. No text, no signs, no written words.",
+    "script": "Norway is a land of long, crinkly coastlines, thousands of islands, and snow-capped mountains.",
+    "text_overlays": "",
+    "comments": "",
+    "style": "Natural Landscapes"
+  },
+  {
+    "frame": "03.2",
+    "visuals": "The snow-capped mountains of Norway under an icy winter sky. No text, no signs, no written words.",
+    "script": "Its winters are icy and dark.",
+    "text_overlays": "",
+    "comments": "",
+    "style": "Natural Landscapes"
+  },
+  {
+    "frame": "03.3",
+    "visuals": "Lush green hills in Norway during a mild summer with wildflowers. No text, no signs, no written words.",
+    "script": "While summers bring mild sunshine and green hills.",
+    "text_overlays": "",
+    "comments": "",
+    "style": "Natural Landscapes"
+  },
+  {
+    "frame": "04",
+    "visuals": "The stunning Geirangerfjord in Norway with its deep blue water, steep green cliffs, and waterfalls. No text, no signs, no written words.",
+    "script": "And get this: Norway is home to some of the most magical landscapes on Earth. Ever heard of a fjord? These are deep, narrow sea inlets surrounded by towering cliffs. The Geirangerfjord is so stunning it looks like a scene from a fantasy movie!",
+    "text_overlays": "Geirangerfjord",
+    "comments": "",
+    "style": "Natural Landscapes"
+  },
+  {
+    "frame": "06.1",
+    "visuals": "The Bryggen wharf in Bergen in Norway bustling with people and inhabitants. Open space, not closed. No text, no signs, no written words.",
+    "script": "Speaking of symbols, Norway picked a tough and majestic animal to represent it: the moose!",
+    "text_overlays": "moose",
+    "comments": "",
+    "style": "Animals"
+  },
+  {
+    "frame": "06.2",
+    "visuals": "A soccer ball on a soccer field. No text, no signs, no written words.",
+    "script": "Add in the bright red fox, and you’ve got quite a forest team.",
+    "text_overlays": "red fox",
+    "comments": "",
+    "style": "Objects, instruments, things"
+  },
+  {
+    "frame": "07",
+    "visuals": "A colorful puffin bird with a painted-looking face perched on a rocky cliff edge in Norway. No text, no signs, no written words.",
+    "script": "But wait, there’s more! Along the coast, look out for the puffin: a bird with a painted-on face and the cutest nest spots in cliffside burrows.",
+    "text_overlays": "Puffin",
+    "comments": "",
+    "style": "Animals"
+  },
+  {
+    "frame": "08",
+    "visuals": "The modern Oslo skyline in Norway with the Viking Ship Museum and the green Vigeland Park. No text, no signs, no written words.",
+    "script": "So, where's the capital? Say hello to Oslo! It’s packed with Viking museums and parks where you might just run into… squirrels, no promises though.",
+    "text_overlays": "Oslo",
+    "comments": "",
+    "style": "Cities"
+  },
+  {
+    "frame": "09",
+    "visuals": "The iconic Bryggen waterfront in Bergen, Norway, with its row of colorful wooden houses and the rain-slicked harbor. No text, no signs, no written words.",
+    "script": "Then there’s Bergen, famous for its rainbow-colored wooden houses and, yep, lots of rain.",
+    "text_overlays": "Bergen",
+    "comments": "",
+    "style": "Crowded Place"
+  },
+  {
+    "frame": "10",
+    "visuals": "A snowy night in Tromsø, Norway, with the vibrant green and purple aurora borealis (Northern Lights) dancing in the sky. No text, no signs, no written words.",
+    "script": "And all the way up in Tromsø? It’s known for the northern lights that appear in the winter sky!",
+    "text_overlays": "Tromsø",
+    "comments": "",
+    "style": "Objects, instruments, things"
+  },
+  {
+    "frame": "11",
+    "visuals": "The Bryggen wharf in Bergen in Norway bustling with people and inhabitants. Open space, not closed. No text, no signs, no written words.",
+    "script": "Norwegian is the main language here, but in some areas, Indigenous Sámi speakers keep their traditions alive with their own words and stories. Isn’t that awesome diversity?",
+    "text_overlays": "",
+    "comments": "",
+    "style": "Crowded Place"
+  },
+  {
+    "frame": "12",
+    "visuals": "The Vigeland Sculpture Park in Oslo in Norway bustling with people and inhabitants. Open space, not closed. No text, no signs, no written words.",
+    "script": "Around 5.5 million people live in Norway. That is about the same as the population of Minnesota!",
+    "text_overlays": "",
+    "comments": "",
+    "style": "Crowded Place"
+  },
+  {
+    "frame": "13.1",
+    "visuals": "A block of traditional Norwegian brunost (brown cheese) on a slice of fresh bread on a wooden table. No text, no signs, no written words.",
+    "script": "Hungry already? Norwegians love brunost, a sweet brown cheese, melted on toast. Yum!",
+    "text_overlays": "brunost",
+    "comments": "",
+    "style": "Food"
+  },
+  {
+    "frame": "13.2",
+    "visuals": "Freshly made Norwegian waffles served with red jam and a dollop of sour cream on a festive plate. No text, no signs, no written words.",
+    "script": "And when they want something sugary, waffles with jam hit the spot.",
+    "text_overlays": "waffles",
+    "comments": "",
+    "style": "Food"
+  },
+  {
+    "frame": "14.1",
+    "visuals": "A traditional Norwegian holiday dish of ribbe (crispy pork belly) served with sides on a decorated table. No text, no signs, no written words.",
+    "script": "At Christmas, locals love crispy pork belly called ribbe.",
+    "text_overlays": "Ribbe",
+    "comments": "",
+    "style": "People"
+  },
+  {
+    "frame": "14.2",
+    "visuals": "A bottle of red julebrus (holiday soda) on a festive table in Norway. No text, no signs, no written words.",
+    "script": "They wash it down with julebrus, a fizzy berry soda made for the holidays!",
+    "text_overlays": "Julebrus",
+    "comments": "",
+    "style": "People"
+  },
+  {
+    "frame": "15",
+    "visuals": "Geirangerfjord in Norway bustling with people and inhabitants. Open space, not closed. No text, no signs, no written words.",
+    "script": "And on May 17, Norway’s National Day turns into a giant party with parades, waffles, and folks wearing bunads, which are beautiful, traditional outfits.",
+    "text_overlays": "National Day",
+    "comments": "",
+    "style": "Crowded Place"
+  },
+  {
+    "frame": "16",
+    "visuals": "A soccer ball on a soccer field. No text, no signs, no written words.",
+    "script": "Now picture this: in 1998, tiny Norway beat mighty Brazil 2–1 in a surprising soccer match. What a moment, and they’re still proud of it!",
+    "text_overlays": "",
+    "comments": "",
+    "style": "Objects, instruments, things"
+  },
+  {
+    "frame": "17.1",
+    "visuals": "Norwegian soccer star Erling Haaland celebrating a goal in his national team jersey. No text, no signs, no written words.",
+    "script": "Norwegians also love skiing, and guess who stands out worldwide? Soccer star Erling Haaland is famous for scoring lots of goals.",
+    "text_overlays": "Erling Haaland",
+    "comments": "",
+    "style": "People"
+  },
+  {
+    "frame": "17.2",
+    "visuals": "Norwegian chess champion Magnus Carlsen sitting at a chess board during an international match. No text, no signs, no written words.",
+    "script": "And Magnus Carlsen became world chess champion as a teen and remains one of the best today!",
+    "text_overlays": "Magnus Carlsen",
+    "comments": "",
+    "style": "People"
+  },
+  {
+    "frame": "18",
+    "visuals": "The Midnight Sun in Norway, hovering just above the horizon over a calm sea at midnight. No text, no signs, no written words.",
+    "script": "Want a fun fact? In parts of Norway, the sun never sets for weeks in the summer. It’s called the Midnight Sun, how cool is that?",
+    "text_overlays": "Midnight Sun",
+    "comments": "",
+    "style": "Objects, instruments, things"
+  }
+]

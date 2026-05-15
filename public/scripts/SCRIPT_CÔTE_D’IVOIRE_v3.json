@@ -1,0 +1,154 @@
+[
+  {
+    "frame": "03",
+    "visuals": "The lush tropical rainforest of Taï National Park in Côte d'Ivoire with tall trees and dense green foliage. No text, no signs, no written words.",
+    "script": "The land here feels like a giant nature park! Tropical forests like Taï National Park, grassy plains where antelopes roam, and rolling hills. The weather stays warm all year, with a rainy season and a dry one to mix things up.",
+    "text_overlays": "Taï National Park",
+    "comments": "",
+    "style": "Natural Landscapes"
+  },
+  {
+    "frame": "04",
+    "visuals": "The majestic Mount Nimba in Côte d'Ivoire surrounded by thick, misty jungle and unique mountain plants. No text, no signs, no written words.",
+    "script": "Now for my favorite natural gem… Mount Nimba! Way out west, this mountain is part of a UNESCO site where rare plants and animals thrive. It’s like a secret jungle lab!",
+    "text_overlays": "Mount Nimba",
+    "comments": "",
+    "style": "Natural Landscapes"
+  },
+  {
+    "frame": "05",
+    "visuals": "Assinie-Mafia beach in CôTe D’Ivoire bustling with people and inhabitants. Open space, not closed. No text, no signs, no written words.",
+    "script": "And speaking of wildlife… meet the country’s most iconic resident: the elephant!\nIt’s actually the national symbol. In fact, the country's name means “Ivory Coast”, because huge numbers of elephants once lived here.",
+    "text_overlays": "The Elephant",
+    "comments": "",
+    "style": "Animals"
+  },
+  {
+    "frame": "06.1",
+    "visuals": "A group of chimpanzees swinging through the green canopy of a Côte d'Ivoire forest. No text, no signs, no written words.",
+    "script": "You might see chimpanzees swinging through the trees.",
+    "text_overlays": "Chimpanzee",
+    "comments": "",
+    "style": "Objects, instruments, things"
+  },
+  {
+    "frame": "06.2",
+    "visuals": "A rare and shy pygmy hippo peeking from the deep shadows of a Côte d'Ivoire riverbank. No text, no signs, no written words.",
+    "script": "But the real star is the rare pygmy hippo. It’s tiny, shy, and very special!",
+    "text_overlays": "Pygmy Hippo",
+    "comments": "",
+    "style": "People"
+  },
+  {
+    "frame": "08",
+    "visuals": "The massive Basilica of Our Lady of Peace in Yamoussoukro, Côte d'Ivoire, standing tall under a clear blue sky. No text, no signs, no written words.",
+    "script": "Can you name the capital? It’s Yamoussoukro! It’s home to the Basilica of Our Lady of Peace, one of the biggest churches in the world!",
+    "text_overlays": "Yamoussoukro",
+    "comments": "",
+    "style": "Crowded Place"
+  },
+  {
+    "frame": "09",
+    "visuals": "A wide view of the Abidjan lagoon in Côte d'Ivoire with small boats and the modern city skyline in the background. No text, no signs, no written words.",
+    "script": "But wait, there’s more! Abidjan is the largest city. Its lagoon isn’t just pretty—it’s used for transport, fishing, and all kinds of trade.",
+    "text_overlays": "Abidjan",
+    "comments": "",
+    "style": "Cities"
+  },
+  {
+    "frame": "10",
+    "visuals": "Colorful market stalls in Bouaké, Côte d'Ivoire, filled with vibrant hand-woven textiles and local crafts. No text, no signs, no written words.",
+    "script": "Then there’s Bouaké, full of colorful crafts and textile markets that are a feast for the eyes.",
+    "text_overlays": "Bouaké",
+    "comments": "",
+    "style": "Objects, instruments, things"
+  },
+  {
+    "frame": "11",
+    "visuals": "The vibrant markets of Abidjan in CôTe D’Ivoire bustling with people and inhabitants. Open space, not closed. No text, no signs, no written words.",
+    "script": "French is the official language, but people here speak over 60 different languages! Bonjour, explorers!",
+    "text_overlays": "",
+    "comments": "",
+    "style": "Crowded Place"
+  },
+  {
+    "frame": "12",
+    "visuals": "The Basilica of Our Lady of Peace open courtyard in CôTe D’Ivoire bustling with people and inhabitants. Open space, not closed. No text, no signs, no written words.",
+    "script": "About 28 million people call this country home. That’s roughly the same as the population of Texas!",
+    "text_overlays": "",
+    "comments": "",
+    "style": "Crowded Place"
+  },
+  {
+    "frame": "12.1",
+    "visuals": "A fluffy plate of authentic Côte d'Ivoire attiéké (cassava) served with a large grilled fish and fresh onions. No text, no signs, no written words.",
+    "script": "Time to eat! Try attiéké!\nA fluffy cassava dish that tastes amazing with grilled fish.",
+    "text_overlays": "Attiéké",
+    "comments": "",
+    "style": "Food"
+  },
+  {
+    "frame": "13",
+    "visuals": "A street vendor's basket in Côte d'Ivoire filled with golden-fried alloco (sweet plantains) served on a rustic plate. No text, no signs, no written words.",
+    "script": "Craving a snack? Try alloco! These are sweet, golden-fried plantains that are crispy and popular in every neighborhood.",
+    "text_overlays": "Alloco",
+    "comments": "",
+    "style": "Food"
+  },
+  {
+    "frame": "14",
+    "visuals": "A farmer in a Côte d'Ivoire plantation collecting large yellow cocoa pods into a traditional basket. No text, no signs, no written words.",
+    "script": "Guess what? Côte d’Ivoire is the world’s top grower of cocoa. That’s the magical bean that becomes chocolate!",
+    "text_overlays": "Cocoa Gold",
+    "comments": "",
+    "style": "People"
+  },
+  {
+    "frame": "15",
+    "visuals": "A dancer in a traditional, intricately carved mask performing the fast-paced Zaouli dance in a Côte d'Ivoire village. No text, no signs, no written words.",
+    "script": "Let’s move to the Zaouli dance! Dancers wear traditional masks and move their feet incredibly fast to tell ancient stories.",
+    "text_overlays": "Zaouli Dance",
+    "comments": "",
+    "style": "People"
+  },
+  {
+    "frame": "16",
+    "visuals": "A traditional Côte d'Ivoire village festival at night with drummers playing and children clapping in a circle. No text, no signs, no written words.",
+    "script": "At village festivals, drumming and storytelling bring the night to life. It’s music you can feel in your feet!",
+    "text_overlays": "",
+    "comments": "",
+    "style": "People"
+  },
+  {
+    "frame": "17",
+    "visuals": "A soccer ball on a soccer field. No text, no signs, no written words.",
+    "script": "Here’s a moment to remember: in 2006, the national soccer team qualified for the World Cup for the first time. Their success lifted national pride and brought people together.",
+    "text_overlays": "2006 World Cup",
+    "comments": "",
+    "style": "People"
+  },
+  {
+    "frame": "18",
+    "visuals": "Côte d'Ivoire soccer legend Didier Drogba celebrating a goal on the pitch with fans cheering in the background. No text, no signs, no written words.",
+    "script": "If you’re into sports, meet Didier Drogba, the soccer star who’s also known for helping unite people during hard times.",
+    "text_overlays": "Didier Drogba",
+    "comments": "",
+    "style": "People"
+  },
+  {
+    "frame": "19",
+    "visuals": "Côte d'Ivoire sprinter Murielle Ahouré racing on a professional track under the sun. No text, no signs, no written words.",
+    "script": "And don’t miss Murielle Ahouré!\nWest Africa’s fastest woman and a world medalist in sprinting!",
+    "text_overlays": "Murielle Ahouré",
+    "comments": "",
+    "style": "Objects, instruments, things"
+  },
+  {
+    "frame": "20",
+    "visuals": "A tropical street in Abidjan, Côte d'Ivoire, decorated for Christmas with palm trees wrapped in lights and artificial white snow. No text, no signs, no written words.",
+    "script": "And here’s one last surprise… when it’s hot in December, people use foam or cotton to make a “white Christmas.” Now that’s holiday creativity!",
+    "text_overlays": "",
+    "comments": "",
+    "style": "People"
+  }
+]

@@ -1,0 +1,162 @@
+[
+  {
+    "frame": "03.1",
+    "visuals": "A sunny Croatian beach with clear turquoise water and a white pebble shore under a Mediterranean sky. No text, no signs, no written words.",
+    "script": "Get this: the coast has a Mediterranean climate with sunny skies and warm breezes.",
+    "text_overlays": "Mediterranean Coast",
+    "comments": "",
+    "style": "Natural Landscapes"
+  },
+  {
+    "frame": "03.2",
+    "visuals": "Snowy inland mountains in Croatia with pine trees and a small mountain village in the distance. No text, no signs, no written words.",
+    "script": "While inland towns have snowy winters perfect for sledding and snowball fights.",
+    "text_overlays": "Snowy Mountains",
+    "comments": "",
+    "style": "Natural Landscapes"
+  },
+  {
+    "frame": "04",
+    "visuals": "The rugged limestone cliffs of the Dinaric Alps in Croatia with a hiker trekking near a mountain goat. No text, no signs, no written words.",
+    "script": "Now for my favorite part: mountains! The Dinaric Alps slice through the land, creating massive cliffs and wild paths for hikers to explore.",
+    "text_overlays": "Dinaric Alps",
+    "comments": "",
+    "style": "Natural Landscapes"
+  },
+  {
+    "frame": "05.1",
+    "visuals": "A small brown pine marten (kuna) climbing a tree branch in a Croatian forest. No text, no signs, no written words.",
+    "script": "And these mountains aren’t just for hikers… They're also home to some fascinating wildlife! The national animal is the pine marten, a tree-climbing cutie.",
+    "text_overlays": "Pine marten",
+    "comments": "",
+    "style": "Animals"
+  },
+  {
+    "frame": "05.2",
+    "visuals": "An old Croatian Kuna coin showing the pine marten symbol. No text, no signs, no written words.",
+    "script": "Its name, \"kuna\", was actually used as the name for Croatia's money for a long time!",
+    "text_overlays": "Kuna coin",
+    "comments": "",
+    "style": "Objects, instruments, things"
+  },
+  {
+    "frame": "06",
+    "visuals": "A rare Eurasian lynx hiding among the bushes of a lush green Croatian forest. No text, no signs, no written words.",
+    "script": "If you’re lucky, you might spot a golden eagle or a rare Eurasian lynx hiding in the national parks. They are protected and very special!",
+    "text_overlays": "Eurasian lynx",
+    "comments": "",
+    "style": "Objects, instruments, things"
+  },
+  {
+    "frame": "08",
+    "visuals": "A cityscape of Zagreb, Croatia, with its iconic blue trams moving through the historic Upper Town streets. No text, no signs, no written words.",
+    "script": "What’s the capital of Croatia? It’s Zagreb! The city is full of colorful trams and street art that makes the walls look like a giant comic book.",
+    "text_overlays": "Zagreb",
+    "comments": "",
+    "style": "Cities"
+  },
+  {
+    "frame": "09",
+    "visuals": "A wide view of the historic Diocletian's Palace in Split, Croatia, with its ancient stone arches and Roman architecture. No text, no signs, no written words.",
+    "script": "In the city of Split, you can walk through a Roman palace that is more than 1,700 years old!",
+    "text_overlays": "Split",
+    "comments": "",
+    "style": "Cities"
+  },
+  {
+    "frame": "10",
+    "visuals": "Plitvice Lakes in Croatia bustling with people and inhabitants. Open space, not closed. No text, no signs, no written words.",
+    "script": "Most people speak Croatian, but in places like Istria, you’ll hear lots of Italian too. It’s a fun mix of cultures!",
+    "text_overlays": "",
+    "comments": "",
+    "style": "Crowded Place"
+  },
+  {
+    "frame": "11",
+    "visuals": "The historic walls of Dubrovnik in Croatia bustling with people and inhabitants. Open space, not closed. No text, no signs, no written words.",
+    "script": "Around 4 million people live in Croatia. That’s about the same as Oregon! Small country, big personality!",
+    "text_overlays": "",
+    "comments": "",
+    "style": "Crowded Place"
+  },
+  {
+    "frame": "12",
+    "visuals": "A traditional Croatian Peka being roasted under a large iron bell-shaped lid over an open outdoor wood fire. No text, no signs, no written words.",
+    "script": "Yum time! Ever tried peka? It’s a fire-roasted combo of meat and veggies, sealed under a bell-shaped lid. Can you smell the smoke?",
+    "text_overlays": "Peka",
+    "comments": "",
+    "style": "Food"
+  },
+  {
+    "frame": "13",
+    "visuals": "A wheel of traditional Pag cheese served on a wooden board with the rocky coast and sheep of Pag island, Croatia, in the background. No text, no signs, no written words.",
+    "script": "Now add Pag cheese, made from sheep’s milk on a windy island where salty herbs grow near the sea. It crumbles like magic on your tongue!",
+    "text_overlays": "Pag cheese",
+    "comments": "",
+    "style": "Natural Landscapes"
+  },
+  {
+    "frame": "14",
+    "visuals": "Sun-drenched vineyards on a hillside in Croatia overlooking the blue Adriatic Sea, with olive trees growing nearby. No text, no signs, no written words.",
+    "script": "Farmers here have been growing olives and grapes for generations. The Mediterranean sun makes them taste amazing!",
+    "text_overlays": "Grapes & Olives",
+    "comments": "",
+    "style": "People"
+  },
+  {
+    "frame": "15",
+    "visuals": "A group of people in traditional attire singing Klapa harmonies on a coastal stone stage at sunset in Croatia. No text, no signs, no written words.",
+    "script": "Sing it with me! Klapa is Croatia’s traditional group singing! Like a human ocean wave of harmony, often heard in seaside towns during summer festivals.",
+    "text_overlays": "Klapa",
+    "comments": "",
+    "style": "People"
+  },
+  {
+    "frame": "16",
+    "visuals": "Participants in medieval costumes riding horses and aiming lances during the Sinjska Alka tournament in Croatia. No text, no signs, no written words.",
+    "script": "And don't miss the Sinjska Alka! every August, knights on horseback race and aim their lances with serious skill. Medieval fun in real life? Yes please!",
+    "text_overlays": "Sinjska Alka",
+    "comments": "",
+    "style": "Objects, instruments, things"
+  },
+  {
+    "frame": "17",
+    "visuals": "A soccer ball on a soccer field. No text, no signs, no written words.",
+    "script": "In 2018, Croatia’s soccer team surprised the world by reaching the final match! They finished as the second-best team on the entire planet.",
+    "text_overlays": "",
+    "comments": "",
+    "style": "Objects, instruments, things"
+  },
+  {
+    "frame": "18.1",
+    "visuals": "A soccer ball on a soccer field. No text, no signs, no written words.",
+    "script": "And sports fans, listen up! Luka Modrić leads on the soccer field like a boss.",
+    "text_overlays": "Luka Modrić",
+    "comments": "",
+    "style": "Objects, instruments, things"
+  },
+  {
+    "frame": "18.2",
+    "visuals": "Croatian tennis legend Goran Ivanišević serving the ball on a professional grass court. No text, no signs, no written words.",
+    "script": "While tennis star Goran Ivanišević smashed his way to Wimbledon glory in 2001!",
+    "text_overlays": "Goran Ivanišević",
+    "comments": "",
+    "style": "People"
+  },
+  {
+    "frame": "19.1",
+    "visuals": "A spotted Dalmatian dog sitting on a rocky coastal cliff overlooking the Adriatic Sea in Croatia. No text, no signs, no written words.",
+    "script": "Surprise! The famous Dalmatian dog is named after Croatia's Dalmatia coast!",
+    "text_overlays": "Dalmatian dog",
+    "comments": "",
+    "style": "Animals"
+  },
+  {
+    "frame": "19.2",
+    "visuals": "A traditional red silk necktie (cravat) displayed elegantly on a white dress shirt. No text, no signs, no written words.",
+    "script": "The necktie, or \"cravat,\" was invented by Croatian soldiers.",
+    "text_overlays": "Cravat",
+    "comments": "",
+    "style": "Objects, instruments, things"
+  }
+]

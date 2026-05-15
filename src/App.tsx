@@ -14,6 +14,7 @@ import { LogIn, LayoutDashboard, Loader2 } from 'lucide-react';
 import { logActivity } from './lib/activityLogger';
 
 import { ThemeProvider } from './components/ThemeProvider';
+import { MigrateButton } from './components/MigrateButton';
 
 export default function App() {
   const [user, setUser] = useState<User | null>(null);
@@ -146,6 +147,7 @@ export default function App() {
         {view === 'api-keys' && (
           <ApiKeysSettings />
         )}
+        <MigrateButton />
         <Toaster />
       </Layout>
     </ThemeProvider>

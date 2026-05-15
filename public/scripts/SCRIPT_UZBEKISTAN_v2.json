@@ -1,0 +1,162 @@
+[
+  {
+    "frame": "03.1",
+    "visuals": "A traditional Uzbek town in summer with a visible heat shimmer effect over the sandy streets and baked-brick buildings. No text, no signs, no written words.",
+    "script": "Uzbekistan’s summers can get hotter than 100°F.",
+    "text_overlays": "",
+    "comments": "",
+    "style": "Natural Landscapes"
+  },
+  {
+    "frame": "03.2",
+    "visuals": "A snowy winter scene in Uzbekistan with children sledding down a hill near an old turquoise-domed mosque. No text, no signs, no written words.",
+    "script": "And kids sled in snowy winters! Talk about weather with a wild side. Plus, most days are sunny, which makes everything feel brighter, even the camels look cheerful!",
+    "text_overlays": "",
+    "comments": "",
+    "style": "Natural Landscapes"
+  },
+  {
+    "frame": "04",
+    "visuals": "The vast Kyzylkum Desert in Uzbekistan with its unique reddish-orange sand dunes stretching under a bright sun. No text, no signs, no written words.",
+    "script": "Now for my favorite part: deserts you can’t miss! The Kyzylkum Desert covers a large part of Uzbekistan and is named for its reddish-orange sand, kind of like a desert at sunset!",
+    "text_overlays": "Kyzylkum Desert",
+    "comments": "",
+    "style": "Natural Landscapes"
+  },
+  {
+    "frame": "06",
+    "visuals": "A rare snow leopard with its thick grey-and-black spotted fur perched on a high rocky ledge in the mountains of Uzbekistan. No text, no signs, no written words.",
+    "script": "And get this: Uzbekistan’s national symbol is the snow leopard, a rare big cat that lives way up in the mountains. Pretty cool, right?",
+    "text_overlays": "Snow leopard",
+    "comments": "",
+    "style": "Animals"
+  },
+  {
+    "frame": "07.1",
+    "visuals": "Registan Square in Samarkand in Uzbekistan bustling with people and inhabitants. Open space, not closed. No text, no signs, no written words.",
+    "script": "Speaking of wildlife, the Bukhara deer, once nearly extinct, now trots proudly through Uzbek forests.",
+    "text_overlays": "Bukhara deer",
+    "comments": "",
+    "style": "Animals"
+  },
+  {
+    "frame": "07.2",
+    "visuals": "A golden eagle soaring over the rocky desert cliffs of Uzbekistan under a clear blue sky. No text, no signs, no written words.",
+    "script": "Add that to your animal watch list, along with golden eagles who fly over desert cliffs!",
+    "text_overlays": "Golden eagle",
+    "comments": "",
+    "style": "Animals"
+  },
+  {
+    "frame": "08",
+    "visuals": "The modern skyline of Tashkent, Uzbekistan, with its futuristic buildings, the Tashkent TV Tower, and a glimpse of the historic Chorsu Bazaar. No text, no signs, no written words.",
+    "script": "Now, here's a brain teaser: any guesses what the capital city is? Ding ding… it’s Tashkent! Picture a place with shiny new buildings, old mosques, and bustling bazaars all rolled into one.",
+    "text_overlays": "Tashkent",
+    "comments": "",
+    "style": "Cities"
+  },
+  {
+    "frame": "09",
+    "visuals": "The magnificent Registan Square in Samarkand, Uzbekistan, with its three massive, blue-tiled madrasahs and intricate mosaics. No text, no signs, no written words.",
+    "script": "But wait, there's more! Samarkand is a city so old it sat on the Silk Road, where traders roamed with spices and stories.",
+    "text_overlays": "Samarkand",
+    "comments": "",
+    "style": "Crowded Place"
+  },
+  {
+    "frame": "10",
+    "visuals": "The ancient Po-i-Kalyan complex in Bukhara, Uzbekistan, with its tall brick minaret and turquoise-domed mosque. No text, no signs, no written words.",
+    "script": "Then there’s Bukhara, packed with over 140 landmarks: it’s like walking through a real-life time machine!",
+    "text_overlays": "Bukhara",
+    "comments": "",
+    "style": "Objects, instruments, things"
+  },
+  {
+    "frame": "11",
+    "visuals": "Registan Square in Samarkand in Uzbekistan bustling with people and inhabitants. Open space, not closed. No text, no signs, no written words.",
+    "script": "Speaking of people, most folks in Uzbekistan speak Uzbek, but you’ll also hear Russian and Tajik in the mix. It’s a word party over there!",
+    "text_overlays": "",
+    "comments": "",
+    "style": "Crowded Place"
+  },
+  {
+    "frame": "12",
+    "visuals": "The historic center of Bukhara in Uzbekistan bustling with people and inhabitants. Open space, not closed. No text, no signs, no written words.",
+    "script": "Around 35 million people live in Uzbekistan: that's about the same number of people who live in California as of 2023. Imagine one giant dinner table!",
+    "text_overlays": "",
+    "comments": "",
+    "style": "Crowded Place"
+  },
+  {
+    "frame": "13",
+    "visuals": "A large traditional platter of Uzbek plov (rice pilaf) with tender lamb, yellow carrots, and chickpeas, garnished with garlic. No text, no signs, no written words.",
+    "script": "And what would they be eating? Try plov, a famous rice dish with lamb and carrots, cooked up at weddings and family feasts. Yum!",
+    "text_overlays": "Plov",
+    "comments": "",
+    "style": "Food"
+  },
+  {
+    "frame": "14",
+    "visuals": "A traditional Uzbek tea set on a low table with small ceramic cups of green tea, fresh grapes, and slices of sweet melon. No text, no signs, no written words.",
+    "script": "Wash it down with green tea, often served hot in teeny cups during meals. And don’t forget fresh apricots, juicy grapes, and melons sweet as candy!",
+    "text_overlays": "",
+    "comments": "",
+    "style": "Food"
+  },
+  {
+    "frame": "15",
+    "visuals": "Uzbek musicians in traditional embroidered robes playing doira drums and long-necked string instruments at an outdoor festival. No text, no signs, no written words.",
+    "script": "Now listen to this beat: traditional Uzbek music uses doira drums and stringy instruments you can pluck at festivals.",
+    "text_overlays": "",
+    "comments": "",
+    "style": "People"
+  },
+  {
+    "frame": "16",
+    "visuals": "People in Uzbekistan celebrating Navruz in a village square, with traditional dancing and large pots of sweet sumalak pudding. No text, no signs, no written words.",
+    "script": "Spring brings Navruz, a holiday full of joyful dancing and a pudding called sumalak made from sweet wheat sprouts. Party time!",
+    "text_overlays": "Navruz",
+    "comments": "",
+    "style": "Food"
+  },
+  {
+    "frame": "17",
+    "visuals": "A historic illustration of ancient scholars in Samarkand, Uzbekistan, studying star maps and scrolls in a grand library. No text, no signs, no written words.",
+    "script": "Feeling inspired? Samarkand and Bukhara weren’t just pretty places. Long ago, they were BIG in science and learning during the Silk Road era. Scholars from far away came to study!",
+    "text_overlays": "Ancient Learning",
+    "comments": "",
+    "style": "People"
+  },
+  {
+    "frame": "18",
+    "visuals": "A soccer ball on a soccer field. No text, no signs, no written words.",
+    "script": "Uzbekistan joined FIFA in 1994 and dreams of one day scoring big in a World Cup. Fingers crossed for a goal-filled future!",
+    "text_overlays": "Uzbekistan Football",
+    "comments": "",
+    "style": "Objects, instruments, things"
+  },
+  {
+    "frame": "19.1",
+    "visuals": "Uzbek gymnast Oksana Chusovitina performing on a balance beam during an Olympic competition. No text, no signs, no written words.",
+    "script": "As for sports, Uzbekistan shines in boxing, wrestling, and judo! And meet Oksana Chusovitina: a gymnast who’s rocked 8 Olympic Games!",
+    "text_overlays": "Oksana Chusovitina",
+    "comments": "",
+    "style": "Objects, instruments, things"
+  },
+  {
+    "frame": "19.2",
+    "visuals": "An Uzbek boxer celebrating a victory in the ring with his national team uniform. No text, no signs, no written words.",
+    "script": "Talk about superhero stamina!",
+    "text_overlays": "Boxing Champion",
+    "comments": "",
+    "style": "Objects, instruments, things"
+  },
+  {
+    "frame": "20",
+    "visuals": "A modern solar power plant in the sunny steppe of Uzbekistan, with rows of solar panels under a clear sky. No text, no signs, no written words.",
+    "script": "Ready for a wow? Uzbekistan is one of only TWO countries completely surrounded by landlocked countries. No beach? No problem! In some areas, Uzbek trains use solar-powered stations to help the environment.",
+    "text_overlays": "Solar Power",
+    "comments": "",
+    "style": "Natural Landscapes"
+  }
+]

@@ -1,0 +1,135 @@
+[
+  {
+    "frame": "03",
+    "visuals": "A vast, flat desert landscape in Qatar under a blazing hot sun, with shimmering heat waves over the sandy horizon. No text, no signs, no written words.",
+    "script": "It’s mostly flat and dry here, with sizzling hot summers and hardly any rain. Better bring a hat—and lots of water!",
+    "text_overlays": "",
+    "style": "Natural Landscapes"
+  },
+  {
+    "frame": "04",
+    "visuals": "The Khor Al Adaid (Inland Sea) in Qatar, where massive sand dunes meet a calm saltwater lagoon under a clear blue sky. No text, no signs, no written words.",
+    "script": "Now get this—there’s a magical place called the Khor Al Adaid, or Inland Sea. It’s a saltwater lagoon connected to the sea through winding desert channels… like a hidden treasure chest filled with waves!",
+    "text_overlays": "Khor Al Adaid",
+    "style": "Natural Landscapes"
+  },
+  {
+    "frame": "06",
+    "visuals": "A sleek white Arabian oryx with long, slightly curved horns standing on the desert sands of Qatar. No text, no signs, no written words.",
+    "script": "Now meet the national animal: the Arabian oryx! It’s a sleek white antelope with twisty, magical horns. Why does it look like a desert unicorn?",
+    "text_overlays": "Arabian oryx",
+    "style": "Animals"
+  },
+  {
+    "frame": "07",
+    "visuals": "A majestic hunting falcon perched on a leather-gloved hand in the Qatari desert, with its hood removed. No text, no signs, no written words.",
+    "script": "And you’ll also see falcons here—lots of them! Falcons are highly valued in Qatari culture and trained for traditional falconry sports. Let’s just say… they get rockstar treatment!",
+    "text_overlays": "Falcon",
+    "style": "Cities"
+  },
+  {
+    "frame": "08.1",
+    "visuals": "A small, sandy-colored sand cat peeking out from behind a desert rock in Qatar. No text, no signs, no written words.",
+    "script": "Other desert animals? How about sand cats and desert foxes?",
+    "text_overlays": "Sand cat",
+    "style": "Natural Landscapes"
+  },
+  {
+    "frame": "08.2",
+    "visuals": "A desert fox with large ears alert and watchful in the sandy dunes of Qatar. No text, no signs, no written words.",
+    "script": "They're sneaky, speedy, and super rare!",
+    "text_overlays": "Desert fox",
+    "style": "Crowded Place"
+  },
+  {
+    "frame": "09",
+    "visuals": "The futuristic Doha skyline in Qatar at sunset, with its unique skyscrapers and the Museum of Islamic Art by the waterfront. No text, no signs, no written words.",
+    "script": "The capital city is Doha. It’s shiny and modern, with skyscrapers, museums, and ocean views that will leave you saying “Whoa-ha!”",
+    "text_overlays": "Doha",
+    "style": "Cities"
+  },
+  {
+    "frame": "10.1",
+    "visuals": "The Al Janoub Stadium in Al Wakrah, Qatar, with its unique architecture inspired by the sails of traditional dhow boats. No text, no signs, no written words.",
+    "script": "But wait, there’s more—Al Wakrah has roots as a fishing village and now has a stadium shaped like a traditional boat.",
+    "text_overlays": "Al Wakrah",
+    "style": "Objects, instruments, things"
+  },
+  {
+    "frame": "10.2",
+    "visuals": "The modern Education City in Al Rayyan, Qatar, with its innovative university buildings and green, artistic campuses. No text, no signs, no written words.",
+    "script": "Then there’s Al Rayyan, home to sports centers and the famous Education City, where students from around the world study in green campuses dotted with art and science.",
+    "text_overlays": "Education City",
+    "style": "Cities"
+  },
+  {
+    "frame": "11",
+    "visuals": "The Doha Corniche in Qatar bustling with people and inhabitants. Open space, not closed. No text, no signs, no written words.",
+    "script": "Speaking of people, Arabic is the main language, but English is used a lot—especially in schools. So don’t worry, you’ll definitely be able to say hi!",
+    "text_overlays": "",
+    "style": "Crowded Place"
+  },
+  {
+    "frame": "12",
+    "visuals": "The Souq Waqif in Qatar bustling with people and inhabitants. Open space, not closed. No text, no signs, no written words.",
+    "script": "Around 3 million people live in Qatar—that’s about the same as the whole state of Oklahoma! Small country, big vibes.",
+    "text_overlays": "",
+    "style": "Crowded Place"
+  },
+  {
+    "frame": "13",
+    "visuals": "A large platter of traditional Qatari machboos (spiced rice with chicken), garnished with nuts and raisins. No text, no signs, no written words.",
+    "script": "Now for my favorite part… the food! Try machboos—it’s rice spiced just right, with chicken or fish. Families eat it together on special nights.",
+    "text_overlays": "Machboos",
+    "style": "Food"
+  },
+  {
+    "frame": "14",
+    "visuals": "A bowl of sweet, golden luqaimat dumplings in Qatar, drizzled with date syrup and sprinkled with sesame seeds. No text, no signs, no written words.",
+    "script": "Need dessert? Don’t miss luqaimat—sweet, golden dumplings that crunch when you bite in. Yum!",
+    "text_overlays": "Luqaimat",
+    "style": "Food"
+  },
+  {
+    "frame": "15",
+    "visuals": "A small glass of steaming, milky karak tea being served at a traditional Qatari cafe in the desert. No text, no signs, no written words.",
+    "script": "Thirsty yet? Grab some karak tea. It’s warm, milky, and served at cozy cafés or from drive-thru stalls—yes, even in the desert!",
+    "text_overlays": "Karak tea",
+    "style": "Natural Landscapes"
+  },
+  {
+    "frame": "16",
+    "visuals": "Men in traditional white thobes performing the Ardha sword dance in Qatar, accompanied by rhythmic drumming. No text, no signs, no written words.",
+    "script": "Let’s turn up the music! Qatari folk dances like the Ardha involve swords, drums, and lots of group rhythm-action. It’s tradition with a twist!",
+    "text_overlays": "Ardha",
+    "style": "People"
+  },
+  {
+    "frame": "17",
+    "visuals": "A spectacular fireworks display over the Doha skyline in Qatar during National Day celebrations on December 18. No text, no signs, no written words.",
+    "script": "And on December 18 the whole country celebrates National Day with parades, fireworks, and pride in their past. It’s a huge party!",
+    "text_overlays": "National Day",
+    "style": "People"
+  },
+  {
+    "frame": "18",
+    "visuals": "A soccer ball on a soccer field. No text, no signs, no written words.",
+    "script": "In 2022, Qatar became the first Arab nation to host the World Cup. Fans came from around the globe to cheer and discover Qatari culture!",
+    "text_overlays": "World Cup 2022",
+    "style": "Objects, instruments, things"
+  },
+  {
+    "frame": "19.1",
+    "visuals": "Qatari athlete Mutaz Barshim performing a high jump during an international competition. No text, no signs, no written words.",
+    "script": "Sports are a big deal here. High jumper Mutaz Barshim won Olympic gold and is famous for being super kind.",
+    "text_overlays": "Mutaz Barshim",
+    "style": "Objects, instruments, things"
+  },
+  {
+    "frame": "19.2",
+    "visuals": "Qatari soccer player Akram Afif celebrating a goal in his national team jersey. No text, no signs, no written words.",
+    "script": "And soccer star Akram Afif played in the World Cup and helped lead Qatar on the world stage!",
+    "text_overlays": "Akram Afif",
+    "style": "People"
+  }
+]

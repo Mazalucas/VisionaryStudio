@@ -1,0 +1,170 @@
+[
+  {
+    "frame": "03",
+    "visuals": "The massive Pasterze glacier in the Austrian Alps with towering mountains and green forests in the background. No text, no signs, no written words.",
+    "script": "Look at those views! Austria has over 250 glaciers, including the Pasterze, the country’s largest.\nWinters? Super snowy and perfect for skiing. Summers? Mild and sunny, prime picnic weather!",
+    "text_overlays": "Pasterze",
+    "comments": "",
+    "style": "Natural Landscapes"
+  },
+  {
+    "frame": "04",
+    "visuals": "A panoramic view of the Austrian Alps with hiking trails, ski slopes, and a cozy village nestled in a green valley. No text, no signs, no written words.",
+    "script": "Now for my favorite part: the Alps! These mega-mountains spread across the west, filled with ski slopes and cozy villages. \nIt’s a winter wonderland!",
+    "text_overlays": "The Alps",
+    "comments": "",
+    "style": "Natural Landscapes"
+  },
+  {
+    "frame": "06",
+    "visuals": "The historic streets of Salzburg in Austria bustling with people and inhabitants. Open space, not closed. No text, no signs, no written words.",
+    "script": "Speaking of symbols, check out Austria’s golden eagle. It’s the national symbol, representing pride and power on the coat of arms.",
+    "text_overlays": "Golden eagle",
+    "comments": "",
+    "style": "Crowded Place"
+  },
+  {
+    "frame": "07.1",
+    "visuals": "An Alpine ibex with long curved horns standing on a rocky cliff in the Austrian mountains. No text, no signs, no written words.",
+    "script": "Mountains mean furry friends! The Alpine ibex with its twisty horns hops around rocky cliffs.",
+    "text_overlays": "Alpine ibex",
+    "comments": "",
+    "style": "Cities"
+  },
+  {
+    "frame": "07.2",
+    "visuals": "A quick-footed chamois in a sunny Austrian mountain meadow. No text, no signs, no written words.",
+    "script": "And the quick-footed chamois is great at hide-and-seek.",
+    "text_overlays": "Chamois",
+    "comments": "",
+    "style": "Cities"
+  },
+  {
+    "frame": "07.3",
+    "visuals": "A rare forest lynx peeking through the thick trees of a dense Austrian forest. No text, no signs, no written words.",
+    "script": "If you’re really lucky, you might even spot a rare forest lynx stalking through the trees.",
+    "text_overlays": "Forest lynx",
+    "comments": "",
+    "style": "Natural Landscapes"
+  },
+  {
+    "frame": "08.1",
+    "visuals": "The grand Imperial Palace (Hofburg) in Vienna, Austria, under a clear sky. No text, no signs, no written words.",
+    "script": "What’s the capital of Austria? It’s Vienna, a city of grand palaces.",
+    "text_overlays": "Vienna",
+    "comments": "",
+    "style": "Cities"
+  },
+  {
+    "frame": "08.2",
+    "visuals": "A slice of authentic chocolate Sachertorte served on a white ceramic plate in a traditional Viennese café. No text, no signs, no written words.",
+    "script": "And the famous chocolate Sachertorte!",
+    "text_overlays": "Sachertorte",
+    "comments": "",
+    "style": "Crowded Place"
+  },
+  {
+    "frame": "09.1",
+    "visuals": "A bronze statue of Mozart in a historic plaza in Salzburg, Austria, with the Hohensalzburg Fortress in the distance. No text, no signs, no written words.",
+    "script": "Other awesome cities? Salzburg is a musical masterpiece! Is where Mozart was born!",
+    "text_overlays": "Salzburg",
+    "comments": "",
+    "style": "Crowded Place"
+  },
+  {
+    "frame": "09.2",
+    "visuals": "The historic Old Town of Graz, Austria, with its red-roofed buildings and the modern Kunsthaus Graz building. No text, no signs, no written words.",
+    "script": "Graz is also cool, with an old town that looks like a fairy tale.",
+    "text_overlays": "Graz",
+    "comments": "",
+    "style": "Cities"
+  },
+  {
+    "frame": "10",
+    "visuals": "The open square of Hofburg Palace in Austria bustling with people and inhabitants. Open space, not closed. No text, no signs, no written words.",
+    "script": "German is the official language here! but many people also speak English. \nIt’s a great place for making friends from all over!",
+    "text_overlays": "",
+    "comments": "",
+    "style": "Crowded Place"
+  },
+  {
+    "frame": "11",
+    "visuals": "Belvedere Palace gardens in Austria bustling with people and inhabitants. Open space, not closed. No text, no signs, no written words.",
+    "script": "Austria’s population is around 9 million… that’s close to the population of New York City. Big enough for grand culture, but small enough for charm.",
+    "text_overlays": "",
+    "comments": "",
+    "style": "Crowded Place"
+  },
+  {
+    "frame": "12",
+    "visuals": "A golden-brown breaded Wiener Schnitzel served with a slice of lemon, parsley, and a side of potato salad on a white plate in Austria. No text, no signs, no written words.",
+    "script": "Hungry? Wiener Schnitzel is the national dish! breaded meat called veal, often served for special family meals. Yum!",
+    "text_overlays": "Wiener Schnitzel",
+    "comments": "",
+    "style": "Food"
+  },
+  {
+    "frame": "13",
+    "visuals": "A warm slice of flaky Austrian Apple Strudel dusted with powdered sugar and served with a dollop of whipped cream. No text, no signs, no written words.",
+    "script": "Don’t forget Apple Strudel! It’s a sweet, flaky pastry filled with warm apples and whipped cream.",
+    "text_overlays": "Apple strudel",
+    "comments": "",
+    "style": "Food"
+  },
+  {
+    "frame": "14",
+    "visuals": "A glass of fizzy Almdudler herbal soda on a rustic wooden table with the Austrian Alps in the background. No text, no signs, no written words.",
+    "script": "Thirsty? Sip some Almdudler! It’s a fizzy herbal soda that Austrians absolutely love.",
+    "text_overlays": "Almdudler",
+    "comments": "",
+    "style": "People"
+  },
+  {
+    "frame": "15",
+    "visuals": "Couples in formal attire dancing the Viennese waltz in a grand, chandelier-lit ballroom in Vienna, Austria. No text, no signs, no written words.",
+    "script": "Now let’s dance to the rhythm of tradition! The Viennese waltz twirls through grand ballrooms, and every New Year, Austria fills with elegant music during a giant televised concert. Fancy, right?",
+    "text_overlays": "Viennese Waltz",
+    "comments": "",
+    "style": "People"
+  },
+  {
+    "frame": "16",
+    "visuals": "A soccer ball on a soccer field. No text, no signs, no written words.",
+    "script": "Ready for a throwback? In 1954, Austria took 3rd place in the World Cup! That’s a huge moment in their soccer history.",
+    "text_overlays": "",
+    "comments": "",
+    "style": "Objects, instruments, things"
+  },
+  {
+    "frame": "17.1",
+    "visuals": "Austrian ski legend Marcel Hirscher mid-turn on a snowy race slope in the Alps. No text, no signs, no written words.",
+    "script": "Sports here? Alpine skiing rules the slopes! Legends like Marcel Hirscher, an 8-time World Cup champ.",
+    "text_overlays": "Marcel Hirscher",
+    "comments": "",
+    "style": "Objects, instruments, things"
+  },
+  {
+    "frame": "17.2",
+    "visuals": "A portrait of Arnold Schwarzenegger in his youth as a bodybuilder with an Austrian flag subtly in the background. No text, no signs, no written words.",
+    "script": "And Arnold Schwarzenegger! bodybuilder, movie star, and even California’s governor!",
+    "text_overlays": "Arnold Schwarzenegger",
+    "comments": "",
+    "style": "People"
+  },
+  {
+    "frame": "18",
+    "visuals": "A decorated Austrian cow wearing a crown of flowers during the Almabtrieb festival in a traditional alpine village. No text, no signs, no written words.",
+    "script": "Still want more? Get this: during a festival called Almabtrieb, cows wear flower crowns as they stroll through villages after summer. Moo-velous fashion show!",
+    "text_overlays": "Almabtrieb",
+    "comments": "",
+    "style": "Objects, instruments, things"
+  },
+  {
+    "frame": "19",
+    "visuals": "An airplane flying over the Austrian Alps seen from above, with a slice of apple strudel on a tray table. No text, no signs, no written words.",
+    "script": "Time to waltz away from this land of wonders and sweet treats! I’m leaving with a heart full of music and a belly full of strudel.",
+    "text_overlays": "",
+    "comments": "",
+    "style": "Food"
+  }
+]

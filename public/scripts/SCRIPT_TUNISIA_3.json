@@ -1,0 +1,162 @@
+[
+  {
+    "frame": "03.1",
+    "visuals": "A vast, golden Sahara Desert landscape in Tunisia with sweeping sand dunes under a hot sun. No text, no signs, no written words.",
+    "script": "Now picture this: deserts.",
+    "text_overlays": "Sahara Desert",
+    "comments": "",
+    "style": "Natural Landscapes"
+  },
+  {
+    "frame": "03.2",
+    "visuals": "A beautiful Mediterranean beach in Tunisia with white sand and clear turquoise water. No text, no signs, no written words.",
+    "script": "Beaches, forests, and hills, all rolled into one country. Tunisia’s weather? Mostly warm and dry, perfect for sun lovers and desert adventurers alike.",
+    "text_overlays": "",
+    "comments": "",
+    "style": "Natural Landscapes"
+  },
+  {
+    "frame": "04",
+    "visuals": "The rugged peak of Chambi Mountain in Tunisia, with rocky slopes and green shrubs under a clear blue sky. No text, no signs, no written words.",
+    "script": "And guess what? The Sahara Desert spreads across the bottom half of Tunisia. But head north, and you’ll find the Chambi Mountain, Tunisia’s tallest peak, reaching about 1,544 meters. Hikers visit for amazing views and mountain air!",
+    "text_overlays": "Chambi Mountain",
+    "comments": "",
+    "style": "Natural Landscapes"
+  },
+  {
+    "frame": "05",
+    "visuals": "A small fennec fox with its characteristic oversized ears sitting on the desert sand in Tunisia. No text, no signs, no written words.",
+    "script": "Meet the fennec fox! With ears so big they could catch radio stations, this desert dweller is a well-loved animal in Tunisia.",
+    "text_overlays": "Fennec fox",
+    "comments": "",
+    "style": "Animals"
+  },
+  {
+    "frame": "06",
+    "visuals": "A Barbary sheep with large curved horns standing on a rocky ledge in the Tunisian mountains. No text, no signs, no written words.",
+    "script": "And don’t forget the Barbary sheep, those curvy horns and bold cliff-climbing skills make them true mountain masters.",
+    "text_overlays": "Barbary sheep",
+    "comments": "",
+    "style": "Natural Landscapes"
+  },
+  {
+    "frame": "07",
+    "visuals": "The historic Medina of Tunis, Tunisia, with its narrow streets, white-walled houses, and the minaret of the Zitouna Mosque. No text, no signs, no written words.",
+    "script": "Now here's a brain teaser: what’s the capital city of Tunisia? It’s Tunis! This coastal capital is full of old mosques whispering history, and modern streets buzzing with life.\nBut Tunisia has other amazing cities too.",
+    "text_overlays": "Tunis",
+    "comments": "",
+    "style": "Cities"
+  },
+  {
+    "frame": "08",
+    "visuals": "Vast groves of olive trees in the countryside near Sfax, Tunisia, under a bright Mediterranean sun. No text, no signs, no written words.",
+    "script": "If you wander farther, Sfax is famous for its golden olive oil, made from millions of olives grown under the warm sun.",
+    "text_overlays": "Sfax",
+    "comments": "",
+    "style": "Crowded Place"
+  },
+  {
+    "frame": "09",
+    "visuals": "The ancient Ribat of Sousse, a fortress by the Mediterranean Sea in Tunisia, with its stone walls and tall watchtower. No text, no signs, no written words.",
+    "script": "while Sousse tempts travelers with dreamy beaches and ancient sea forts that look like movie sets.",
+    "text_overlays": "Sousse",
+    "comments": "",
+    "style": "Natural Landscapes"
+  },
+  {
+    "frame": "11",
+    "visuals": "The amphitheatre of El Jem in Tunisia bustling with people and inhabitants. Open space, not closed. No text, no signs, no written words.",
+    "script": "Speaking of sounds, Tunisia’s main language is Arabic, but many people also speak French, especially in schools and offices.",
+    "text_overlays": "",
+    "comments": "",
+    "style": "Crowded Place"
+  },
+  {
+    "frame": "12",
+    "visuals": "The Medina of Tunis in Tunisia bustling with people and inhabitants. Open space, not closed. No text, no signs, no written words.",
+    "script": "Now for my favorite part… Tunisia has a population close to 12 million, as of today, that’s about the same as the state of Pennsylvania in the U.S.",
+    "text_overlays": "",
+    "comments": "",
+    "style": "Crowded Place"
+  },
+  {
+    "frame": "13",
+    "visuals": "A large traditional platter of Tunisian couscous with spicy sauce, chickpeas, carrots, and lamb. No text, no signs, no written words.",
+    "script": "Hungry yet? Couscous is Tunisia’s superstar food, often shared at family celebrations. It’s fluffy, steamy, and topped with veggies or meat, yum!",
+    "text_overlays": "Couscous",
+    "comments": "",
+    "style": "Food"
+  },
+  {
+    "frame": "14",
+    "visuals": "A glass of sweet Tunisian mint tea with pine nuts on top, being poured from a traditional metal teapot. No text, no signs, no written words.",
+    "script": "For dessert or friendly visits, mint tea is the drink of choice, sweet, warm, and totally welcoming.",
+    "text_overlays": "Mint tea",
+    "comments": "",
+    "style": "Food"
+  },
+  {
+    "frame": "15.1",
+    "visuals": "Clusters of ripe, golden-brown Deglet Nour dates hanging from a palm tree in a Tunisian oasis. No text, no signs, no written words.",
+    "script": "And don’t forget dates.",
+    "text_overlays": "Dates",
+    "comments": "",
+    "style": "People"
+  },
+  {
+    "frame": "15.2",
+    "visuals": "A sunny orchard in Tunisia with trees full of ripe oranges and lemons. No text, no signs, no written words.",
+    "script": "And citrus fruits, these sunny treats grow across Tunisia’s orchards and farms.",
+    "text_overlays": "Citrus fruits",
+    "comments": "",
+    "style": "People"
+  },
+  {
+    "frame": "16",
+    "visuals": "A Tunisian family celebrating Eid together, sharing traditional sweets like baklawa in a decorated home. No text, no signs, no written words.",
+    "script": "During Eid, an important Muslim holiday, families gather, share traditional sweets, and celebrate with music, drumming, and dancing. It’s a joyful celebration you won’t forget!",
+    "text_overlays": "Eid",
+    "comments": "",
+    "style": "People"
+  },
+  {
+    "frame": "17",
+    "visuals": "Senegalese drummers and dancers in colorful traditional outfits performing in a festive village square in Tunisia. No text, no signs, no written words.",
+    "script": "Add in drumming and dancing, it’s a vibe you won’t forget!",
+    "text_overlays": "",
+    "comments": "",
+    "style": "People"
+  },
+  {
+    "frame": "18",
+    "visuals": "The historic ruins of ancient Carthage in Tunisia, with stone pillars and arches overlooking the Mediterranean Sea. No text, no signs, no written words.",
+    "script": "Now here's something epic: ancient Carthage, near Tunis, was a mega-famous trading city connecting Europe and Africa. Feel the historic power yet?",
+    "text_overlays": "Carthage",
+    "comments": "",
+    "style": "Cities"
+  },
+  {
+    "frame": "19.1",
+    "visuals": "A portrait or action shot of soccer player Wahbi Khazri. No text, no signs, no written words.",
+    "script": "And sports? Tunisia loves football! Wahbi Khazri is known for scoring important goals in past global tournaments, a proud moment!",
+    "text_overlays": "Wahbi Khazri",
+    "comments": "",
+    "style": "Objects, instruments, things"
+  },
+  {
+    "frame": "19.2",
+    "visuals": "Tunisian tennis star Ons Jabeur celebrating a point on a professional tennis court. No text, no signs, no written words.",
+    "script": "Tennis hero Ons Jabeur, one of the world’s top players in recent years, inspires kids everywhere with her lightning-quick moves and powerful swing.",
+    "text_overlays": "Ons Jabeur",
+    "comments": "",
+    "style": "Objects, instruments, things"
+  },
+  {
+    "frame": "20",
+    "visuals": "The iconic desert architecture of the Star Wars filming location in Tataouine, Tunisia, with its unique domed buildings and sandy landscape. No text, no signs, no written words.",
+    "script": "Last but not least… did you know parts of Star Wars were filmed right here? Yep, Luke Skywalker’s \"home planet\" is actually Tunisia’s desert! Mind blown?",
+    "text_overlays": "Star Wars Set",
+    "comments": "",
+    "style": "People"
+  }
+]

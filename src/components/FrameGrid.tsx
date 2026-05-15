@@ -11,7 +11,7 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { Sparkles, Trash2, Eye, Download, CheckCircle2, Circle, RefreshCw, Image as ImageIcon, Edit3, Upload as UploadIcon, RotateCcw, Clapperboard, Loader2, History, ChevronLeft, ChevronRight, Plus, Palette, ChevronDown } from 'lucide-react';
+import { Sparkles, Trash2, Eye, Download, CheckCircle2, Circle, RefreshCw, Image as ImageIcon, Edit3, Upload as UploadIcon, RotateCcw, Clapperboard, Loader2, History, ChevronLeft, ChevronRight, Plus, Palette, ChevronDown, Archive, Copy, Undo2 } from 'lucide-react';
 import { toast } from 'sonner';
 import JSZip from 'jszip';
 import { saveAs } from 'file-saver';
@@ -40,6 +40,7 @@ interface Frame {
   activeGenerationId?: string;
   systemInstructionsOverride?: string;
   masterStyleOverride?: string;
+  isArchived?: boolean;
 }
 
 export interface FrameGeneration {
@@ -220,6 +221,11 @@ export function FrameGrid({
   const [importingHistory, setImportingHistory] = useState(false);
   const [settingActiveGenId, setSettingActiveGenId] = useState<string | null>(null);
   const [isDownloadingMultiple, setIsDownloadingMultiple] = useState(false);
+  const [showAddFrameDialog, setShowAddFrameDialog] = useState(false);
+  const [newFrameNumber, setNewFrameNumber] = useState('');
+  const [newFrameDescription, setNewFrameDescription] = useState('');
+  const [isAddingFrame, setIsAddingFrame] = useState(false);
+  const [showArchived, setShowArchived] = useState(false);
 
   const getFrameFilename = (frameNumber: string) => {
     let formattedNumber = frameNumber;
@@ -318,9 +324,11 @@ export function FrameGrid({
       
       // Sort frames numerically by frameNumber
       const sortedFrms = [...frms].sort((a, b) => {
-        const numA = parseInt(a.frameNumber.replace(/\D/g, '')) || 0;
-        const numB = parseInt(b.frameNumber.replace(/\D/g, '')) || 0;
-        return numA - numB;
+        const parseFrame = (f: string) => {
+          const val = parseFloat(f);
+          return isNaN(val) ? 999999 : val;
+        };
+        return parseFrame(a.frameNumber) - parseFrame(b.frameNumber);
       });
       
       setFrames(sortedFrms);
@@ -641,7 +649,35 @@ export function FrameGrid({
   };
 
   const handleDeleteFrame = async (id: string) => {
-    if (!confirm('Are you sure you want to delete this frame?')) return;
+    if (!confirm('Are you sure you want to archive this frame?')) return;
+    setDeletingFrameId(id);
+    try {
+      await updateDoc(doc(db, 'projects', projectId, 'frames', id), {
+        isArchived: true,
+        status: 'skipped'
+      });
+      toast.success('Frame archived');
+    } catch (error) {
+      toast.error('Failed to archive frame');
+    } finally {
+      setDeletingFrameId(null);
+    }
+  };
+
+  const handleRestoreFrame = async (id: string) => {
+    try {
+      await updateDoc(doc(db, 'projects', projectId, 'frames', id), {
+        isArchived: false,
+        status: 'pending'
+      });
+      toast.success('Frame restored');
+    } catch (error) {
+      toast.error('Failed to restore frame');
+    }
+  };
+
+  const handlePermanentlyDeleteFrame = async (id: string) => {
+    if (!confirm('This will permanently delete the frame and all its images. Continue?')) return;
     setDeletingFrameId(id);
     try {
       const frame = frames.find(f => f.id === id);
@@ -673,7 +709,7 @@ export function FrameGrid({
       }
 
       await deleteDoc(doc(db, 'projects', projectId, 'frames', id));
-      toast.success('Frame deleted');
+      toast.success('Frame permanently deleted');
     } catch (error) {
       toast.error('Failed to delete frame');
     } finally {
@@ -742,6 +778,101 @@ export function FrameGrid({
       toast.error('Failed to update status');
     } finally {
       setUpdatingStatusId(null);
+    }
+  };
+
+  const handleDuplicateFrame = async (frame: Frame) => {
+    try {
+      const currentNumber = frame.frameNumber;
+      let originalNewNumber = '';
+      let duplicateNumber = '';
+
+      const dotIndex = currentNumber.indexOf('.');
+      if (dotIndex === -1) {
+        // "07" -> "07.1" and "07.2"
+        originalNewNumber = `${currentNumber}.1`;
+        duplicateNumber = `${currentNumber}.2`;
+        
+        // Update original
+        await updateDoc(doc(db, 'projects', projectId, 'frames', frame.id), {
+          frameNumber: originalNewNumber,
+          updatedAt: serverTimestamp()
+        });
+      } else {
+        // "07.2" -> "07.3"
+        const base = currentNumber.substring(0, dotIndex);
+        const suffix = parseInt(currentNumber.substring(dotIndex + 1));
+        duplicateNumber = `${base}.${suffix + 1}`;
+      }
+
+      // Create duplicate
+      const framesRef = collection(db, 'projects', projectId, 'frames');
+      const newFrameRef = doc(framesRef);
+      const { id, generatedImageUrl, storagePath, activeGenerationId, ...frameData } = frame;
+      
+      await setDoc(newFrameRef, {
+        ...frameData,
+        frameNumber: duplicateNumber,
+        status: 'pending',
+        isArchived: false,
+        createdAt: serverTimestamp(),
+        updatedAt: serverTimestamp()
+      });
+
+      // Update project frame count
+      await updateDoc(doc(db, 'projects', projectId), {
+        totalFrames: increment(1),
+        updatedAt: serverTimestamp()
+      });
+
+      toast.success(`Frame duplicated as ${duplicateNumber}`);
+      logActivity('Duplicate Frame', `Duplicated frame ${currentNumber} as ${duplicateNumber}.`, projectId, projectName);
+    } catch (error) {
+      console.error(error);
+      toast.error('Failed to duplicate frame');
+    }
+  };
+
+  const handleAddManualFrame = async () => {
+    if (!newFrameNumber.trim()) {
+      toast.error('Please enter a frame number');
+      return;
+    }
+    setIsAddingFrame(true);
+    try {
+      const framesRef = collection(db, 'projects', projectId, 'frames');
+      const newFrameRef = doc(framesRef);
+      
+      await setDoc(newFrameRef, {
+        frameNumber: newFrameNumber.trim(),
+        originalDescription: newFrameDescription.trim(),
+        generationPrompt: newFrameDescription.trim(),
+        narratedText: '',
+        visualIntent: '',
+        category: 'Custom',
+        status: 'pending',
+        projectId,
+        createdAt: serverTimestamp(),
+        updatedAt: serverTimestamp()
+      });
+
+      // Update project frame count
+      await updateDoc(doc(db, 'projects', projectId), {
+        totalFrames: increment(1),
+        updatedAt: serverTimestamp()
+      });
+
+      toast.success(`Frame ${newFrameNumber} added`);
+      logActivity('Add Frame', `Manually added frame ${newFrameNumber}.`, projectId, projectName);
+      
+      setShowAddFrameDialog(false);
+      setNewFrameNumber('');
+      setNewFrameDescription('');
+    } catch (error) {
+      console.error(error);
+      toast.error('Failed to add frame');
+    } finally {
+      setIsAddingFrame(false);
     }
   };
 
@@ -880,6 +1011,29 @@ export function FrameGrid({
           </Select>
 
           <Button
+            variant="outline"
+            size="sm"
+            onClick={() => setShowArchived(!showArchived)}
+            className={cn(
+              "h-9 rounded-lg border-border bg-card text-foreground transition-all",
+              showArchived && "bg-orange-500/10 border-orange-500/50 text-orange-600 dark:text-orange-400"
+            )}
+          >
+            {showArchived ? <Undo2 className="mr-2 h-4 w-4" /> : <Archive className="mr-2 h-4 w-4" />}
+            {showArchived ? "Back to Active" : "Archived"}
+          </Button>
+
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => setShowAddFrameDialog(true)}
+            className="h-9 rounded-lg border-border bg-card text-foreground hover:bg-muted"
+          >
+            <Plus className="mr-2 h-4 w-4" />
+            Add Frame
+          </Button>
+
+          <Button
             onClick={handleGenerateSelected}
             disabled={isGenerating || selectedFrameIds.size === 0}
             aria-busy={isGenerating}
@@ -915,7 +1069,7 @@ export function FrameGrid({
       )}
 
       <div className={cn('grid gap-6', frameGridColsClass(gridColumns))}>
-        {frames.map((frame) => {
+        {frames.filter(f => !!f.isArchived === showArchived).map((frame) => {
           const activeIdx =
             generatingActiveFrameId === null
               ? -1
@@ -1169,13 +1323,37 @@ export function FrameGrid({
                     <Button 
                       variant="ghost" 
                       size="icon" 
+                      className="h-6 w-6 text-foreground hover:text-primary"
+                      onClick={() => handleDuplicateFrame(frame)}
+                    >
+                      <Copy size={14} />
+                    </Button>
+                    <Button 
+                      variant="ghost" 
+                      size="icon" 
                       className="h-6 w-6 text-foreground hover:text-destructive"
                       disabled={deletingFrameId === frame.id}
                       aria-busy={deletingFrameId === frame.id}
-                      onClick={() => handleDeleteFrame(frame.id)}
+                      onClick={() => frame.isArchived ? handleRestoreFrame(frame.id) : handleDeleteFrame(frame.id)}
                     >
-                      {deletingFrameId === frame.id ? <Loader2 size={14} className="animate-spin" /> : <Trash2 size={14} />}
+                      {deletingFrameId === frame.id ? (
+                        <Loader2 size={14} className="animate-spin" />
+                      ) : frame.isArchived ? (
+                        <Undo2 size={14} className="text-orange-500" />
+                      ) : (
+                        <Archive size={14} />
+                      )}
                     </Button>
+                    {frame.isArchived && (
+                      <Button 
+                        variant="ghost" 
+                        size="icon" 
+                        className="h-6 w-6 text-destructive hover:text-destructive"
+                        onClick={() => handlePermanentlyDeleteFrame(frame.id)}
+                      >
+                        <Trash2 size={14} />
+                      </Button>
+                    )}
                   </div>
                 </div>
               <h4 className="font-semibold text-sm line-clamp-1 text-foreground" title={frame.visualIntent}>{frame.visualIntent}</h4>
@@ -1579,6 +1757,53 @@ export function FrameGrid({
               )}
             </div>
           )}
+        </DialogContent>
+      </Dialog>
+      {/* Add Frame Dialog */}
+      <Dialog open={showAddFrameDialog} onOpenChange={setShowAddFrameDialog}>
+        <DialogContent className="sm:max-w-md">
+          <DialogHeader>
+            <DialogTitle>Add Manual Frame</DialogTitle>
+            <DialogDescription>
+              Create a new frame manually by specifying its number and description.
+            </DialogDescription>
+          </DialogHeader>
+          <div className="space-y-4 py-4">
+            <div className="space-y-2">
+              <Label htmlFor="frameNumber">Frame Number</Label>
+              <Input
+                id="frameNumber"
+                placeholder="e.g. 07 or 07.1"
+                value={newFrameNumber}
+                onChange={(e) => setNewFrameNumber(e.target.value)}
+              />
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="description">Description (Visual Intent)</Label>
+              <Textarea
+                id="description"
+                placeholder="Describe what should be in this frame..."
+                value={newFrameDescription}
+                onChange={(e) => setNewFrameDescription(e.target.value)}
+                className="min-h-[100px]"
+              />
+            </div>
+          </div>
+          <DialogFooter>
+            <Button variant="outline" onClick={() => setShowAddFrameDialog(false)}>
+              Cancel
+            </Button>
+            <Button onClick={handleAddManualFrame} disabled={isAddingFrame}>
+              {isAddingFrame ? (
+                <>
+                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                  Adding...
+                </>
+              ) : (
+                'Add Frame'
+              )}
+            </Button>
+          </DialogFooter>
         </DialogContent>
       </Dialog>
     </div>

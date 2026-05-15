@@ -1,0 +1,170 @@
+[
+  {
+    "frame": "03.1",
+    "visuals": "A snowy winter street in Seoul, South Korea, with people wearing warm mittens and coats. No text, no signs, no written words.",
+    "script": "The country has four distinct seasons, with cold winters.",
+    "text_overlays": "Winter in Korea",
+    "comments": "",
+    "style": "Natural Landscapes"
+  },
+  {
+    "frame": "03.2",
+    "visuals": "A sunny summer park in South Korea with people using hand fans and wearing sun hats. No text, no signs, no written words.",
+    "script": "And hot, humid summers in many areas, don’t forget your mittens or your fan!",
+    "text_overlays": "Summer in Korea",
+    "comments": "",
+    "style": "Natural Landscapes"
+  },
+  {
+    "frame": "04",
+    "visuals": "The majestic Hallasan volcano on Jeju Island, South Korea, with its green slopes and clear blue sky. No text, no signs, no written words.",
+    "script": "And guess what? One of its coolest natural spots is Hallasan, an extinct volcano that rises high above Jeju Island. It’s the tallest mountain in the country, no lava, just lovely views.",
+    "text_overlays": "Hallasan",
+    "comments": "",
+    "style": "Natural Landscapes"
+  },
+  {
+    "frame": "06.1",
+    "visuals": "A powerful Siberian tiger walking through a dense Korean forest. No text, no signs, no written words.",
+    "script": "And get this: the Siberian tiger is a symbolic animal admired in Korean culture. Some even say the tiger watches over the land like a fluffy guardian!",
+    "text_overlays": "Siberian tiger",
+    "comments": "",
+    "style": "Animals"
+  },
+  {
+    "frame": "06.2",
+    "visuals": "A black and white Korean magpie bird perched on a tree branch. No text, no signs, no written words.",
+    "script": "And the Korean magpie is also a symbolic animal admired in Korean culture.",
+    "text_overlays": "Korean magpie",
+    "comments": "",
+    "style": "Animals"
+  },
+  {
+    "frame": "07.1",
+    "visuals": "A cute Korean raccoon dog (tanuki) peeking from the bushes in a forest. No text, no signs, no written words.",
+    "script": "But wait, there’s more wildness: you can find raccoon dogs (not actual raccoons!).",
+    "text_overlays": "Raccoon dog",
+    "comments": "",
+    "style": "Cities"
+  },
+  {
+    "frame": "07.2",
+    "visuals": "An elegant deer standing in a lush green forest in South Korea. No text, no signs, no written words.",
+    "script": "Elegant deer, and even tiny wildcats in Korea’s forests. Cute and fierce!",
+    "text_overlays": "Deer",
+    "comments": "",
+    "style": "Animals"
+  },
+  {
+    "frame": "08",
+    "visuals": "A modern cityscape of Seoul, South Korea, at night with glowing skyscrapers and the historic Gyeongbokgung Palace in the foreground. No text, no signs, no written words.",
+    "script": "So, what’s the capital city? It’s Seoul! Packed with glowing skyscrapers, ancient palaces, and K-pop magic. Would you ride a robot taxi there? Because yes… they have those.",
+    "text_overlays": "Seoul",
+    "comments": "",
+    "style": "Cities"
+  },
+  {
+    "frame": "09.1",
+    "visuals": "The sunny Haeundae Beach in Busan, South Korea, with high-rise buildings along the coast. No text, no signs, no written words.",
+    "script": "Other cities are full of charm too! Busan has sunny beaches and giant fish markets where squid is always on the menu.",
+    "text_overlays": "Busan",
+    "comments": "",
+    "style": "Food"
+  },
+  {
+    "frame": "09.2",
+    "visuals": "A vibrant apple orchard in Daegu, South Korea, with ripe red apples on the trees. No text, no signs, no written words.",
+    "script": "Over in Daegu, apples grow in sweet orchards, and you might find fabric-dyeing workshops bursting with color.",
+    "text_overlays": "Daegu",
+    "comments": "",
+    "style": "Food"
+  },
+  {
+    "frame": "10",
+    "visuals": "Gyeongbokgung Palace courtyard in Korea Republic bustling with people and inhabitants. Open space, not closed. No text, no signs, no written words.",
+    "script": "Speaking of people, most folks speak Korean, but in big cities, you might catch a little English or Chinese buzzing through the streets, like a language festival!",
+    "text_overlays": "",
+    "comments": "",
+    "style": "Crowded Place"
+  },
+  {
+    "frame": "11",
+    "visuals": "The bustling Myeongdong street in Korea Republic bustling with people and inhabitants. Open space, not closed. No text, no signs, no written words.",
+    "script": "About 52 million people live in Korea, that’s about the same as California! Imagine if every Californian loved spicy cabbage… because here, they do!",
+    "text_overlays": "",
+    "comments": "",
+    "style": "Food"
+  },
+  {
+    "frame": "12",
+    "visuals": "A traditional Korean table setting with a ceramic bowl of spicy, red fermented kimchi and wooden chopsticks. No text, no signs, no written words.",
+    "script": "Yum time! Kimchi is the superstar side dish, spicy, crunchy, and deliciously fermented. It’s on almost every table.",
+    "text_overlays": "Kimchi",
+    "comments": "",
+    "style": "Food"
+  },
+  {
+    "frame": "13",
+    "visuals": "A steaming bowl of spicy Korean tteokbokki (rice cakes) in a rich red sauce, served at a street food stall. No text, no signs, no written words.",
+    "script": "Or grab some tteokbokki, spicy rice cakes swimming in red sauce. Popular with students and snack lovers. Warning: they’re addicting!",
+    "text_overlays": "Tteokbokki",
+    "comments": "",
+    "style": "Food"
+  },
+  {
+    "frame": "14",
+    "visuals": "A colorful bowl of authentic Korean bibimbap with rice, seasoned vegetables, meat, and a fried egg on top. No text, no signs, no written words.",
+    "script": "And don’t skip bibimbap, a colorful rice bowl with veggies, meat, and a fried egg on top. It’s like a rainbow in a bowl… that you can eat!",
+    "text_overlays": "Bibimbap",
+    "comments": "",
+    "style": "Food"
+  },
+  {
+    "frame": "15",
+    "visuals": "A traditional Korean Chuseok celebration with people wearing colorful hanboks and performing a fan dance. No text, no signs, no written words.",
+    "script": "Now… for celebrations! Chuseok (추석) is the harvest holiday when families wear hanbok, share songs, and say thanks. You might hear drumming and spot a fan dance swooshing by!",
+    "text_overlays": "Chuseok (추석)",
+    "comments": "",
+    "style": "People"
+  },
+  {
+    "frame": "16",
+    "visuals": "A soccer ball on a soccer field. No text, no signs, no written words.",
+    "script": "In 2002, Korea co-hosted the World Cup with Japan and made it all the way to the semi-finals! The crowd roared, neighbors hugged, and everyone red-faced from cheering. What a moment!",
+    "text_overlays": "2002 World Cup",
+    "comments": "",
+    "style": "Objects, instruments, things"
+  },
+  {
+    "frame": "17",
+    "visuals": "South Korean soccer star Son Heung-min celebrating a goal in his national team jersey. No text, no signs, no written words.",
+    "script": "Koreans also love sports. Soccer is huge, and star player Son Heung-min plays in England’s Premier League and scores big.",
+    "text_overlays": "Son Heung-min",
+    "comments": "",
+    "style": "People"
+  },
+  {
+    "frame": "18",
+    "visuals": "South Korean figure skater Yuna Kim performing a graceful routine on the ice in a sparkling outfit. No text, no signs, no written words.",
+    "script": "And ice queen Yuna Kim danced her way to Olympic figure skating gold. Grace in motion!",
+    "text_overlays": "Yuna Kim",
+    "comments": "",
+    "style": "Objects, instruments, things"
+  },
+  {
+    "frame": "19",
+    "visuals": "A cozy themed cafe in Seoul, South Korea, with people sipping drinks while sitting near friendly sheep. No text, no signs, no written words.",
+    "script": "Ready for this? Korea has cafés for everything: cats, robots, raccoons… even sheep. Order a latte and pet a lamb. Yes, seriously!",
+    "text_overlays": "Animal Cafe",
+    "comments": "",
+    "style": "Objects, instruments, things"
+  },
+  {
+    "frame": "20",
+    "visuals": "A beautiful view of the South Korean countryside with rolling green hills and a traditional village in the distance. No text, no signs, no written words.",
+    "script": "Wow, what an unforgettable adventure through South Korea! Bright city lights, ancient palaces, K-pop beats, delicious food, and traditions that go back thousands of years all in one incredible place!",
+    "text_overlays": "",
+    "comments": "",
+    "style": "Food"
+  }
+]
