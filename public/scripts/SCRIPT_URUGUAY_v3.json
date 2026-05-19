@@ -3,90 +3,105 @@
     "frame": "03",
     "visuals": "A vast, flat landscape of grassy prairies (pampas) in Uruguay waving in the wind under a bright blue sky.",
     "script": "Now, imagine flat lands that go on forever, grassy prairies that wave in the wind, and beaches perfect for a summer splash, all along the Atlantic Ocean. Feels like the outdoorsy dream!",
-    "text_overlays": ""
+    "text_overlays": "",
+    "style": "Natural Landscapes"
   },
   {
     "frame": "04.1",
     "visuals": "A massive, ancient ombú tree in Uruguay with its thick, broccoli-shaped canopy and wide base standing in a field.",
     "script": "Oh! And guess what? Uruguay’s got a cool national tree called the ombú, which looks like a giant broccoli shaped by the wind.",
-    "text_overlays": "Ombú"
+    "text_overlays": "Ombú",
+    "style": "Natural Landscapes"
   },
   {
     "frame": "04.2",
     "visuals": "A close-up of a vibrant red ceibo flower, the national flower of Uruguay, blooming on a branch.",
     "script": "And the national flower? A bold red beauty called the ceibo. Not your average backyard garden plants, huh?",
-    "text_overlays": "Ceibo"
+    "text_overlays": "Ceibo",
+    "style": "Objects, instruments, things"
   },
   {
     "frame": "06",
     "visuals": "The Rambla of Montevideo, Uruguay, a long coastal avenue with people walking and the Atlantic Ocean on one side.",
     "script": "The capital, Montevideo, isn’t just big, it’s huge for Uruguay, with over a million people, that’s nearly half the people in the whole country! It’s full of cool art, food, and music.",
-    "text_overlays": "Montevideo"
+    "text_overlays": "Montevideo",
+    "style": "Animals"
   },
   {
     "frame": "07",
     "visuals": "The famous 'Los Dedos' (The Fingers) sculpture emerging from the sand on a beach in Punta del Este, Uruguay.",
     "script": "But there are other neat cities too, like Punta del Este, a beach town that turns into a party zone during summer!\nNow, what do people speak in Uruguay? Mostly Spanish!",
-    "text_overlays": "Punta del Este"
+    "text_overlays": "Punta del Este",
+    "style": "Cities"
   },
   {
     "frame": "08",
     "visuals": "A pleasant afternoon at the Plaza Independencia in Montevideo, Uruguay, with pedestrians walking near the Artigas Mausoleum.",
     "script": "Speaking of people, around 3.5 million live in Uruguay. That’s less than the population of Los Angeles.",
-    "text_overlays": ""
+    "text_overlays": "",
+    "style": "Animals"
   },
   {
     "frame": "09",
     "visuals": "A green pasture in Uruguay with a large herd of cattle grazing under the sun.",
     "script": "And super wild fact: cows outnumber humans here… by a lot! For every person, there are about four cows! Isn’t that crazy?\nMoo-ving on…",
-    "text_overlays": "Cattle Farming"
+    "text_overlays": "Cattle Farming",
+    "style": "People"
   },
   {
     "frame": "10",
     "visuals": "A traditional Uruguayan asado (barbecue) with various cuts of meat sizzling on a large iron grill (parrilla).",
     "script": "Ready to eat? Uruguay knows how to grill! Just like their Argentinian neighbours, their favorite food is asado: a sizzling plate of barbecued meat, shared at family gatherings. Smells amazing, tastes even better!",
-    "text_overlays": "Asado"
+    "text_overlays": "Asado",
+    "style": "Food"
   },
   {
     "frame": "11.1",
     "visuals": "A massive, delicious Uruguayan chivito sandwich overflowing with steak, ham, cheese, egg, and salad.",
     "script": "Also the “Chivito”, Uruguay’s most iconic sandwich! It’s a mountain of juicy steak, cheese, egg, and veggies, all stacked between fresh bread, a feast in your hands.",
-    "text_overlays": "Chivito"
+    "text_overlays": "Chivito",
+    "style": "Food"
   },
   {
     "frame": "11.2",
     "visuals": "A person in Uruguay holding a traditional mate gourd with a metal straw (bombilla) and a thermos tucked under their arm.",
     "script": "And don’t forget mate! A warm herbal drink sipped through a silver straw. People in Uruguay carry mate and their thermos of hot water everywhere. They love it!",
-    "text_overlays": "Mate"
+    "text_overlays": "Mate",
+    "style": "People"
   },
   {
     "frame": "12",
     "visuals": "Candombe drummers in Uruguay performing in a street parade during Carnival, with rhythmic beats and colorful costumes.",
     "script": "Let’s turn up the music! You’ll hear rhythms of candombe echoing through the streets. It’s an Afro-Uruguayan drum and dance style that comes alive during Carnival with parades, glitter, feathers, and feet that just can’t stop dancing!",
-    "text_overlays": "Candombe"
+    "text_overlays": "Candombe",
+    "style": "Cities"
   },
   {
     "frame": "13",
     "visuals": "The Centenario Stadium in Montevideo, Uruguay, where the first-ever World Cup final was held in 1930.",
     "script": "Ready for a world record moment? In 1930, Uruguay hosted and won the very FIRST World Cup. First ever! In total, Uruguay has won the World Cup 2 times.",
-    "text_overlays": "Centenario Stadium"
+    "text_overlays": "Centenario Stadium",
+    "style": "Objects, instruments, things"
   },
   {
     "frame": "14",
     "visuals": "Uruguayan soccer star Luis Suárez celebrating a goal in his national team jersey.",
     "script": "Of course, we can’t chat about soccer without shouting out the legendary Luis Suárez. He made a name for Uruguay on the global stage.",
-    "text_overlays": "Luis Suárez"
+    "text_overlays": "Luis Suárez",
+    "style": "Objects, instruments, things"
   },
   {
     "frame": "15",
     "visuals": "Modern wind turbines spinning across the green Uruguayan countryside under a clear sky.",
     "script": "Want more fun facts? Uruguay runs on clean energy like wind and sun: over 90% of its electricity comes from renewable sources. Green power, big impact!",
-    "text_overlays": "Clean Energy"
+    "text_overlays": "Clean Energy",
+    "style": "Cities"
   },
   {
     "frame": "16",
     "visuals": "A scenic view of the historic town of Colonia del Sacramento, Uruguay, with its cobblestone streets and lighthouse by the river.",
     "script": "Thanks for flying with us to Uruguay! Keep those passports ready, your next discovery is just a cloud away!",
-    "text_overlays": "Colonia del Sacramento"
+    "text_overlays": "Colonia del Sacramento",
+    "style": "Cities"
   }
 ]

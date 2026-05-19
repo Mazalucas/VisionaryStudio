@@ -3,132 +3,154 @@
     "frame": "03.1",
     "visuals": "Dense, green tropical rainforest in the Colombian Amazon with sunlight filtering through the trees.",
     "script": "Now for the landscape, Colombia is like a nature party! It’s got tropical jungles.",
-    "text_overlays": "Amazon Rainforest"
+    "text_overlays": "Amazon Rainforest",
+    "style": "Natural Landscapes"
   },
   {
     "frame": "03.2",
     "visuals": "Snowy peaks of the Colombian Andes mountains under a clear blue sky.",
     "script": "Snowy Andes peaks.",
-    "text_overlays": "Andes Mountains"
+    "text_overlays": "Andes Mountains",
+    "style": "Natural Landscapes"
   },
   {
     "frame": "03.3",
     "visuals": "A sunny Caribbean coastline in Colombia with white sand beaches and palm trees.",
     "script": "And sunny beachy coastlines.",
-    "text_overlays": "Caribbean Coast"
+    "text_overlays": "Caribbean Coast",
+    "style": "Natural Landscapes"
   },
   {
     "frame": "04",
     "visuals": "A map illustration of Colombia showing the Andes mountain range splitting into three distinct branches (Occidental, Central, and Oriental).",
     "script": "Here’s the best twist: the Andes Mountains split into not one, not two, but THREE ranges as they cross Colombia. That means tons of rivers, steep valleys, and super cool hiking trails.",
-    "text_overlays": "Andes Mountains"
+    "text_overlays": "Andes Mountains",
+    "style": "Natural Landscapes"
   },
   {
     "frame": "05",
     "visuals": "A wide view of the Magdalena River in Colombia with small wooden boats and locals fishing along the banks.",
     "script": "Speaking of rivers, meet the Magdalena: it’s like Colombia’s watery highway! People farm, fish, and travel along it every day. Floaty and functional!",
-    "text_overlays": "Magdalena River"
+    "text_overlays": "Magdalena River",
+    "style": "People"
   },
   {
     "frame": "07",
     "visuals": "A massive Andean condor soaring high above the rugged mountain cliffs of Colombia.",
     "script": "Now keep your eyes on the sky! The Andean condor, a giant bird with wings that stretch wider than a car, is Colombia’s national animal!",
-    "text_overlays": "Andean Condor"
+    "text_overlays": "Andean Condor",
+    "style": "Animals"
   },
   {
     "frame": "08",
     "visuals": "A rare pink river dolphin leaping from the freshwater of the Colombian Amazon.",
     "script": "And deep in the Amazon waters you might spot a pink river dolphin! Yup, it’s real—and it only lives in freshwater. Now that’s one fashionable creature.",
-    "text_overlays": "Pink River Dolphin"
+    "text_overlays": "Pink River Dolphin",
+    "style": "Natural Landscapes"
   },
   {
     "frame": "09",
     "visuals": "A high-altitude view of Bogotá, Colombia, with its red brick buildings, historic center, and colorful street murals.",
     "script": "Have you ever heard of Bogotá? It’s Colombia’s capital and it’s way up in the mountains! Bet you didn’t think a city could be high up and full of libraries and street art!",
-    "text_overlays": "Bogotá"
+    "text_overlays": "Bogotá",
+    "style": "Cities"
   },
   {
     "frame": "10.1",
     "visuals": "A festive parade in Medellín, Colombia, with people carrying large, circular flower arrangements (silleteros).",
     "script": "Just a short trip away is Medellín, where flowers bloom in many seasons thanks to its spring-like weather! They even have a giant flower festival with colorful parades.",
-    "text_overlays": "Medellín"
+    "text_overlays": "Medellín",
+    "style": "Crowded Place"
   },
   {
     "frame": "10.2",
     "visuals": "The historic city of Cartagena, Colombia, with its well-preserved colonial stone walls and colorful buildings.",
     "script": "And over on the coast? Cartagena, with its colorful forts and old city walls—it’s like a history book you can walk through!",
-    "text_overlays": "Cartagena"
+    "text_overlays": "Cartagena",
+    "style": "Cities"
   },
   {
     "frame": "11",
     "visuals": "A quiet, colonial street in Villa de Leyva, Colombia, with its large stone-paved plaza and whitewashed buildings.",
     "script": "Colombia’s official language is Spanish, but wait in different regions, people also speak Wayuu, Embera, and Creole.",
-    "text_overlays": "Spanish, Wayuu, Embera, Creole"
+    "text_overlays": "Spanish, Wayuu, Embera, Creole",
+    "style": "Cities"
   },
   {
     "frame": "12",
     "visuals": "A pleasant afternoon at the Plaza de Bolívar in Bogotá, Colombia, with people walking past the historic cathedral and justice palace.",
     "script": "Colombia has a large population, approximately 53 million, about the same as Spain, and it’s still growing.",
-    "text_overlays": "53 Million People"
+    "text_overlays": "53 Million People",
+    "style": "Animals"
   },
   {
     "frame": "13",
     "visuals": "Warm Colombian arepas (corn cakes) stuffed with melted cheese and a fried egg on a traditional ceramic plate.",
     "script": "Time to taste Colombia! Arepas are warm corn cakes, sometimes stuffed with eggs, cheese, or both. Yum squared!",
-    "text_overlays": "Arepas"
+    "text_overlays": "Arepas",
+    "style": "Food"
   },
   {
     "frame": "14",
     "visuals": "A steaming bowl of authentic Colombian ajiaco soup with chicken, corn, and potatoes, served with avocado slices.",
     "script": "Ajiaco is a cozy chicken and potato soup, perfect when you’re up in chilly mountains.",
-    "text_overlays": "Ajiaco"
+    "text_overlays": "Ajiaco",
+    "style": "Food"
   },
   {
     "frame": "15",
     "visuals": "A burlap sack of fresh Colombian coffee beans, a steaming cup of coffee, and a bundle of vibrant tropical flowers on a wooden table.",
     "script": "And don’t forget what Colombia’s famous for: coffee! It’s one of the top producers in the world. And flowers? Colombians grow so many they ship them worldwide!",
-    "text_overlays": "Coffee, Flowers"
+    "text_overlays": "Coffee, Flowers",
+    "style": "Food"
   },
   {
     "frame": "16.1",
     "visuals": "A group of dancers in traditional Colombian attire performing the cumbia with drums in a town square.",
     "script": "Now get ready to dance with cumbia music styles packed with drums, and joyful vibes.",
-    "text_overlays": "Cumbia"
+    "text_overlays": "Cumbia",
+    "style": "Cities"
   },
   {
     "frame": "16.2",
     "visuals": "Musicians playing the accordion and drums to the rhythm of vallenato music in a sunny Colombian courtyard.",
     "script": "And vallenato music packed with accordions.",
-    "text_overlays": "Vallenato"
+    "text_overlays": "Vallenato",
+    "style": "Objects, instruments, things"
   },
   {
     "frame": "17",
     "visuals": "The vibrant Barranquilla Carnival in Colombia with participants in elaborate masks and colorful costumes under a shower of confetti.",
     "script": "And get this, the Barranquilla Carnival is one of South America’s biggest parties! Costumes, dancing, music; it’s like a giant glitter-filled explosion of fun!",
-    "text_overlays": "Barranquilla Carnival"
+    "text_overlays": "Barranquilla Carnival",
+    "style": "Objects, instruments, things"
   },
   {
     "frame": "18",
     "visuals": "Colombian fans in a stadium celebrating a victory, waving the yellow, blue, and red national flag.",
     "script": "Colombia reached the quarterfinals in the 2014 World Cup, their best result as of 2024. Go team!",
-    "text_overlays": "2014 World Cup"
+    "text_overlays": "2014 World Cup",
+    "style": "Objects, instruments, things"
   },
   {
     "frame": "19.1",
     "visuals": "Colombian soccer star James Rodríguez celebrating a goal on the pitch.",
     "script": "And speaking of soccer, James Rodríguez became world-famous as the tournament’s top scorer!",
-    "text_overlays": "James Rodríguez"
+    "text_overlays": "James Rodríguez",
+    "style": "Objects, instruments, things"
   },
   {
     "frame": "19.2",
     "visuals": "Global pop superstar Shakira performing on a stage during a concert in Colombia.",
     "script": "Oh, and pop superstar Shakira? She was born right in Barranquilla!",
-    "text_overlays": "Shakira"
+    "text_overlays": "Shakira",
+    "style": "Objects, instruments, things"
   },
   {
     "frame": "20",
     "visuals": "An aerial view of the Caño Cristales river in Colombia, known as the liquid rainbow, with its vibrant red, yellow, and green underwater plants.",
     "script": "Here’s a colorful fact: in Caño Cristales, aquatic plants make the river shine in five different colors during certain months. It’s nicknamed “The Liquid Rainbow!”",
-    "text_overlays": "Caño Cristales"
+    "text_overlays": "Caño Cristales",
+    "style": "Natural Landscapes"
   }
 ]

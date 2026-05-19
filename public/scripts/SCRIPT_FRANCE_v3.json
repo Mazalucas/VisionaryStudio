@@ -3,120 +3,140 @@
     "frame": "03.1",
     "visuals": "The snow-capped peaks of the French Alps under a clear blue sky.",
     "script": "From the icy peaks of the Alps to the breezy beaches near the Mediterranean, France’s weather is all over the place.",
-    "text_overlays": "Alps"
+    "text_overlays": "Alps",
+    "style": "Natural Landscapes"
   },
   {
     "frame": "03.2",
     "visuals": "Sunny Mediterranean beaches on the French Riviera with turquoise water and palm trees.",
     "script": "From the icy peaks of the Alps to the breezy beaches near the Mediterranean, France’s weather is all over the place.",
-    "text_overlays": "Mediterranean"
+    "text_overlays": "Mediterranean",
+    "style": "Natural Landscapes"
   },
   {
     "frame": "04",
     "visuals": "The Loire River winding through green hills in France, with a fairytale castle (Château de Chambord) in the background.",
     "script": "The Loire River flows across central France, and the Loire Valley is known for scenic landscapes and castles that look like they popped out of a fairy tale.",
-    "text_overlays": "Loire River, Loire Valley"
+    "text_overlays": "Loire River, Loire Valley",
+    "style": "Natural Landscapes"
   },
   {
     "frame": "06",
     "visuals": "A festive Bastille Day parade on the Champs-Élysées in Paris, France, with fireworks and crowds waving French flags.",
     "script": "Those three ideas became the motto of a big moment in history: the French Revolution! “Bastille Day” on July 14 celebrates its beginning more than 200 years ago, when people stood up for freedom. Today, it’s a very festive day, full of parades, fireworks, and music!",
-    "text_overlays": "French Revolution,\nBastille Day"
+    "text_overlays": "French Revolution,\nBastille Day",
+    "style": "Crowded Place"
   },
   {
     "frame": "07",
     "visuals": "The Gallic rooster national symbol of France, shown on a gold coin and a sports jersey.",
     "script": "Speaking of national symbols, the Gallic rooster is a national symbol and appears proudly on Olympic uniforms and even French coins. Cock-a-doodle-doo, France!",
-    "text_overlays": "Gallic Rooster"
+    "text_overlays": "Gallic Rooster",
+    "style": "Objects, instruments, things"
   },
   {
     "frame": "08",
     "visuals": "Fluffy marmots and chamois in the rocky mountain landscape of the French Alps.",
     "script": "In the French Alps, you might meet a fluffy marmot or a leaping chamois.",
-    "text_overlays": "Marmot, Chamois"
+    "text_overlays": "Marmot, Chamois",
+    "style": "Natural Landscapes"
   },
   {
     "frame": "09",
     "visuals": "The Eiffel Tower in Paris, France, glowing at night with the city lights and Seine River in the foreground.",
     "script": "Ever heard of Paris? Of course you have! It’s the capital and home to the Eiffel Tower, Notre Dame’s Cathedral and the Louvre, one of the world’s biggest museums with over 35,000 pieces of art including the Mona Lisa.",
-    "text_overlays": "Paris, Eiffel Tower\nLouvre"
+    "text_overlays": "Paris, Eiffel Tower\nLouvre",
+    "style": "Cities"
   },
   {
     "frame": "10.1",
     "visuals": "The bustling Paul Bocuse indoor food market in Lyon, France, with stalls of fresh produce and cheese.",
     "script": "Over in Lyon—aka the food capital of France—you can visit the famous Paul Bocuse Market and try all kinds of treats.",
-    "text_overlays": "Lyon, Paul Bocuse Market"
+    "text_overlays": "Lyon, Paul Bocuse Market",
+    "style": "Crowded Place"
   },
   {
     "frame": "10.2",
     "visuals": "The colorful Old Port of Marseille, France, with fishing boats and historic buildings along the water.",
     "script": "And Marseille? It’s a sunny port city with a vibrant atmosphere.",
-    "text_overlays": "Marseille"
+    "text_overlays": "Marseille",
+    "style": "Cities"
   },
   {
     "frame": "11",
     "visuals": "The red carpet at the Palais des Festivals in Cannes, France, with palm trees and photographers under a sunny sky.",
     "script": "And down south in Cannes, a famous film festival rolls out the red carpet every May, welcoming movie stars from around the world.",
-    "text_overlays": "Cannes Film Festival"
+    "text_overlays": "Cannes Film Festival",
+    "style": "Crowded Place"
   },
   {
     "frame": "12",
     "visuals": "A charming street in the historic center of Rennes, France, with half-timbered houses and a few locals walking.",
     "script": "Speaking of people, most folks in France speak French, but some regions use languages like Breton and Occitan.",
-    "text_overlays": "Breton, Occitan"
+    "text_overlays": "Breton, Occitan",
+    "style": "People"
   },
   {
     "frame": "13",
     "visuals": "A pleasant afternoon at the Place de la Concorde in Paris, France, with pedestrians walking near the Egyptian obelisk.",
     "script": "Here's a fun fact: despite being more than twice the size of Mexico, France has only half its population, with approximately 65 million people residing in the land of cheese lovers!",
-    "text_overlays": ""
+    "text_overlays": "",
+    "style": "Animals"
   },
   {
     "frame": "14",
     "visuals": "A variety of French cheeses (Brie, Roquefort, Camembert) on a wooden board with a fresh baguette.",
     "script": "Oh yes… cheese. France has over 300 kinds, often paired with a crusty baguette for picnic perfection.",
-    "text_overlays": "Cheese, Baguette"
+    "text_overlays": "Cheese, Baguette",
+    "style": "Objects, instruments, things"
   },
   {
     "frame": "15",
     "visuals": "A classic French breakfast with a flaky butter croissant and a cup of café au lait on a small café table.",
     "script": "Crepes, crusty baguettes, and croissants are some of my favorites.",
-    "text_overlays": "Croissant"
+    "text_overlays": "Croissant",
+    "style": "Food"
   },
   {
     "frame": "16",
     "visuals": "Vibrant purple lavender fields in bloom in Provence, France, with a stone cottage and grazing cows in the distance.",
     "script": "Oh, and in the countryside, you can find and eat grapes, while you walk though lavender fields in bloom. Magical, right?",
-    "text_overlays": ""
+    "text_overlays": "",
+    "style": "Objects, instruments, things"
   },
   {
     "frame": "17",
     "visuals": "French fans celebrating a World Cup victory in a Parisian square, with flags waving and blue, white, and red smoke.",
     "script": "Did you know France won the World Cup twice?! in 1998 and again in 2018. Both times came with epic parties and dancing in the streets!",
-    "text_overlays": "World Cup, 1998, 2018"
+    "text_overlays": "World Cup, 1998, 2018",
+    "style": "Objects, instruments, things"
   },
   {
     "frame": "18.1",
     "visuals": "French soccer star Kylian Mbappé celebrating a goal on the pitch.",
     "script": "And speaking of stars, Kylian Mbappé is a soccer superhero.\nHe nearly secured France's third gold star in the 2022 World Cup final, scoring 3 goals despite their loss.",
-    "text_overlays": "Kylian Mbappé"
+    "text_overlays": "Kylian Mbappé",
+    "style": "Objects, instruments, things"
   },
   {
     "frame": "18.2",
     "visuals": "Polish-born French scientist Marie Curie working in her historic laboratory in Paris.",
     "script": "France is also home to great scientists like Marie Curie.",
-    "text_overlays": "Marie Curie"
+    "text_overlays": "Marie Curie",
+    "style": "Objects, instruments, things"
   },
   {
     "frame": "19",
     "visuals": "A global map highlighting France and its various overseas territories across the world's oceans.",
     "script": "Surprise! France has 12 time zones—more than any other country, thanks to its faraway regions. These are places like islands in the Caribbean and Pacific that are part of France, even though they’re super far from Europe. So it’s always French time somewhere!",
-    "text_overlays": ""
+    "text_overlays": "",
+    "style": "Natural Landscapes"
   },
   {
     "frame": "20",
     "visuals": "An airplane flying over the French countryside seen from above, with a camera and croissant on a tray table.",
     "script": "Speaking of time, it’s time to go! The world waits!",
-    "text_overlays": ""
+    "text_overlays": "",
+    "style": "Objects, instruments, things"
   }
 ]

@@ -3,120 +3,140 @@
     "frame": "03",
     "visuals": "The lush, dense canopy of the Brazilian Amazon rainforest with a winding river visible from above.",
     "script": "Brazil is often called “the lung of the earth” because it has the largest tropical rainforest on Earth, the Amazon! And no, it's not the one that delivers packages to your door.",
-    "overlay": "Amazon"
+    "overlay": "Amazon",
+    "style": "Natural Landscapes"
   },
   {
     "frame": "04",
     "visuals": "The wide and mighty Amazon River flowing through the thick green rainforest of Brazil under a tropical sky.",
     "script": "The Amazon rainforest is so giant, it actually affects the Earth’s weather. Yup, the WHOLE planet! It's also shared with other countries in South America. In there you can find the mighty Amazon River, the second longest river in the whole world.",
-    "overlay": "Amazon River"
+    "overlay": "Amazon River",
+    "style": "Natural Landscapes"
   },
   {
     "frame": "05.1",
     "visuals": "A colorful Brazilian toucan perched on a tropical tree branch in the Amazon.",
     "script": "…and –listen to this– MILLIONS of species of plants and animals. That includes colorful toucans.",
-    "overlay": "toucan"
+    "overlay": "toucan",
+    "style": "Animals"
   },
   {
     "frame": "05.2",
     "visuals": "A stealthy jaguar prowling through the dense undergrowth of the Brazilian rainforest.",
     "script": "Stealthy jaguars, and all kinds of monkeys.",
-    "overlay": "jaguar"
+    "overlay": "jaguar",
+    "style": "Animals"
   },
   {
     "frame": "06",
     "visuals": "A group of diverse Brazilian monkeys, including spider monkeys and marmosets, playing in the trees of the jungle.",
     "script": "And when I say that I really mean it. There are about 260 known species of monkeys worldwide, and the greatest diversity is found in Brazil, home to more than 130 species.",
-    "overlay": "monkeys"
+    "overlay": "monkeys",
+    "style": "Animals"
   },
   {
     "frame": "08",
     "visuals": "An aerial view of Brasília, the capital of Brazil, showing its unique airplane-shaped city layout and modern architecture.",
     "script": "The capital of this awesome country is Brasília, a city designed to look like a cross from above that ended up looking like a bird or airplane!",
-    "overlay": "Brasília"
+    "overlay": "Brasília",
+    "style": "Cities"
   },
   {
     "frame": "09",
     "visuals": "The massive urban skyline of São Paulo, Brazil, with skyscrapers stretching to the horizon and a few busy city streets.",
     "script": "I bet you’ve probably heard of São Paulo, the biggest city in the entire Americas, and one of the biggest and crowded cities in the world",
-    "overlay": "São Paulo"
+    "overlay": "São Paulo",
+    "style": "Cities"
   },
   {
     "frame": "10.1",
     "visuals": "A vibrant Carnival parade in Rio de Janeiro, Brazil, with dancers in elaborate, colorful feather costumes.",
     "script": "And Rio de Janeiro, a colorful city very well-known for its world-class carnivals.",
-    "overlay": "Rio de Janeiro"
+    "overlay": "Rio de Janeiro",
+    "style": "Cities"
   },
   {
     "frame": "10.2",
     "visuals": "The sunny beaches of Copacabana in Rio de Janeiro, Brazil, with people enjoying the sand and waves.",
     "script": "Seriously, Rio’s Carnival is one of the biggest parties on Earth, with parades, costumes, and dancing that lasts for days.",
-    "overlay": "Carnival"
+    "overlay": "Carnival",
+    "style": "Crowded Place"
   },
   {
     "frame": "11",
     "visuals": "The iconic Christ the Redeemer statue in Rio de Janeiro, Brazil, standing atop Corcovado mountain with the city and bay in the background.",
     "script": "And get this: there's a 30-meter-tall statue of Jesus overlooking Rio de Janeiro, that’s like a 9-story building blessing the city with a giant hug!",
-    "overlay": "Christ the Redeemer"
+    "overlay": "Christ the Redeemer",
+    "style": "Cities"
   },
   {
     "frame": "12",
     "visuals": "A quiet, historic street in the town of Paraty, Brazil, with white buildings, colorful doors, and cobblestone paths.",
     "script": "Now, what’s the main language people speak there? Portuguese! Brazil's the only country in all of South America that speaks it when most of its neighbors speak Spanish.",
-    "overlay": ""
+    "overlay": "",
+    "style": "Cities"
   },
   {
     "frame": "13",
     "visuals": "A pleasant afternoon at the Praça da Sé in São Paulo, Brazil, with pedestrians walking near the historic cathedral.",
     "script": "Speaking of people speaking, hear this: Brazil has about 215 million people! That’s almost two-thirds the size of the entire U.S. population.",
-    "overlay": ""
+    "overlay": "",
+    "style": "Animals"
   },
   {
     "frame": "14",
     "visuals": "A traditional Brazilian meal spread on a table with black beans (feijoada), rice, and a platter of tropical fruits like mango and papaya.",
     "script": "Now… food time! Brazilian meals often have rice, beans, and yummy tropical fruits like mangos, papayas, and guavas, oh my!",
-    "overlay": ""
+    "overlay": "",
+    "style": "Food"
   },
   {
     "frame": "15",
     "visuals": "A close-up of hands harvesting ripe red coffee beans in a sun-drenched Brazilian coffee plantation.",
     "script": "It also grows tons of coffee too! it’s usually the top coffee exporter in the world!",
-    "overlay": "Coffee"
+    "overlay": "Coffee",
+    "style": "Food"
   },
   {
     "frame": "16.1",
     "visuals": "Street dancers in vibrant costumes performing the fast-paced samba in a Brazilian city square.",
     "script": "This joyful country is known for music styles like samba, super fun and fast.",
-    "overlay": "samba"
+    "overlay": "samba",
+    "style": "Cities"
   },
   {
     "frame": "16.2",
     "visuals": "A duo playing a smooth bossa nova melody on acoustic guitars on an Ipanema beach at sunset in Brazil.",
     "script": "And bossa nova, which is smooth and chill. Great for dancing in the streets or vibing on the beach!",
-    "overlay": "bossa nova"
+    "overlay": "bossa nova",
+    "style": "Natural Landscapes"
   },
   {
     "frame": "17",
     "visuals": "A golden trophy displayed between the dates '1958, 1962, 1970, 1994, 2002' to represent Brazil's five World Cup victories.",
     "script": "Now here comes a goal-tastic fact: Brazil has won the World Cup five times! More than any other country! Soccer isn’t just a sport here, it’s practically a national treasure.",
-    "overlay": ""
+    "overlay": "",
+    "style": "Objects, instruments, things"
   },
   {
     "frame": "18",
     "visuals": "A mural in a Brazilian street depicting the legendary soccer player Pelé celebrating a goal.",
     "script": "It’s no surprise that some of the greatest players of all time were born here. The legendary Pelé is the most famous of all — we’re talking GOAT here! He is still the only player in history to win three World Cups, winning his first at just 17.",
-    "overlay": "Pelé"
+    "overlay": "Pelé",
+    "style": "Objects, instruments, things"
   },
   {
     "frame": "19.1",
     "visuals": "Brazilian soccer star Neymar celebrating a goal on the pitch.",
     "script": "Neymar is one of Brazil’s top soccer stars today, known for his incredible skills.",
-    "overlay": "Neymar"
+    "overlay": "Neymar",
+    "style": "Objects, instruments, things"
   },
   {
     "frame": "19.2",
     "visuals": "Brazilian soccer player Vinícius Jr. running with the ball during a match.",
     "script": "And Vinícius Jr. is known for his speed and exciting style of play! They keep the magic going.",
-    "overlay": "Vinicius Jr"
+    "overlay": "Vinicius Jr",
+    "style": "Objects, instruments, things"
   }
 ]

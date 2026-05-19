@@ -10,6 +10,7 @@ export interface ActivityLog {
   details: string;
   projectId?: string;
   projectName?: string;
+  metadata?: any;
   timestamp: any;
 }
 
@@ -17,7 +18,8 @@ export const logActivity = async (
   action: string,
   details: string,
   projectId?: string,
-  projectName?: string
+  projectName?: string,
+  metadata?: any
 ) => {
   try {
     const user = auth.currentUser;
@@ -34,6 +36,7 @@ export const logActivity = async (
       details,
       projectId: projectId || null,
       projectName: projectName || null,
+      metadata: metadata || null,
       timestamp: serverTimestamp(),
     };
 

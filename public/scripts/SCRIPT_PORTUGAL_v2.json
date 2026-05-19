@@ -4,146 +4,167 @@
     "visuals": "A sunny Atlantic coast in Portugal with golden cliffs and blue water under a clear summer sky.",
     "script": "The weather? Portugal usually has mild temperatures, with sunny summers and rainy winters, especially along the coast. Pack your sunglasses and maybe a raincoat, just in case!",
     "text_overlays": "",
-    "comments": ""
+    "comments": "",
+    "style": "Objects, instruments, things"
   },
   {
     "frame": "03.2",
     "visuals": "A rainy winter day in the Portuguese countryside with green hills and dark clouds.",
     "script": "",
     "text_overlays": "",
-    "comments": ""
+    "comments": "",
+    "style": "Objects, instruments, things"
   },
   {
     "frame": "04",
     "visuals": "A scenic view of the Douro River winding through steep hills covered in terraced vineyards in Portugal, with a traditional rabelo boat on the water.",
     "script": "Now for my favorite part: landscapes! The Douro River winds through hills and vineyards in the north. You can even spot traditional boats called rabelos gliding past rows of grapevines!",
     "text_overlays": "Douro River",
-    "comments": ""
+    "comments": "",
+    "style": "Natural Landscapes"
   },
   {
     "frame": "06",
     "visuals": "A colorful Rooster of Barcelos statue, a traditional Portuguese symbol, displayed in a vibrant town square.",
     "script": "Speaking of symbols, keep your eyes peeled for the Rooster of Barcelos. This colorful bird is EVERYWHERE, bringing good luck like a feathered charm.",
     "text_overlays": "Rooster of Barcelos",
-    "comments": ""
+    "comments": "",
+    "style": "Animals"
   },
   {
     "frame": "07.1",
     "visuals": "An Iberian wolf standing in a misty mountain forest in Portugal.",
     "script": "High in Portugal’s mountains lives the Iberian wolf: a protected species with mysterious golden eyes. Who’s the (mountain) boss now?",
     "text_overlays": "Iberian wolf",
-    "comments": ""
+    "comments": "",
+    "style": "Natural Landscapes"
   },
   {
     "frame": "07.2",
     "visuals": "A rare Iberian lynx prowling through the dense cork oak forests of Portugal.",
     "script": "If you’re super lucky, a rare Iberian lynx sneaking through the forest!",
     "text_overlays": "Iberian lynx",
-    "comments": ""
+    "comments": "",
+    "style": "Natural Landscapes"
   },
   {
     "frame": "07.3",
     "visuals": "A group of pink flamingos wading through a shallow lagoon in the Algarve region of Portugal.",
     "script": "Oh, and down below? You'll also find bright flamingos wading through lagoons.",
     "text_overlays": "Flamingos",
-    "comments": ""
+    "comments": "",
+    "style": "Objects, instruments, things"
   },
   {
     "frame": "08",
     "visuals": "The iconic view of Lisbon, Portugal, with its red-roofed buildings, pastel walls, and the historic yellow tram climbing a steep hill.",
     "script": "Quick quiz: can you name Portugal’s capital? It’s Lisbon! A city built on seven hills with pastel-colored houses, it almost looks like it’s been sprinkled with candy!",
     "text_overlays": "Lisbon",
-    "comments": ""
+    "comments": "",
+    "style": "Cities"
   },
   {
     "frame": "09.1",
     "visuals": "The colorful Ribeira district in Porto, Portugal, with its ancient houses along the Douro River and the Dom Luís I Bridge.",
     "script": "Then there’s Porto, a city famous for its sweet wine, colorful riverside streets, and epic bridges that stretch across the Douro River… wow, what a view!",
     "text_overlays": "Porto",
-    "comments": ""
+    "comments": "",
+    "style": "Cities"
   },
   {
     "frame": "09.2",
     "visuals": "The historic University of Coimbra in Portugal with its ancient stone buildings and students in traditional black capes.",
     "script": "And Coimbra? Home to students who wear long black capes. Yep, like real-life wizards at a school of magic!",
     "text_overlays": "Coimbra",
-    "comments": ""
+    "comments": "",
+    "style": "Cities"
   },
   {
     "frame": "10",
     "visuals": "A narrow, historic street in the Alfama district of Lisbon, Portugal, with laundry hanging from balconies and patterned tile walls (azulejos).",
     "script": "When it comes to language, most folks speak Portuguese, but guess what? In some northeast villages, they speak a rare one called Mirandese. Kind of like a secret code!",
     "text_overlays": "",
-    "comments": ""
+    "comments": "",
+    "style": "Cities"
   },
   {
     "frame": "11",
     "visuals": "A pleasant afternoon at the Praça do Comércio in Lisbon, Portugal, with pedestrians walking near the yellow arches and the Tagus River.",
     "script": "Portugal’s home to about 10 million people: that’s a bit more than New York City! So, imagine one giant, delicious dinner party.",
     "text_overlays": "",
-    "comments": ""
+    "comments": "",
+    "style": "Animals"
   },
   {
     "frame": "12",
     "visuals": "A traditional Portuguese dish of Bacalhau à Brás (shredded cod with potatoes and eggs) served on a platter with olives.",
     "script": "Speaking of food… mmm! Bacalhau is dried cod, and they cook it hundreds of tasty ways. Grilled, baked, or in a creamy casserole… yum!",
     "text_overlays": "Bacalhau",
-    "comments": ""
+    "comments": "",
+    "style": "Food"
   },
   {
     "frame": "13",
     "visuals": "A tray of freshly baked Portuguese pastéis de nata (custard tarts) with their characteristic burnt tops, dusted with cinnamon.",
     "script": "Don’t miss pastéis de nata! These warm custard tarts are usually served in cafés, sometimes with cinnamon on top. Dessert? YES, please!",
     "text_overlays": "Pastéis de nata",
-    "comments": ""
+    "comments": "",
+    "style": "Objects, instruments, things"
   },
   {
     "frame": "14",
     "visuals": "A lively street festival in Lisbon for the Feast of Saint Anthony, with people grilling sardines and colorful decorations overhead.",
     "script": "And who’s hungry for a party? At summer street fests called Festas dos Santos! People dance, decorate, and grill sardines right on the street. Talk about flavor and fun!",
     "text_overlays": "Santos Populares",
-    "comments": ""
+    "comments": "",
+    "style": "Cities"
   },
   {
     "frame": "15",
     "visuals": "A soulful Fado singer performing in a dimly lit, traditional tavern in Lisbon, accompanied by a Portuguese guitar.",
     "script": "Ready to hear something soulful? Fado is a traditional music style where singers tell emotional stories with twangy Portuguese guitars. It’s like music that hugs your heart.",
     "text_overlays": "Fado",
-    "comments": ""
+    "comments": "",
+    "style": "Objects, instruments, things"
   },
   {
     "frame": "16",
     "visuals": "A historic illustration of Portuguese caravel ships sailing across the Atlantic Ocean during the Age of Discovery.",
     "script": "And history? In the 1400s, Portuguese explorers set out by ship, sailing to Africa, Asia, and the Americas. These sea journeys changed world maps forever.",
     "text_overlays": "Age of Discovery",
-    "comments": ""
+    "comments": "",
+    "style": "Natural Landscapes"
   },
   {
     "frame": "17",
     "visuals": "A vintage photo of Portuguese soccer legend Eusébio celebrating a goal during the 1966 World Cup.",
     "script": "Flash forward to 1966: football legend Eusébio led Portugal to third place in their first big tournament. What a thrilling kickoff!",
     "text_overlays": "Eusébio",
-    "comments": ""
+    "comments": "",
+    "style": "Objects, instruments, things"
   },
   {
     "frame": "18",
     "visuals": "Portuguese soccer superstar Cristiano Ronaldo celebrating a goal in his national team jersey.",
     "script": "Today, soccer still rules. Cristiano Ronaldo, born on Madeira Island, is one of the world’s top players.",
     "text_overlays": "Cristiano Ronaldo",
-    "comments": ""
+    "comments": "",
+    "style": "Objects, instruments, things"
   },
   {
     "frame": "19",
     "visuals": "Portuguese triathlete Vanessa Fernandes racing on a professional track with her national team uniform.",
     "script": "And Vanessa Fernandes? She crushed it in triathlon, racing to Olympic silver in 2008!",
     "text_overlays": "Vanessa Fernandes",
-    "comments": ""
+    "comments": "",
+    "style": "Food"
   },
   {
     "frame": "20",
     "visuals": "Massive waves crashing on the coast of Nazaré, Portugal, with surfers attempting to ride the giant swells.",
     "script": "Before we go, here’s a splashy fact: Portugal’s coast is over 800 kilometers long with waves so big, surfers come from around the planet. Cowabunga!",
     "text_overlays": "Nazaré Waves",
-    "comments": ""
+    "comments": "",
+    "style": "Objects, instruments, things"
   }
 ]

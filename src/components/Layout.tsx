@@ -3,14 +3,15 @@ import { auth } from '../firebase';
 import { User } from 'firebase/auth';
 import { Button } from '@/components/ui/button';
 import { TooltipProvider } from '@/components/ui/tooltip';
-import { LayoutDashboard, Image as ImageIcon, KeyRound, LogOut } from 'lucide-react';
+import { LayoutDashboard, Image as ImageIcon, KeyRound, LogOut, Activity } from 'lucide-react';
 import { ThemeToggle } from './ThemeToggle';
+import { AppView } from '../App';
 
 interface LayoutProps {
   children: React.ReactNode;
   user: User;
-  currentView: 'projects' | 'project-detail' | 'styles' | 'api-keys';
-  setView: (view: 'projects' | 'project-detail' | 'styles' | 'api-keys') => void;
+  currentView: AppView;
+  setView: (view: AppView) => void;
 }
 
 export function Layout({ children, user, currentView, setView }: LayoutProps) {
@@ -48,6 +49,13 @@ export function Layout({ children, user, currentView, setView }: LayoutProps) {
                 onClick={() => setView('api-keys')}
               >
                 <KeyRound className="mr-3 h-5 w-5" /> API Keys
+              </Button>
+              <Button 
+                variant={currentView === 'activity' ? 'secondary' : 'ghost'} 
+                className="w-full justify-start h-11 font-medium"
+                onClick={() => setView('activity')}
+              >
+                <Activity className="mr-3 h-5 w-5" /> Activity Log
               </Button>
             </nav>
           </div>
@@ -88,3 +96,4 @@ export function Layout({ children, user, currentView, setView }: LayoutProps) {
     </TooltipProvider>
   );
 }
+

@@ -3,108 +3,126 @@
     "frame": "3",
     "visuals": "Map of the Japanese archipelago highlighting the four main islands (Honshu, Hokkaido, Kyushu, and Shikoku) with snowy landscapes in Hokkaido and tropical beaches in Okinawa.",
     "script": "Japan’s got four main islands: Honshu, Hokkaido, Kyushu, and Shikoku. It stretches so far from north to south that you can find snow in northern areas like Hokkaido and sunny beaches in southern places like Okinawa. Talk about wearing both coats and flip-flops!",
-    "text_overlays": "Hokkaido, Okinawa"
+    "text_overlays": "Hokkaido, Okinawa",
+    "style": "Natural Landscapes"
   },
   {
     "frame": "4",
     "visuals": "Japanese landscape featuring steaming natural hot springs, dense green forests, and the Sakurajima volcano erupting in the background.",
     "script": "Speaking of cool places, Japan's land has it all: steaming hot springs, spooky forests, towering mountains, and kraken-level active volcanoes like Sakurajima. Yep, this country even shakes, rattles, and rolls with earthquakes!",
-    "text_overlays": "Sakurajima"
+    "text_overlays": "Sakurajima",
+    "style": "Natural Landscapes"
   },
   {
     "frame": "6",
     "visuals": "A Japanese cherry blossom tree (sakura) in full bloom with pink petals falling in a traditional park with stone lanterns.",
     "script": "And every spring, people celebrate another national symbol: the beautiful cherry blossom, or sakura.",
-    "text_overlays": "Sakura"
+    "text_overlays": "Sakura",
+    "style": "Natural Landscapes"
   },
   {
     "frame": "7",
     "visuals": "Families gathered on blue mats for a Hanami picnic under blooming cherry trees in a Japanese park.",
     "script": "​​There’s a beautiful Japanese spring tradition called Hanami﻿, where people gather under blooming cherry trees to picnic and enjoy the short‑lived beauty of the flowers together.",
-    "text_overlays": "Hanami"
+    "text_overlays": "Hanami",
+    "style": "Natural Landscapes"
   },
   {
     "frame": "8",
     "visuals": "Japanese snow monkeys (macaques) soaking in a natural hot spring in a snowy landscape, and a red-crowned crane in the wetlands.",
     "script": "Now meet some furry and feathery locals! Japanese macaques, also called snow monkeys, love soaking in warm hot springs like tiny, fuzzy grandpas. And just wait till you see the graceful red-crowned crane doing its elegant dance in the wetlands!",
-    "text_overlays": "Snow Monkeys, Red-Crowned Crane"
+    "text_overlays": "Snow Monkeys, Red-Crowned Crane",
+    "style": "Animals"
   },
   {
     "frame": "9",
     "visuals": "Tokyo cityscape at dusk showing the contrast between a traditional Buddhist temple and modern neon-lit skyscrapers.",
     "script": "Now here's a question: Can you guess what it is? Yep, it’s Tokyo—the capital of Japan and a place where ancient temples peek out between neon skyscrapers.",
-    "text_overlays": "Tokyo"
+    "text_overlays": "Tokyo",
+    "style": "Cities"
   },
   {
     "frame": "10.1",
     "visuals": "The towering green stalks of the Arashiyama Bamboo Grove in Kyoto.",
     "script": "Then there’s Kyoto, full of ancient shrines and whispering bamboo groves—it feels like stepping into a storybook!",
-    "text_overlays": "Kyoto"
+    "text_overlays": "Kyoto",
+    "style": "Monuments"
   },
   {
     "frame": "10.2",
     "visuals": "A vibrant street food stall in Dotonbori, Osaka, with neon signs and vendors grilling takoyaki.",
     "script": "And Osaka? It’s known for its yummy street food and its lively culture.",
-    "text_overlays": "Osaka"
+    "text_overlays": "Osaka",
+    "style": "Cities"
   },
   {
     "frame": "11",
     "visuals": "A moderately busy street in the Gion district of Kyoto with pedestrians in traditional and modern dress walking past wooden teahouses.",
     "script": "Most people in Japan speak Japanese, but don’t be surprised to hear different dialects in different regions—it’s like every area has its own flavor!",
-    "text_overlays": "Japanese"
+    "text_overlays": "Japanese",
+    "style": "Cities"
   },
   {
     "frame": "12",
     "visuals": "A bustling but not overcrowded plaza in front of Tokyo Station's Marunouchi exit with people walking in an organized manner.",
     "script": "Japan has around 125 million people—that’s about the same as all of Mexico! Imagine that many people lining up for sushi!",
-    "text_overlays": ""
+    "text_overlays": "",
+    "style": "Crowded Place"
   },
   {
     "frame": "13",
     "visuals": "A platter of traditional Japanese sushi including nigiri and maki rolls with ginger and wasabi on the side.",
     "script": "Speaking of sushi… yum! It’s a tasty combo of rice, seaweed, and fresh fish.",
-    "text_overlays": "Sushi"
+    "text_overlays": "Sushi",
+    "style": "Animals"
   },
   {
     "frame": "14",
     "visuals": "A steaming bowl of authentic Japanese ramen with pork slices, egg, and green onions, served in a traditional ceramic bowl.",
     "script": "Then there’s ramen: noodle soup so warm and slurpy it's perfect for chilly nights.",
-    "text_overlays": "Ramen"
+    "text_overlays": "Ramen",
+    "style": "Food"
   },
   {
     "frame": "15",
     "visuals": "Japanese mochi desserts in various colors served on a ceramic plate during a traditional New Year celebration.",
     "script": "And mochi, the chewy rice dessert that pops up during New Year festivals, is like a soft, sweet hug.",
-    "text_overlays": "Mochi"
+    "text_overlays": "Mochi",
+    "style": "Food"
   },
   {
     "frame": "16",
     "visuals": "Performers in traditional attire playing large Taiko drums during a Japanese summer festival (Matsuri).",
     "script": "Let’s move to music and dancing! During summer festivals, people bang big Taiko drums and perform Bon Odori dances in circles. It's loud, joyful, and totally unforgettable.",
-    "text_overlays": "Taiko Drums, Bon Odori"
+    "text_overlays": "Taiko Drums, Bon Odori",
+    "style": "Crowded Place"
   },
   {
     "frame": "17",
     "visuals": "The FIFA World Cup trophy displayed between the flags of Japan and South Korea.",
     "script": "Here’s a cool memory: in 2002, Japan co-hosted the FIFA World Cup with South Korea, the first time it was ever held in Asia! Fans cheered like crazy from all corners of the world.",
-    "text_overlays": "FIFA World Cup"
+    "text_overlays": "FIFA World Cup",
+    "style": "Objects, instruments, things"
   },
   {
     "frame": "18.1",
     "visuals": "Japanese tennis player Naomi Osaka serving on a hard court during a tournament.",
     "script": "Sports lovers, rejoice! Japan is home to Naomi Osaka, a world-famous tennis player.",
-    "text_overlays": "Naomi Osaka"
+    "text_overlays": "Naomi Osaka",
+    "style": "Objects, instruments, things"
   },
   {
     "frame": "18.2",
     "visuals": "Japanese baseball star Shohei Ohtani in a batting stance at a stadium.",
     "script": "And Shohei Ohtani? He’s the baseball star known for both pitching and hitting—what a double play!",
-    "text_overlays": "Shohei Ohtani"
+    "text_overlays": "Shohei Ohtani",
+    "style": "Crowded Place"
   },
   {
     "frame": "19",
     "visuals": "A brightly lit Japanese vending machine on a clean Tokyo street corner selling a variety of colorful bottled drinks.",
     "script": "Ready for a vending machine adventure? In Japan, machines sell everything, from hot soup to wacky toys. Grab a button, press it, and boom, instant noodle surprise!",
-    "text_overlays": ""
+    "text_overlays": "",
+    "style": "Objects, instruments, things"
   }
 ]

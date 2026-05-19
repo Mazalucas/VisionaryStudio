@@ -94,7 +94,22 @@ export function MigrateButton() {
 
         for (const frame of framesData) {
           const category = frame.style || 'Objects, instruments, things';
-          const matchedStyleId = styleMap.get(category.toLowerCase().trim());
+          const normalizedCat = category.toLowerCase().trim();
+          let matchedStyleId = styleMap.get(normalizedCat);
+
+          if (!matchedStyleId) {
+            // Fuzzy match to fix mismatched tags like "Objects" vs "Objects, instruments, things"
+            for (const [dbName, dbId] of styleMap.entries()) {
+              if (normalizedCat.includes(dbName) || dbName.includes(normalizedCat)) {
+                matchedStyleId = dbId;
+                break;
+              }
+              if (normalizedCat.includes('objects') && dbName.includes('objects')) {
+                matchedStyleId = dbId;
+                break;
+              }
+            }
+          }
 
           const frameData: any = {
             projectId: projectRef.id,

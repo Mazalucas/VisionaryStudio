@@ -4,125 +4,143 @@
     "visuals": "A vast, arid landscape of the Gran Chaco region in Paraguay with sparse thorny trees and dry earth under a bright sun.",
     "script": "Now imagine this: two huge zones split by a river. The dry, wild Chaco stretches across the west.",
     "text_overlays": "Gran Chaco",
-    "comments": ""
+    "comments": "",
+    "style": "Natural Landscapes"
   },
   {
     "frame": "03.2",
     "visuals": "Humid green plains and lush tropical forests in eastern Paraguay under a bright sun.",
     "script": "While humid plains and forests cover the greener east.",
     "text_overlays": "Eastern Region",
-    "comments": ""
+    "comments": "",
+    "style": "Natural Landscapes"
   },
   {
     "frame": "04",
     "visuals": "The wide Paraguay River winding through a landscape of both dense forests and dry plains.",
     "script": "The Paraguay River cuts through the whole country like nature’s highlighter pen. It shapes the land and even helps split the two main regions.",
     "text_overlays": "Paraguay River",
-    "comments": ""
+    "comments": "",
+    "style": "Natural Landscapes"
   },
   {
     "frame": "06.1",
     "visuals": "A powerful jaguar silently prowling through a dense forest in Paraguay.",
     "script": "The jaguar silently prowling in the forests.",
     "text_overlays": "jaguar",
-    "comments": ""
+    "comments": "",
+    "style": "Natural Landscapes"
   },
   {
     "frame": "06.2",
     "visuals": "A giant anteater with its long snout foraging in the dry grasslands of the Paraguayan Chaco.",
     "script": "And the giant anteater slurping up ants in the dry grasslands are rare but treasured creatures in Paraguay.",
     "text_overlays": "giant anteater",
-    "comments": ""
+    "comments": "",
+    "style": "Food"
   },
   {
     "frame": "07",
     "visuals": "A white bare-throated bellbird with its distinct turquoise throat perched on a tree branch in Paraguay, calling loudly.",
     "script": "And have you heard of the bare-throated bellbird? This white-feathered wonder belts out one of the loudest bird calls on Earth. Bet no alarm clock can beat that!",
     "text_overlays": "bare-throated bellbird",
-    "comments": ""
+    "comments": "",
+    "style": "Animals"
   },
   {
     "frame": "08",
     "visuals": "The historic city center of Asunción, Paraguay, with its mix of colonial buildings and modern skyscrapers.",
     "script": "Now, can you guess the capital city? It’s Asunción, one of the oldest cities in all of South America. That's some serious history!",
     "text_overlays": "Asunción",
-    "comments": ""
+    "comments": "",
+    "style": "Cities"
   },
   {
     "frame": "09",
     "visuals": "A busy street market in Ciudad del Este, Paraguay, with colorful stalls and many shoppers.",
     "script": "Ciudad del Este has a busy shopping district full of electronics and street vendors!",
     "text_overlays": "Ciudad del Este",
-    "comments": ""
+    "comments": "",
+    "style": "Cities"
   },
   {
     "frame": "10",
     "visuals": "A lively street carnival in Encarnación, Paraguay, with people in colorful costumes dancing near the riverside beach.",
     "script": "While Encarnación throws lively carnivals by riverside beaches. Who’s ready to party by the water?",
     "text_overlays": "Encarnación",
-    "comments": ""
+    "comments": "",
+    "style": "Natural Landscapes"
   },
   {
     "frame": "11",
     "visuals": "A quiet, historic street in the town of Yaguarón, Paraguay, with its famous colonial church and a few locals chatting.",
     "script": "Spanish and Guaraní are both spoken every day here. Guaraní's an Indigenous language, and kids even learn it in school!",
     "text_overlays": "",
-    "comments": ""
+    "comments": "",
+    "style": "Cities"
   },
   {
     "frame": "12",
     "visuals": "A pleasant afternoon at the Plaza de Armas in Asunción, Paraguay, with pedestrians walking near the historic government buildings.",
     "script": "With around 7 million people, Paraguay’s population is about the same as the cities of Los Angeles and Chicago combined. So it’s cozy, not crowded.",
     "text_overlays": "",
-    "comments": ""
+    "comments": "",
+    "style": "Crowded Place"
   },
   {
     "frame": "13",
     "visuals": "A basket of fresh, golden chipa (cheesy corn bread) served on a traditional embroidered napkin in Paraguay.",
     "script": "Yum time! Breakfast wouldn’t be the same without chipa! A cheesy bread that goes great on road trips. Hungry yet?",
     "text_overlays": "chipa",
-    "comments": ""
+    "comments": "",
+    "style": "Food"
   },
   {
     "frame": "14",
     "visuals": "A group of friends in a park in Paraguay sharing a cold tereré drink from a decorated cup with a metal straw (bombilla).",
     "script": "On a hot day, grab a tereré. It’s cold herbal tea sipped outdoors with friends, think of it like iced tea with magical herbs.",
     "text_overlays": "tereré",
-    "comments": ""
+    "comments": "",
+    "style": "Food"
   },
   {
     "frame": "15",
     "visuals": "A traditional Paraguayan meal on a rustic table with grilled beef, boiled cassava, and corn-based dishes like sopa paraguaya.",
     "script": "Beef, cassava, and corn show up in tons of dishes. Farming is big here, and food is full of simple, hearty flavors.",
     "text_overlays": "Paraguayan Cuisine",
-    "comments": ""
+    "comments": "",
+    "style": "Food"
   },
   {
     "frame": "16",
     "visuals": "Paraguayan musicians playing a traditional harp and guitars for dancers in colorful traditional outfits.",
     "script": "Music lovers, prepare to dance! Polka paraguaya, a lively style with guitars and harps, gets your feet moving!",
     "text_overlays": "Polka paraguaya",
-    "comments": ""
+    "comments": "",
+    "style": "People"
   },
   {
     "frame": "17",
     "visuals": "Dancers in Paraguay performing the joyful galopa dance with balancing bottles on their heads and long flowing skirts.",
     "script": "The galopa is a joyful traditional dance still seen at festivals, bringing people together with music, colorful skirts, and big smiles that light up the celebration.",
     "text_overlays": "Galopa",
-    "comments": ""
+    "comments": "",
+    "style": "People"
   },
   {
     "frame": "18.1",
     "visuals": "Paraguayan soccer star Roque Santa Cruz celebrating a goal in his national team jersey.",
     "script": "Soccer rules here! Roque Santa Cruz is a superstar known for skill and sportsmanship.",
     "text_overlays": "Roque Santa Cruz",
-    "comments": ""
+    "comments": "",
+    "style": "Objects, instruments, things"
   },
   {
     "frame": "18.2",
     "visuals": "Paraguayan athlete Leryn Franco throwing a javelin during an international competition.",
     "script": "Leryn Franco is an Olympic javelin thrower from Paraguay.",
     "text_overlays": "Leryn Franco",
-    "comments": ""
+    "comments": "",
+    "style": "Objects, instruments, things"
   }
 ]

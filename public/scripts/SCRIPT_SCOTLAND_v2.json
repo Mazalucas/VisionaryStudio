@@ -4,153 +4,175 @@
     "visuals": "A rainy green Scottish hillside with mist rolling over a small stone village and a signpost showing summer and winter.",
     "script": "Scotland has a cool, often rainy climate, some say there are only two seasons: winter and… July! Summers are mild, winters are chilly, and rain can surprise you any time. Don’t forget your rain boots!",
     "text_overlays": "",
-    "comments": ""
+    "comments": "",
+    "style": "Natural Landscapes"
   },
   {
     "frame": "04",
     "visuals": "The dramatic peak of Ben Nevis in Scotland, the tallest mountain in the UK, rising above a landscape of purple heather and clouds.",
     "script": "Now, for our nature fans: get this! Scotland is home to Ben Nevis, the tallest mountain in the UK. It rises 4,413 feet (1,345 meters) into the sky in the Scottish Highlands, and yep, it’s as dramatic as it sounds.",
     "text_overlays": "Ben Nevis",
-    "comments": ""
+    "comments": "",
+    "style": "Natural Landscapes"
   },
   {
     "frame": "05",
     "visuals": "A serene Scottish loch (lake) surrounded by gentle green mountains with a light morning mist over the water.",
     "script": "Forests, lochs (that’s Scottish for lakes), and wild coastlines stretch across the land. It's a perfect place for hiking, spotting eagles, or pretending you're in a fairy tale.",
     "text_overlays": "",
-    "comments": ""
+    "comments": "",
+    "style": "Natural Landscapes"
   },
   {
     "frame": "06",
     "visuals": "A close-up of a sharp, purple Scottish thistle flower in a wild meadow.",
     "script": "The thistle, a spiky purple flower, is Scotland’s national plant. It’s not cuddly, but it’s a symbol of protection and bravery.",
     "text_overlays": "Thistle",
-    "comments": ""
+    "comments": "",
+    "style": "Objects, instruments, things"
   },
   {
     "frame": "07.1",
     "visuals": "A majestic red deer stag with large antlers standing in the Scottish Highlands.",
     "script": "Want to meet some cool Scottish animals? Try spotting a red deer.",
     "text_overlays": "Red deer",
-    "comments": ""
+    "comments": "",
+    "style": "Animals"
   },
   {
     "frame": "07.2",
     "visuals": "A powerful golden eagle soaring over the rugged mountains of Scotland.",
     "script": "Or a golden eagle.",
     "text_overlays": "Golden eagle",
-    "comments": ""
+    "comments": "",
+    "style": "Natural Landscapes"
   },
   {
     "frame": "08",
     "visuals": "A fluffy Highland cow with long, shaggy ginger hair and wide horns standing in a green Scottish field.",
     "script": "Or say hello to the Highland cow, a well-known cattle breed often seen in Scottish farms and postcards, with long shaggy hair that looks ready for a rock concert!",
     "text_overlays": "Highland cow",
-    "comments": ""
+    "comments": "",
+    "style": "Animals"
   },
   {
     "frame": "10",
     "visuals": "The massive Edinburgh Castle perched atop a rocky hill overlooking the historic city of Edinburgh, Scotland.",
     "script": "Now, here's a question: what’s Scotland’s capital? It's Edinburgh! Famous for its castle on a hill and festivals full of music and magic.",
     "text_overlays": "Edinburgh",
-    "comments": ""
+    "comments": "",
+    "style": "Cities"
   },
   {
     "frame": "11",
     "visuals": "A lively street scene in Glasgow, Scotland, at night with neon lights from music venues and historic buildings.",
     "script": "And just around the corner is Glasgow, the biggest city, known for its vibrant music scene and cultural diversity.",
     "text_overlays": "Glasgow",
-    "comments": ""
+    "comments": "",
+    "style": "Cities"
   },
   {
     "frame": "12",
     "visuals": "The grand grey granite buildings of Aberdeen, Scotland, sparkling under a bright sun.",
     "script": "Aberdeen, nicknamed the Granite City, sparkles with gray stone buildings. Shiny!",
     "text_overlays": "Aberdeen",
-    "comments": ""
+    "comments": "",
+    "style": "Cities"
   },
   {
     "frame": "13",
     "visuals": "A quiet, historic street in the town of St Andrews, Scotland, with its ancient stone buildings and a few locals walking.",
     "script": "People in Scotland mostly speak English, but you’ll also hear Scots and Scottish Gaelic in some areas. It’s like a secret language club!",
     "text_overlays": "",
-    "comments": ""
+    "comments": "",
+    "style": "Cities"
   },
   {
     "frame": "14",
     "visuals": "A pleasant afternoon at the George Square in Glasgow, Scotland, with pedestrians walking past statues and grand architecture.",
     "script": "Around 5.5 million people live in Scotland as of 2023, that’s about as many as in the state of Minnesota. Can you imagine them all wearing kilts?",
     "text_overlays": "",
-    "comments": ""
+    "comments": "",
+    "style": "People"
   },
   {
     "frame": "15",
     "visuals": "A traditional Scottish plate of haggis served with neeps (turnips) and tatties (potatoes) in a cozy, festive setting.",
     "script": "Ready to eat? Scotland serves up haggis, a savory dish traditionally made with oats and meat, usually on Burns Night to honor poet Robert Burns. It’s a big deal! Yum!",
     "text_overlays": "Haggis",
-    "comments": ""
+    "comments": "",
+    "style": "Food"
   },
   {
     "frame": "16",
     "visuals": "A pile of buttery Scottish shortbread cookies served with a steaming cup of tea in a traditional tea set.",
     "script": "Don’t miss out on shortbread either: a crumbly, sweet cookie shaped like little fingers or circles. Perfect with a warm cup of tea!",
     "text_overlays": "Shortbread",
-    "comments": ""
+    "comments": "",
+    "style": "Food"
   },
   {
     "frame": "17",
     "visuals": "A bottle and glass of bright orange Irn-Bru soda on a rustic table with the misty Scottish moors in the background.",
     "script": "And wash it all down with Irn-Bru, a fizzy orange soda that Scots love almost as much as their bagpipes.",
     "text_overlays": "Irn-Bru",
-    "comments": ""
+    "comments": "",
+    "style": "Objects, instruments, things"
   },
   {
     "frame": "18",
     "visuals": "A Scottish bagpiper in a traditional tartan kilt performing alongside Highland dancers at an outdoor festival.",
     "script": "Speaking of music: Bagpipes! Add Highland dancing, and you’ve got a Scottish celebration. Weddings, festivals, parades… it’s a total blast!",
     "text_overlays": "Bagpipes",
-    "comments": ""
+    "comments": "",
+    "style": "Crowded Place"
   },
   {
     "frame": "19",
     "visuals": "A historic illustration of the first-ever international soccer match in 1872 between Scotland and England.",
     "script": "Guess what? Scotland played in the first-ever international soccer match back in 1872 against England. That’s serious history!",
     "text_overlays": "1872 International Match",
-    "comments": ""
+    "comments": "",
+    "style": "Objects, instruments, things"
   },
   {
     "frame": "20",
     "visuals": "Scottish fans in tartan hats and jerseys cheering in a stadium, waving the national flag (the Saltire).",
     "script": "As of 2023, Scotland has qualified for the FIFA Men’s World Cup 8 times but has never passed the group stage. Still, fans cheer loud and proud!",
     "text_overlays": "World Cup History",
-    "comments": ""
+    "comments": "",
+    "style": "Objects, instruments, things"
   },
   {
     "frame": "21.1",
     "visuals": "Scottish tennis champion Andy Murray celebrating a victory with his racket.",
     "script": "Sports fans, take note: tennis champ Andy Murray grew up in Dunblane.",
     "text_overlays": "Andy Murray",
-    "comments": ""
+    "comments": "",
+    "style": "Objects, instruments, things"
   },
   {
     "frame": "21.2",
     "visuals": "A portrait of Scottish actor Ewan McGregor in a professional setting.",
     "script": "And guess who else is from Scotland? Ewan McGregor: you might know him as Obi-Wan Kenobi!",
     "text_overlays": "Ewan McGregor",
-    "comments": ""
+    "comments": "",
+    "style": "Objects, instruments, things"
   },
   {
     "frame": "22",
     "visuals": "A scenic view of the Isle of Skye in Scotland, with its dramatic rocky cliffs and the Old Man of Storr.",
     "script": "Here’s a brain-boggler: Scotland has over 790 islands, but most people live on the mainland. Some islands even have more sheep than people!",
     "text_overlays": "Isle of Skye",
-    "comments": ""
+    "comments": "",
+    "style": "People"
   },
   {
     "frame": "23",
     "visuals": "The mysterious waters of Loch Ness in Scotland, with a light mist and the ruins of Urquhart Castle on the shore.",
     "script": "And last but not least. Loch Ness might be hiding a legendary monster. Is Nessie real? Only one way to find out! Now off you go, explorer! May your socks stay dry and your shortbread stay crumbly!",
     "text_overlays": "Loch Ness",
-    "comments": ""
+    "comments": "",
+    "style": "Monuments"
   }
 ]

@@ -10,17 +10,20 @@ import { ProjectList } from './components/ProjectList';
 import { ProjectDetail } from './components/ProjectDetail';
 import { StyleReferenceManager } from './components/StyleReferenceManager';
 import { ApiKeysSettings } from './components/ApiKeysSettings';
+import { ActivityDashboard } from './components/ActivityDashboard';
 import { LogIn, LayoutDashboard, Loader2 } from 'lucide-react';
 import { logActivity } from './lib/activityLogger';
 
 import { ThemeProvider } from './components/ThemeProvider';
 import { MigrateButton } from './components/MigrateButton';
 
+export type AppView = 'projects' | 'project-detail' | 'styles' | 'api-keys' | 'activity';
+
 export default function App() {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
   const [isLoggingIn, setIsLoggingIn] = useState(false);
-  const [view, setView] = useState<'projects' | 'project-detail' | 'styles' | 'api-keys'>('projects');
+  const [view, setView] = useState<AppView>('projects');
   const [selectedProjectId, setSelectedProjectId] = useState<string | null>(null);
 
   useEffect(() => {
@@ -146,6 +149,9 @@ export default function App() {
         )}
         {view === 'api-keys' && (
           <ApiKeysSettings />
+        )}
+        {view === 'activity' && (
+          <ActivityDashboard />
         )}
         <MigrateButton />
         <Toaster />

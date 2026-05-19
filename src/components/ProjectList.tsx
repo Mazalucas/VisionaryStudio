@@ -35,12 +35,7 @@ export function ProjectList({ onSelectProject }: ProjectListProps) {
   const [isCreatingProject, setIsCreatingProject] = useState(false);
   const [archivingProjectId, setArchivingProjectId] = useState<string | null>(null);
 
-  // Activity Log State
-  const [isLogOpen, setIsLogOpen] = useState(false);
-  const [isUnlocked, setIsUnlocked] = useState(false);
-  const [password, setPassword] = useState('');
-  const [activityLogs, setActivityLogs] = useState<any[]>([]);
-  const [isLoadingLogs, setIsLoadingLogs] = useState(false);
+
   const [searchTerm, setSearchTerm] = useState('');
 
   // Sorting State
@@ -119,27 +114,7 @@ export function ProjectList({ onSelectProject }: ProjectListProps) {
     }
   };
 
-  const handleUnlockLogs = () => {
-    if (password === 'permiso') {
-      setIsUnlocked(true);
-      fetchActivityLogs();
-    } else {
-      toast.error('Incorrect password');
-    }
-  };
 
-  const fetchActivityLogs = async () => {
-    setIsLoadingLogs(true);
-    try {
-      const q = query(collection(db, 'activity_logs'), orderBy('timestamp', 'desc'), limit(50));
-      const snap = await getDocs(q);
-      setActivityLogs(snap.docs.map(d => ({ id: d.id, ...d.data() })));
-    } catch (error) {
-      toast.error('Failed to fetch activity logs');
-    } finally {
-      setIsLoadingLogs(false);
-    }
-  };
 
   const toggleSort = (key: 'name' | 'status' | 'createdAt') => {
     setSortConfig(prev => ({
@@ -195,91 +170,7 @@ export function ProjectList({ onSelectProject }: ProjectListProps) {
         </div>
         
         <div className="flex items-center gap-3">
-          <Dialog open={isLogOpen} onOpenChange={(open) => {
-            setIsLogOpen(open);
-            if (!open) {
-              setIsUnlocked(false);
-              setPassword('');
-            }
-          }}>
-            <DialogTrigger render={
-              <Button variant="ghost" size="icon" className="h-12 w-12 rounded-xl text-muted-foreground hover:text-foreground transition-all border border-border">
-                {isUnlocked ? <Unlock size={20} /> : <Lock size={20} />}
-              </Button>
-            } />
-            <DialogContent className="max-w-4xl max-h-[80vh] overflow-hidden flex flex-col rounded-2xl bg-card/95 backdrop-blur-2xl">
-              <DialogHeader>
-                <DialogTitle className="flex items-center gap-2 text-2xl">
-                  <ShieldCheck className="text-primary" /> Activity Registry
-                </DialogTitle>
-                <DialogDescription>
-                  Audit trail of project actions and generation activity.
-                </DialogDescription>
-              </DialogHeader>
-              
-              {!isUnlocked ? (
-                <div className="flex flex-col items-center justify-center py-12 space-y-6">
-                  <div className="p-4 rounded-full bg-muted text-muted-foreground">
-                    <Lock size={48} />
-                  </div>
-                  <div className="text-center space-y-2">
-                    <h3 className="text-lg font-bold">Registry Locked</h3>
-                    <p className="text-sm text-muted-foreground">Please enter the moderator password to access the logs.</p>
-                  </div>
-                  <div className="flex gap-2 w-full max-w-xs">
-                    <Input 
-                      type="password" 
-                      placeholder="Password" 
-                      value={password}
-                      onChange={(e) => setPassword(e.target.value)}
-                      onKeyDown={(e) => e.key === 'Enter' && handleUnlockLogs()}
-                      className="rounded-xl h-11 bg-background"
-                    />
-                    <Button onClick={handleUnlockLogs} className="h-11 rounded-xl bg-primary text-primary-foreground">Access</Button>
-                  </div>
-                </div>
-              ) : (
-                <div className="flex-1 overflow-y-auto mt-4 pr-2 custom-scrollbar">
-                  {isLoadingLogs ? (
-                    <div className="flex items-center justify-center py-20">
-                      <Loader2 className="animate-spin text-primary" size={32} />
-                    </div>
-                  ) : activityLogs.length === 0 ? (
-                    <div className="text-center py-20 text-neutral-400">No activity recorded yet.</div>
-                  ) : (
-                    <div className="space-y-3">
-                      {activityLogs.map((log) => (
-                        <div key={log.id} className="p-4 rounded-xl border border-border bg-muted/30 flex flex-col gap-2">
-                          <div className="flex items-center justify-between">
-                            <div className="flex items-center gap-2">
-                              <div className="h-7 w-7 rounded-full bg-primary/10 text-primary flex items-center justify-center">
-                                <User size={14} />
-                              </div>
-                              <span className="text-sm font-bold text-foreground">{log.userName}</span>
-                              <span className="text-[10px] uppercase font-bold px-2 py-0.5 rounded bg-primary text-primary-foreground tracking-widest">{log.action}</span>
-                            </div>
-                            <div className="flex items-center gap-1.5 text-xs text-muted-foreground">
-                              <Clock size={12} />
-                              {log.timestamp?.toDate().toLocaleString() || 'Recent'}
-                            </div>
-                          </div>
-                          <div className="pl-9 text-sm text-muted-foreground">
-                            {log.details}
-                            {log.projectName && (
-                              <div className="mt-1 flex items-center gap-1.5">
-                                <span className="text-[10px] font-bold text-muted-foreground uppercase tracking-wider">Project:</span>
-                                <span className="text-[10px] font-bold text-primary px-2 py-0.5 rounded bg-primary/10 border border-primary/20">{log.projectName}</span>
-                              </div>
-                            )}
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  )}
-                </div>
-              )}
-            </DialogContent>
-          </Dialog>
+
 
           <div className="relative">
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
